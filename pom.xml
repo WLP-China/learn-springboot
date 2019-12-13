@@ -15,6 +15,7 @@
         <module>demo-db-jdbc</module>
         <module>demo-db-mybatis</module>
         <module>demo-swagger</module>
+        <module>demo-db-redis</module>
     </modules>
 
 </project>
