@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+
+configTest:
+  name: Lee
+  age: 23
+
+javabeantest:
+ name: Ming
+ age: 12
+ number:  ${random.int}   #${random} :可以用来生成各种不同类型的随机值
+ uuid : ${random.uuid}
+ max: ${random.int(10)}
+ value: ${random.value}
+ greeting: hi,i'm  ${javabeantest.name}
