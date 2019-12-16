@@ -16,6 +16,7 @@
         <module>demo-db-mybatis</module>
         <module>demo-swagger</module>
         <module>demo-db-redis</module>
+        <module>demo-jwt</module>
     </modules>
 
 </project>
