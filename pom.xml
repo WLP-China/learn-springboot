@@ -10,13 +10,14 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>demo01-firstapp</module>
-        <module>demo-db-jpa</module>
-        <module>demo-db-jdbc</module>
-        <module>demo-db-mybatis</module>
-        <module>demo-swagger</module>
-        <module>demo-db-redis</module>
-        <module>demo-jwt</module>
+<!--        <module>demo01-firstapp</module>-->
+<!--        <module>demo-db-jpa</module>-->
+<!--        <module>demo-db-jdbc</module>-->
+<!--        <module>demo-db-mybatis</module>-->
+<!--        <module>demo-swagger</module>-->
+<!--        <module>demo-db-redis</module>-->
+<!--        <module>demo-jwt</module>-->
+        <module>demo-schedulingTasks</module>
     </modules>
 
 </project>
