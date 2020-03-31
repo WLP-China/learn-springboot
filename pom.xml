@@ -16,8 +16,11 @@
 <!--        <module>demo-db-mybatis</module>-->
 <!--        <module>demo-swagger</module>-->
 <!--        <module>demo-db-redis</module>-->
-<!--        <module>demo-jwt</module>-->
-        <module>demo-schedulingTasks</module>
+<!--        <module>demo-security-jwt</module>-->
+<!--        <module>demo-schedulingTasks</module>-->
+<!--        <module>demo-thymeleaf</module>-->
+
+        <module>pro-community</module>
     </modules>
 
 </project>

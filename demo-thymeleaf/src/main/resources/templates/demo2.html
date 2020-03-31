@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+    <!--
+    Thymeleaf对于变量的操作主要有$\*\#三种方式：
+
+    变量表达式： ${...}，是获取容器上下文变量的值.
+    选择变量表达式： *{...}，获取指定的对象中的变量值。如果是单独的对象，则等价于${}。
+    消息表达式： #{...}表达式与th:text一起使用，加载数据源中的消息，用于国际化
+    链接网址表达式： @{...}，获取网址链接
+    -->
+    <!-- ${} -->
+    <p th:text="${person.name}+'['+${person.age}+']'"></p>
+
+    <!-- *{} -->
+    <p th:object="${person}" th:text="*{name}"></p>
+
+    <!-- @{} -->
+    <a th:href="@{http://www.baidu.com}">百度</a>
+    <a th:href="@{http://localhost:8080/demo1/1}">demo1</a>
+    <a th:href="@{/demo1/1}">demo1</a> <!--省略地址则自动在根目录寻找-->
+    <!--链接分为绝对路径和相对路径
+        绝对的URL，比如 http://www.thymeleaf.org
+        相对URL，可以是：
+            页面相对，像 user/login.html
+            上下文相关，如/itemdetails?id=3（服务器中的上下文名称将自动添加）
+            与服务器相关，~/billing/processInvoice（允许在同一服务器中调用另一个上下文（=应用程序）中的URL）。
+            协议相对URL，如 //code.jquery.com/jquery-2.0.3.min.js
+    -->
+
+    <!-- =================================================================== -->
+    <!-- 文本内联  采用inline关键字可以将表达式嵌入文本-->
+    <p th:inline="text">[[${person.name}]],[[${person.age}]]</p> <!--  使用中括号取数据  -->
+    <p>[[${person.name}]],[[${person.age}]]</p> <!--  th:inline="text" 也可省略  -->
+
+</div>
+</body>
+</html>

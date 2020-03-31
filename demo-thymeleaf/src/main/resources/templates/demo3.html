@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>迭代及条件语法</title>
+</head>
+<body>
+<div>
+    <!-- 迭代
+状态变量在th:each属性中定义，包含以下数据：
+    index:当前迭代索引，从0开始。
+    count:当前迭代索引，从1开始。
+    size:迭代变量中元素的总量。
+    current:每次迭代的iter变量。
+    even/odd:当前迭代是偶数还是奇数。布尔属性。
+    first:当前迭代是否是第一个迭代。布尔属性。
+    last:当前迭代是否是最后一次。布尔属性。
+
+如果没有显式设置状态变量，Thymeleaf将始终通过后缀Stat为迭代变量的名称为您创建一个-->
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>index</th>
+            <th>size</th>
+        </tr>
+        <tr th:each="p : ${people}">
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.age}"></td>
+
+            <td th:text="${pStat.index}"></td>
+            <td th:text="${pStat.size}"></td>
+        </tr>
+    </table>
+
+    <!-- 条件选择：
+IF-THEN： (if) ? (then)
+IF-THEN-ELSE： (if) ? (then) : (else)
+默认： (value) ?: (defaultvalue)-->
+    <a th:if="1==1">view1</a>
+    <a th:if="1==2">view2</a>
+
+    <div th:each="p : ${people}">
+        <div th:switch="${p.age}">
+            <p th:case="21">A</p>
+            <p th:case="22">B</p>
+            <p th:case="*">R</p>
+            <p th:text="${p.name}+${p.age}"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+</head>
+<body>
+<form action="#" th:action="@{/demo2/submit}" th:object="${persion}" method="post">
+<!--与上面写法等价
+<form th:attr="action='#',action=@{/demo2/submit},object=${persion},method='post'">
+ -->
+    <fieldset>
+        <input type="text" name="name"/>
+        <input type="text" name="age"/>
+        <input type="submit" value="提交"/>
+    </fieldset>
+</form>
+
+</body>
+</html>

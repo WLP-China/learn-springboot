@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--传递单一变量-->
+<h1 th:text="${host}">Hello World</h1>
+
+<!-- ========================================================  -->
+
+<!--页面引入/片段引入-->
+<div th:include="footer :: copy">11111111111</div>
+<div th:replace="footer :: copy">22222222222</div>
+<!--
+    th:include 和 th:replace之间的区别
+    th:include将片段的内容包含在其主机标签中，但th:replace实际上将用片段替换主机标签
+-->
+<!--可参数化的片段签名-->
+<div th:include="footer::fun(zhang,san)">...</div>
+<div th:include="::fun(zhang,san)">...</div>
+
+<div th:fragment="fun(a,b)">
+    <p th:text="hello  + ' - '+ ${a} + ${b}">...</p>
+</div>
+
+
+</body>
+</html>
