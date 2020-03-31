@@ -1,9 +1,13 @@
-1. 整合SpringSecurity和JWT实现后台用户的登录和授权功能  
+1. 整合Spring Security和JWT实现后台用户的登录和授权功能  
 2. 改造Swagger-UI的配置使其可以自动记住登录令牌进行发送
 
-#【SpringSecurity】
-SpringSecurity是一个强大的可高度定制的认证和授权框架，对于Spring应用来说它是一套Web安全标准。
-SpringSecurity注重于为Java应用提供认证和授权功能，像所有的Spring项目一样，它对自定义需求具有强大的扩展性。
+#【Spring Security】
+Spring Security是基于Spring AOP和Servlet过滤器的安全框架。它提供全面的安全性解决方案，同时在Web请求级和方法调用级处理身份确认和授权
+
+* Spring Security核心功能
+1. 认证(你是谁，用户/设备/系统)
+2. 验证(你能干什么，即权限控制/授权，允许执行的操作)
+3. 攻击防护(防止伪造身份)
 
 #【JWT】
 JWT是JSON WEB TOKEN的缩写，它是基于 RFC 7519 标准定义的一种可以安全传输的的JSON对象，由于使用了数字签名，所以是可信任和安全的。

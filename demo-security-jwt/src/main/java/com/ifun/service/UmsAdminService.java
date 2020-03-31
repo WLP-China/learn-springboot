@@ -6,7 +6,7 @@ import com.ifun.mbg.model.UmsPermission;
 import java.util.List;
 
 /**
- * 后台管理员Service
+ * 登陆验证. 后台管理员Service
  */
 public interface UmsAdminService {
     /**

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * 权限不足处理类
  * 当访问接口没有权限时，自定义的返回结果
  */
 @Component
