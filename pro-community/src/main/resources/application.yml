@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    #模板模式，支持HTML、XML、TEXT、JAVASCRIPT
+    mode: LEGACYHTML5 #mode的默认值HTML5是一个很严格的检查，改为LEGACYHTML5使用更友好亲切的格式要求
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    cache: false #开发时关闭缓存,避免修改模板还需重启服务器
+    #模板路径,默认是templates
+#    prefix: classpath:/templates/
+#    suffix: .html
