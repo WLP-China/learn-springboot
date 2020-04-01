@@ -1,14 +1,22 @@
 package com.ifun.dto;
 
 /**
- * Create by iFun on 2020/03/30
+ * Create by iFun on 2020/04/01
  */
-public class AccessTokerDTO {
+public class GiteeAccessTokenDTO {
+    public String grant_type;
     public String client_id;
     public String client_secret;
     public String code;
     public String redirect_uri;
-    public String state;
+
+    public String getGrant_type() {
+        return grant_type;
+    }
+
+    public void setGrant_type(String grant_type) {
+        this.grant_type = grant_type;
+    }
 
     public String getClient_id() {
         return client_id;
@@ -40,13 +48,5 @@ public class AccessTokerDTO {
 
     public void setRedirect_uri(String redirect_uri) {
         this.redirect_uri = redirect_uri;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
     }
 }

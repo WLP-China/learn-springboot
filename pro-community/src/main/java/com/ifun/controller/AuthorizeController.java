@@ -1,12 +1,20 @@
 package com.ifun.controller;
 
+import com.ifun.component.GiteeProvider;
 import com.ifun.component.GithubProvider;
-import com.ifun.dto.AccessTokerDTO;
+import com.ifun.dto.AccessTokenDTO;
+import com.ifun.dto.GiteeAccessTokenDTO;
 import com.ifun.dto.GithubUser;
+import com.ifun.mapper.UserMapper;
+import com.ifun.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * Create by iFun on 2020/03/30
@@ -16,20 +24,71 @@ public class AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
+    @Autowired
+    private GiteeProvider giteeProvider;
+
+    @Value("${github.client.id}")
+    private String clientId;
+    @Value("${github.client.secret}")
+    private String clientSecret;
+    @Value("${github.redirect.uri}")
+    private String redirectUri;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @GetMapping("/callback")
-    public String callback(@RequestParam(name = "code") String code,
-                           @RequestParam(name = "state") String state) {
-        AccessTokerDTO accessTokerDTO = new AccessTokerDTO();
-        accessTokerDTO.setClient_id("d652f5db17b798fc512f");
-        accessTokerDTO.setClient_secret("f60ed458909e26513a8fc8e432056126f9f2dc81");
-        accessTokerDTO.setCode(code);
-        accessTokerDTO.setRedirect_uri("http://localhost:8080/callback");
-        accessTokerDTO.setState(state);
-        String accessToken = githubProvider.getAccessToken(accessTokerDTO);
-        GithubUser user = githubProvider.getUser(accessToken);
-        System.out.println(user.getId());
-        return "index";
+    public String githubCallback(@RequestParam(name = "code") String code,
+                                 @RequestParam(name = "state") String state,
+                                 HttpServletRequest request) {
+        AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
+        accessTokenDTO.setClient_id(clientId);
+        accessTokenDTO.setClient_secret(clientSecret);
+        accessTokenDTO.setCode(code);
+        accessTokenDTO.setRedirect_uri(redirectUri);
+        accessTokenDTO.setState(state);
+        String accessToken = githubProvider.getAccessToken(accessTokenDTO);
+        GithubUser githubUser = githubProvider.getUser(accessToken);
+        if (githubUser != null) {
+            //登陆成功，写cookie和session
+            request.getSession().setAttribute("user", githubUser);
+
+            User user = new User();
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setName(githubUser.getName());
+            user.setNickname(githubUser.getLogin());
+            user.setToken(UUID.randomUUID().toString());
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            userMapper.insertUser(user);
+
+            return "redirect:/";
+        } else {
+            //登陆失败，重新登陆
+            return "redirect:/login";
+        }
     }
 
+    @GetMapping("/callback/gitee")
+    public String giteeCallback(@RequestParam(name = "code") String code,
+                                HttpServletRequest request) {
+        GiteeAccessTokenDTO accessTokenDTO = new GiteeAccessTokenDTO();
+        accessTokenDTO.setGrant_type("authorization_code");
+        accessTokenDTO.setClient_id("12ae6cd285a5695182048a47a0187e084dba672a01cd73e9aadbec7f573927b3");
+        accessTokenDTO.setClient_secret("25741fb52a551fea8baeea956bc1188e8d3856c251c56da0dece41af9f404791");
+        accessTokenDTO.setCode(code);
+        accessTokenDTO.setRedirect_uri("http://127.0.0.1:8080/callback/gitee");
+
+        String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
+
+        GithubUser giteeUser = giteeProvider.getUser(accessToken);
+        if (giteeUser != null) {
+            //登陆成功，写cookie和session
+            request.getSession().setAttribute("user", giteeUser);
+            return "redirect:/";
+        } else {
+            //登陆失败，重新登陆
+            return "redirect:/login";
+        }
+    }
 }
