@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
@@ -71,7 +73,8 @@ public class AuthorizeController {
 
     @GetMapping("/callback/gitee")
     public String giteeCallback(@RequestParam(name = "code") String code,
-                                HttpServletRequest request) {
+                                HttpServletRequest request,
+                                HttpServletResponse response) {
         GiteeAccessTokenDTO accessTokenDTO = new GiteeAccessTokenDTO();
         accessTokenDTO.setGrant_type("authorization_code");
         accessTokenDTO.setClient_id("12ae6cd285a5695182048a47a0187e084dba672a01cd73e9aadbec7f573927b3");
@@ -80,11 +83,22 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri("http://127.0.0.1:8080/callback/gitee");
 
         String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
-
         GithubUser giteeUser = giteeProvider.getUser(accessToken);
         if (giteeUser != null) {
             //登陆成功，写cookie和session
-            request.getSession().setAttribute("user", giteeUser);
+//            request.getSession().setAttribute("user", giteeUser);
+            String token = UUID.randomUUID().toString();
+            User user = new User();
+            user.setAccountId(String.valueOf(giteeUser.getId()));
+            user.setName(giteeUser.getName());
+            user.setNickname(giteeUser.getLogin());
+            user.setToken(token);
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            userMapper.insertUser(user);
+
+            response.addCookie(new Cookie("token",token));
+
             return "redirect:/";
         } else {
             //登陆失败，重新登陆

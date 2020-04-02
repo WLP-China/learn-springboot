@@ -3,6 +3,8 @@ package com.ifun.mapper;
 import com.ifun.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * Create by iFun on 2020/03/31
@@ -11,4 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     @Insert("insert into user (ACCOUNT_ID,NAME,NICKNAME,TOKEN,GMT_CREATE,GMT_MODIFIED) values (#{accountId},#{name},#{nickname},#{token},#{gmtCreate},#{gmtModified})")
     void insertUser(User user);
+
+    @Select("select * from user where TOKEN = #{token}")
+    User findByToken(@Param("token") String token);
 }
