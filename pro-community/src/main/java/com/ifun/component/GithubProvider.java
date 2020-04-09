@@ -2,7 +2,7 @@ package com.ifun.component;
 
 import com.alibaba.fastjson.JSON;
 import com.ifun.dto.AccessTokenDTO;
-import com.ifun.dto.GithubUser;
+import com.ifun.dto.UserDTO;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +33,7 @@ public class GithubProvider {
         return null;
     }
 
-    public GithubUser getUser(String accessToker) {
+    public UserDTO getUser(String accessToker) {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + accessToker)
@@ -41,8 +41,8 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String str = response.body().string();
-            GithubUser githubUser = JSON.parseObject(str, GithubUser.class);
-            return githubUser;
+            UserDTO userDTO = JSON.parseObject(str, UserDTO.class);
+            return userDTO;
         } catch (Exception e) {
             System.out.println("error:登陆--获取用户信息异常异常");
             e.printStackTrace();

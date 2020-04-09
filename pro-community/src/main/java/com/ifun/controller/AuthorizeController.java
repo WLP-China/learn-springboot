@@ -4,7 +4,7 @@ import com.ifun.component.GiteeProvider;
 import com.ifun.component.GithubProvider;
 import com.ifun.dto.AccessTokenDTO;
 import com.ifun.dto.GiteeAccessTokenDTO;
-import com.ifun.dto.GithubUser;
+import com.ifun.dto.UserDTO;
 import com.ifun.mapper.UserMapper;
 import com.ifun.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String redirectUri;
 
-    @Autowired
+    @Autowired(required = false)
     private UserMapper userMapper;
 
     @GetMapping("/callback")
@@ -50,15 +50,14 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
-        GithubUser githubUser = githubProvider.getUser(accessToken);
-        if (githubUser != null) {
+        UserDTO githubUser = githubProvider.getUser(accessToken);
+        if (githubUser != null && githubUser.getId() != null) {
             //登陆成功，写cookie和session
             request.getSession().setAttribute("user", githubUser);
 
             User user = new User();
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
-            user.setNickname(githubUser.getLogin());
             user.setToken(UUID.randomUUID().toString());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
@@ -83,7 +82,7 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri("http://127.0.0.1:8080/callback/gitee");
 
         String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
-        GithubUser giteeUser = giteeProvider.getUser(accessToken);
+        UserDTO giteeUser = giteeProvider.getUser(accessToken);
         if (giteeUser != null) {
             //登陆成功，写cookie和session
 //            request.getSession().setAttribute("user", giteeUser);
@@ -91,13 +90,15 @@ public class AuthorizeController {
             User user = new User();
             user.setAccountId(String.valueOf(giteeUser.getId()));
             user.setName(giteeUser.getName());
-            user.setNickname(giteeUser.getLogin());
             user.setToken(token);
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insertUser(user);
 
-            response.addCookie(new Cookie("token",token));
+            Cookie cookie = new Cookie("token", token);
+            cookie.setMaxAge(3600);
+            cookie.setPath("/");
+            response.addCookie(cookie);
 
             return "redirect:/";
         } else {

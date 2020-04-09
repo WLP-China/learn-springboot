@@ -3,10 +3,9 @@ package com.ifun.dto;
 /**
  * Create by iFun on 2020/03/30
  */
-public class GithubUser {
+public class UserDTO {
     private Long id;
-    private String login;//登录名
-    private String name;//昵称
+    private String name;
     private String bio;//描述
 
     public Long getId() {
@@ -15,14 +14,6 @@ public class GithubUser {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getName() {
