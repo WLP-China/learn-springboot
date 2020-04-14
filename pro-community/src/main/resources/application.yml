@@ -4,6 +4,7 @@ spring:
     username: root
     password: mysql123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   thymeleaf:
     #模板模式，支持HTML、XML、TEXT、JAVASCRIPT
     mode: LEGACYHTML5 #mode的默认值HTML5是一个很严格的检查，改为LEGACYHTML5使用更友好亲切的格式要求
@@ -15,9 +16,14 @@ spring:
 #    prefix: classpath:/templates/
 #    suffix: .html
 
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true # mapUnderscoreToCamelCase 映射下划线到驼峰标识
+
 github:
   client:
     id: d652f5db17b798fc512f
     secret: f60ed458909e26513a8fc8e432056126f9f2dc81
   redirect:
     uri: http://localhost:8080/callback
+

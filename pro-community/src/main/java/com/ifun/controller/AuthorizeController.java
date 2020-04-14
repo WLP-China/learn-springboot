@@ -59,7 +59,8 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setName(githubUser.getName());
             user.setBio(githubUser.getBio());
-            user.setAvatarUrl(githubUser.getAvatar_url());
+//            user.setAvatarUrl(githubUser.getAvatar_url());
+            user.setAvatarUrl(githubUser.getAvatarUrl());
             user.setToken(UUID.randomUUID().toString());
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
@@ -93,7 +94,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(giteeUser.getId()));
             user.setName(giteeUser.getName());
             user.setBio(giteeUser.getBio());
-            user.setAvatarUrl(giteeUser.getAvatar_url());
+            user.setAvatarUrl(giteeUser.getAvatarUrl());
             user.setToken(token);
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());

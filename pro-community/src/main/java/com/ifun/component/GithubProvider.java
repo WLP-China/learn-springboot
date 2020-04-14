@@ -41,7 +41,7 @@ public class GithubProvider {
         try {
             Response response = client.newCall(request).execute();
             String str = response.body().string();
-            UserDTO userDTO = JSON.parseObject(str, UserDTO.class);
+            UserDTO userDTO = JSON.parseObject(str, UserDTO.class);//fastjson可以自动把下划线标识映射到驼峰
             return userDTO;
         } catch (Exception e) {
             System.out.println("error:登陆--获取用户信息异常异常");
