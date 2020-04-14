@@ -1,5 +1,6 @@
 package com.ifun.service;
 
+import com.ifun.dto.PaginationDTO;
 import com.ifun.dto.QuestionDTO;
 import com.ifun.mapper.QuestionMapper;
 import com.ifun.mapper.UserMapper;
@@ -20,9 +21,10 @@ public class QuestionService {
     @Autowired(required = false)
     private QuestionMapper questionMapper;
 
-    public List<QuestionDTO> list() {
+    public PaginationDTO list(Integer page, Integer size) {
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        List<Question> questions = questionMapper.list();
+        List<Question> questions = questionMapper.list(size * (page - 1), size);
         for (Question question : questions) {
             User user = userMapper.findById(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
@@ -30,6 +32,24 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        return questionDTOList;
+        Integer totalCount = questionMapper.getCount();
+        PaginationDTO paginationDTO = new PaginationDTO();
+        Integer totalPage;
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+        if(page<1){
+            page=1;
+        }
+        if(page>totalPage){
+            page=totalPage;
+        }
+
+        paginationDTO.setPagination(totalPage, page);
+        paginationDTO.setData(questionDTOList);
+
+        return paginationDTO;
     }
 }
