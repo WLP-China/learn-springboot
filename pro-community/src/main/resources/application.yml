@@ -22,8 +22,13 @@ mybatis:
 
 github:
   client:
-    id: d652f5db17b798fc512f
-    secret: f60ed458909e26513a8fc8e432056126f9f2dc81
+    id:
+    secret:
   redirect:
     uri: http://localhost:8080/callback
-
+gitee:
+  client:
+    id:
+    secret:
+  redirect:
+    uri: http://127.0.0.1:8080/callback/gitee

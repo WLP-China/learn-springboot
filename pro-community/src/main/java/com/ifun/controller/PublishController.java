@@ -1,7 +1,6 @@
 package com.ifun.controller;
 
 import com.ifun.mapper.QuestionMapper;
-import com.ifun.mapper.UserMapper;
 import com.ifun.model.Question;
 import com.ifun.model.User;
 import org.apache.commons.lang3.StringUtils;

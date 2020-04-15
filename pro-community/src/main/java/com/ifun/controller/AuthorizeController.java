@@ -36,35 +36,55 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String redirectUri;
 
+    @Value("${gitee.client.id}")
+    private String giteeClientId;
+    @Value("${gitee.client.secret}")
+    private String giteeClientSecret;
+    @Value("${gitee.redirect.uri}")
+    private String giteeRedirectUri;
+
     @Autowired(required = false)
     private UserMapper userMapper;
 
     @GetMapping("/callback")
     public String githubCallback(@RequestParam(name = "code") String code,
                                  @RequestParam(name = "state") String state,
-                                 HttpServletRequest request) {
+                                 HttpServletResponse response) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
         accessTokenDTO.setCode(code);
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
+
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         UserDTO githubUser = githubProvider.getUser(accessToken);
         if (githubUser != null && githubUser.getId() != null) {
-            //登陆成功，写cookie和session
-            request.getSession().setAttribute("user", githubUser);
+            //登陆成功，写session
+//            request.getSession().setAttribute("user", githubUser);
 
-            User user = new User();
-            user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setName(githubUser.getName());
-            user.setBio(githubUser.getBio());
+            User dbUser = userMapper.findByAccountId(String.valueOf(githubUser.getId()));
+            String token = "";
+            if (dbUser != null) {
+                token = dbUser.getToken();
+                //TODO 比较giteeUser与dbUser,更新字段
+            } else {
+                token = UUID.randomUUID().toString();
+                User user = new User();
+                user.setAccountId(String.valueOf(githubUser.getId()));
+                user.setName(githubUser.getName());
+                user.setBio(githubUser.getBio());
 //            user.setAvatarUrl(githubUser.getAvatar_url());
-            user.setAvatarUrl(githubUser.getAvatarUrl());
-            user.setToken(UUID.randomUUID().toString());
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            userMapper.insertUser(user);
+                user.setAvatarUrl(githubUser.getAvatarUrl());
+                user.setToken(token);
+                user.setGmtCreate(System.currentTimeMillis());
+                user.setGmtModified(user.getGmtCreate());
+                userMapper.insertUser(user);
+            }
+            Cookie cookie = new Cookie("token", token);
+            cookie.setMaxAge(3600);
+            cookie.setPath("/");
+            response.addCookie(cookie);
 
             return "redirect:/";
         } else {
@@ -75,30 +95,34 @@ public class AuthorizeController {
 
     @GetMapping("/callback/gitee")
     public String giteeCallback(@RequestParam(name = "code") String code,
-                                HttpServletRequest request,
                                 HttpServletResponse response) {
         GiteeAccessTokenDTO accessTokenDTO = new GiteeAccessTokenDTO();
         accessTokenDTO.setGrant_type("authorization_code");
-        accessTokenDTO.setClient_id("12ae6cd285a5695182048a47a0187e084dba672a01cd73e9aadbec7f573927b3");
-        accessTokenDTO.setClient_secret("25741fb52a551fea8baeea956bc1188e8d3856c251c56da0dece41af9f404791");
+        accessTokenDTO.setClient_id(giteeClientId);
+        accessTokenDTO.setClient_secret(giteeClientSecret);
         accessTokenDTO.setCode(code);
-        accessTokenDTO.setRedirect_uri("http://127.0.0.1:8080/callback/gitee");
+        accessTokenDTO.setRedirect_uri(giteeRedirectUri);
 
         String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
         UserDTO giteeUser = giteeProvider.getUser(accessToken);
-        if (giteeUser != null) {
-            //登陆成功，写cookie和session
-//            request.getSession().setAttribute("user", giteeUser);
-            String token = UUID.randomUUID().toString();
-            User user = new User();
-            user.setAccountId(String.valueOf(giteeUser.getId()));
-            user.setName(giteeUser.getName());
-            user.setBio(giteeUser.getBio());
-            user.setAvatarUrl(giteeUser.getAvatarUrl());
-            user.setToken(token);
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
-            userMapper.insertUser(user);
+        if (giteeUser != null && giteeUser.getId() != null) {
+            User dbUser = userMapper.findByAccountId(String.valueOf(giteeUser.getId()));
+            String token = "";
+            if (dbUser != null) {
+                token = dbUser.getToken();
+                //TODO 比较giteeUser与dbUser,更新字段
+            } else {
+                token = UUID.randomUUID().toString();
+                User user = new User();
+                user.setAccountId(String.valueOf(giteeUser.getId()));
+                user.setName(giteeUser.getName());
+                user.setBio(giteeUser.getBio());
+                user.setAvatarUrl(giteeUser.getAvatarUrl());
+                user.setToken(token);
+                user.setGmtCreate(System.currentTimeMillis());
+                user.setGmtModified(user.getGmtCreate());
+                userMapper.insertUser(user);
+            }
 
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(3600);
