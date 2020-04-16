@@ -5,8 +5,8 @@ import com.ifun.component.GithubProvider;
 import com.ifun.dto.AccessTokenDTO;
 import com.ifun.dto.GiteeAccessTokenDTO;
 import com.ifun.dto.UserDTO;
-import com.ifun.mapper.UserMapper;
 import com.ifun.model.User;
+import com.ifun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -29,6 +28,9 @@ public class AuthorizeController {
     @Autowired
     private GiteeProvider giteeProvider;
 
+    @Autowired
+    private UserService userService;
+
     @Value("${github.client.id}")
     private String clientId;
     @Value("${github.client.secret}")
@@ -42,9 +44,6 @@ public class AuthorizeController {
     private String giteeClientSecret;
     @Value("${gitee.redirect.uri}")
     private String giteeRedirectUri;
-
-    @Autowired(required = false)
-    private UserMapper userMapper;
 
     @GetMapping("/callback")
     public String githubCallback(@RequestParam(name = "code") String code,
@@ -63,24 +62,16 @@ public class AuthorizeController {
             //登陆成功，写session
 //            request.getSession().setAttribute("user", githubUser);
 
-            User dbUser = userMapper.findByAccountId(String.valueOf(githubUser.getId()));
-            String token = "";
-            if (dbUser != null) {
-                token = dbUser.getToken();
-                //TODO 比较giteeUser与dbUser,更新字段
-            } else {
-                token = UUID.randomUUID().toString();
-                User user = new User();
-                user.setAccountId(String.valueOf(githubUser.getId()));
-                user.setName(githubUser.getName());
-                user.setBio(githubUser.getBio());
+            String token = UUID.randomUUID().toString();
+            User user = new User();
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setName(githubUser.getName());
+            user.setBio(githubUser.getBio());
 //            user.setAvatarUrl(githubUser.getAvatar_url());
-                user.setAvatarUrl(githubUser.getAvatarUrl());
-                user.setToken(token);
-                user.setGmtCreate(System.currentTimeMillis());
-                user.setGmtModified(user.getGmtCreate());
-                userMapper.insertUser(user);
-            }
+            user.setAvatarUrl(githubUser.getAvatarUrl());
+            user.setToken(token);
+            userService.insertOrUpdateUser(user);
+
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(3600);
             cookie.setPath("/");
@@ -106,23 +97,14 @@ public class AuthorizeController {
         String accessToken = giteeProvider.getAccessToken(accessTokenDTO);
         UserDTO giteeUser = giteeProvider.getUser(accessToken);
         if (giteeUser != null && giteeUser.getId() != null) {
-            User dbUser = userMapper.findByAccountId(String.valueOf(giteeUser.getId()));
-            String token = "";
-            if (dbUser != null) {
-                token = dbUser.getToken();
-                //TODO 比较giteeUser与dbUser,更新字段
-            } else {
-                token = UUID.randomUUID().toString();
-                User user = new User();
-                user.setAccountId(String.valueOf(giteeUser.getId()));
-                user.setName(giteeUser.getName());
-                user.setBio(giteeUser.getBio());
-                user.setAvatarUrl(giteeUser.getAvatarUrl());
-                user.setToken(token);
-                user.setGmtCreate(System.currentTimeMillis());
-                user.setGmtModified(user.getGmtCreate());
-                userMapper.insertUser(user);
-            }
+            String token = UUID.randomUUID().toString();
+            User user = new User();
+            user.setAccountId(String.valueOf(giteeUser.getId()));
+            user.setName(giteeUser.getName());
+            user.setBio(giteeUser.getBio());
+            user.setAvatarUrl(giteeUser.getAvatarUrl());
+            user.setToken(token);
+            userService.insertOrUpdateUser(user);
 
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(3600);
