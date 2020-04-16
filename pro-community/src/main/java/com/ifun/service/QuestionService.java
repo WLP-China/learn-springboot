@@ -92,4 +92,30 @@ public class QuestionService {
         questionDTO.setUser(user);
         return questionDTO;
     }
+
+    public void createOrUpdaye(Question question) {
+        if (question.getId() == null) {
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setLikeCount(0);
+            question.setCommentCount(0);
+            questionMapper.create(question);
+        } else {
+            Question dbQuestion = questionMapper.getById(question.getId());
+            if (dbQuestion == null) {
+                //数据库无此条信息
+                return;
+            }
+            if (dbQuestion.getCreator() != question.getCreator()) {
+                //与数据库中创建者不一致
+                return;
+            }
+            dbQuestion.setTitle(question.getTitle());
+            dbQuestion.setDescription(question.getDescription());
+            dbQuestion.setTag(question.getTag());
+            dbQuestion.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(dbQuestion);
+        }
+    }
 }
