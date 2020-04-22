@@ -13,15 +13,11 @@ public class User implements Serializable {
 
     /**
      * 描述
-     *
-     * @mbggenerated
      */
     private String bio;
 
     /**
      * 头像地址
-     *
-     * @mbggenerated
      */
     private String avatarUrl;
 
@@ -29,15 +25,11 @@ public class User implements Serializable {
 
     /**
      * 创建时间
-     *
-     * @mbggenerated
      */
     private Long gmtCreate;
 
     /**
      * 修改时间
-     *
-     * @mbggenerated
      */
     private Long gmtModified;
 

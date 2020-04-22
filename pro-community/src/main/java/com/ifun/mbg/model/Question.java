@@ -7,64 +7,46 @@ public class Question implements Serializable {
 
     /**
      * 标题
-     *
-     * @mbggenerated
      */
     private String title;
 
     /**
      * 标签
-     *
-     * @mbggenerated
      */
     private String tag;
 
     /**
      * 创建时间
-     *
-     * @mbggenerated
      */
     private Long gmtCreate;
 
     /**
      * 修改时间
-     *
-     * @mbggenerated
      */
     private Long gmtModified;
 
     /**
      * 创建者ID
-     *
-     * @mbggenerated
      */
     private Integer creator;
 
     /**
      * 回复数
-     *
-     * @mbggenerated
      */
     private Integer commentCount;
 
     /**
      * 浏览数
-     *
-     * @mbggenerated
      */
     private Integer viewCount;
 
     /**
      * 点赞数
-     *
-     * @mbggenerated
      */
     private Integer likeCount;
 
     /**
      * 描述
-     *
-     * @mbggenerated
      */
     private String description;
 
