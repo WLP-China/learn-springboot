@@ -1,6 +1,6 @@
 package com.ifun.dto;
 
-import com.ifun.model.User;
+import com.ifun.mbg.model.User;
 import lombok.Data;
 
 @Data

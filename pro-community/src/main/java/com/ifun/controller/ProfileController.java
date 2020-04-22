@@ -1,7 +1,7 @@
 package com.ifun.controller;
 
 import com.ifun.dto.PaginationDTO;
-import com.ifun.model.User;
+import com.ifun.mbg.model.User;
 import com.ifun.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

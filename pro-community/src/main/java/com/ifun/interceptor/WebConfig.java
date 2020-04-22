@@ -25,8 +25,19 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //配置server虚拟路径，handler为前台访问的目录，locations为files相对应的本地路径
 
-        // 默认访问static文件
+        //允许访问static文件
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+
+//        String os = System.getProperty("os.name");
+//        if (os.toLowerCase().startsWith("win")) { //Windows系统
+//            registry.addResourceHandler("/app_file/**")
+//                    // /app_file/**表示在磁盘filePathWindow目录下的所有资源会被解析为以下的路径
+//                    .addResourceLocations("file:" + filePathWindow);
+//        } else { //linux和mac
+//            registry.addResourceHandler("/app_file/**")
+//                    .addResourceLocations("file:" + filePathLinux) ;
+//        }
+
     }
 }

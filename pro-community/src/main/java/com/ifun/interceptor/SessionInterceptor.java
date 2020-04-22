@@ -1,7 +1,8 @@
 package com.ifun.interceptor;
 
-import com.ifun.mapper.UserMapper;
-import com.ifun.model.User;
+import com.ifun.mbg.mapper.UserMapper;
+import com.ifun.mbg.model.User;
+import com.ifun.mbg.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Service //写成service方式让spring接管这个bean，不然 @Autowired不能使用
 public class SessionInterceptor implements HandlerInterceptor {
@@ -27,9 +29,11 @@ public class SessionInterceptor implements HandlerInterceptor {
                 for (Cookie cookie : cookies) {
                     if ("token".equals(cookie.getName())) {
                         String token = cookie.getValue();
-                        user = userMapper.findByToken(token);
-                        if (user != null) {
-                            request.getSession().setAttribute("user", user);
+                        UserExample example = new UserExample();
+                        example.createCriteria().andTokenEqualTo(token);
+                        List<User> users = userMapper.selectByExample(example);
+                        if (users.size() != 0) {
+                            request.getSession().setAttribute("user", users.get(0));
                         }
                         break;
                     }

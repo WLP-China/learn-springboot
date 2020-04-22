@@ -1,9 +1,8 @@
 package com.ifun.controller;
 
 import com.ifun.dto.QuestionDTO;
-import com.ifun.mapper.QuestionMapper;
-import com.ifun.model.Question;
-import com.ifun.model.User;
+import com.ifun.mbg.model.Question;
+import com.ifun.mbg.model.User;
 import com.ifun.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,12 @@
 package com.ifun;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("com.ifun.mbg.mapper")
 public class MainApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {

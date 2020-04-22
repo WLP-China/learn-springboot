@@ -5,7 +5,7 @@ import com.ifun.component.GithubProvider;
 import com.ifun.dto.AccessTokenDTO;
 import com.ifun.dto.GiteeAccessTokenDTO;
 import com.ifun.dto.UserDTO;
-import com.ifun.model.User;
+import com.ifun.mbg.model.User;
 import com.ifun.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,7 +71,7 @@ public class AuthorizeController {
 //            user.setAvatarUrl(githubUser.getAvatar_url());
             user.setAvatarUrl(githubUser.getAvatarUrl());
             user.setToken(token);
-            userService.insertOrUpdateUser(user);
+            userService.createOrUpdate(user);
 
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(3600);
@@ -105,7 +105,7 @@ public class AuthorizeController {
             user.setBio(giteeUser.getBio());
             user.setAvatarUrl(giteeUser.getAvatarUrl());
             user.setToken(token);
-            userService.insertOrUpdateUser(user);
+            userService.createOrUpdate(user);
 
             Cookie cookie = new Cookie("token", token);
             cookie.setMaxAge(3600);

@@ -17,8 +17,13 @@ spring:
 #    suffix: .html
 
 mybatis:
+  # MyBatis的mapper.xml的路径配置
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/**/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true # mapUnderscoreToCamelCase 映射下划线到驼峰标识
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 github:
   client:
