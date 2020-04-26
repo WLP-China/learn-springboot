@@ -2,6 +2,8 @@ package com.ifun.service;
 
 import com.ifun.dto.PaginationDTO;
 import com.ifun.dto.QuestionDTO;
+import com.ifun.exception.CustomizeErrorCode;
+import com.ifun.exception.CustomizeException;
 import com.ifun.mbg.mapper.QuestionMapper;
 import com.ifun.mbg.mapper.UserMapper;
 import com.ifun.mbg.model.Question;
@@ -92,8 +94,11 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-        QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.selectByPrimaryKey(id);
+        if (question==null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
+        QuestionDTO questionDTO = new QuestionDTO();
         User user = userMapper.selectByPrimaryKey(question.getCreator());
         BeanUtils.copyProperties(question, questionDTO);
         questionDTO.setUser(user);
@@ -108,17 +113,20 @@ public class QuestionService {
             question.setViewCount(0);
             question.setLikeCount(0);
             question.setCommentCount(0);
-            questionMapper.insert(question);
+            int insert = questionMapper.insert(question);
+            if (insert!=1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_SAVE_FAIL);
+            }
         } else {
             //更新
             Question dbQuestion = questionMapper.selectByPrimaryKey(question.getId());
             if (dbQuestion == null) {
                 //数据库无此条信息
-                return;
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             if (dbQuestion.getCreator() != question.getCreator()) {
                 //与数据库中创建者不一致
-                return;
+                throw new CustomizeException(CustomizeErrorCode.INVALID_OPERATION);
             }
             Question updateQuestion = new Question();
             updateQuestion.setTitle(question.getTitle());
@@ -127,7 +135,10 @@ public class QuestionService {
             updateQuestion.setGmtModified(System.currentTimeMillis());
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(dbQuestion.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int update = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if (update!=1) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
     }
 }
