@@ -1,8 +1,8 @@
 package com.ifun.controller;
 
 import com.ifun.dto.QuestionDTO;
-import com.ifun.exception.CustomizeErrorCode;
-import com.ifun.exception.CustomizeException;
+import com.ifun.exception.ServiceException;
+import com.ifun.exception.enums.CoreExceptionEnum;
 import com.ifun.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ public class QustionController {
         try {
             questionId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
-            throw new CustomizeException(CustomizeErrorCode.INVALID_INPUT);
+            throw new ServiceException(CoreExceptionEnum.INVALID_INPUT);
         }
         QuestionDTO questionDTO = questionService.getById(questionId);
         model.addAttribute("question", questionDTO);

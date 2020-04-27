@@ -2,8 +2,9 @@ package com.ifun.service;
 
 import com.ifun.dto.PaginationDTO;
 import com.ifun.dto.QuestionDTO;
-import com.ifun.exception.CustomizeErrorCode;
-import com.ifun.exception.CustomizeException;
+import com.ifun.exception.ServiceException;
+import com.ifun.exception.enums.CoreExceptionEnum;
+import com.ifun.exception.enums.QuestionExceptionEnum;
 import com.ifun.mbg.mapper.QuestionMapper;
 import com.ifun.mbg.mapper.UserMapper;
 import com.ifun.mbg.model.Question;
@@ -96,7 +97,7 @@ public class QuestionService {
     public QuestionDTO getById(Integer id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question==null) {
-            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
         }
         QuestionDTO questionDTO = new QuestionDTO();
         User user = userMapper.selectByPrimaryKey(question.getCreator());
@@ -115,18 +116,18 @@ public class QuestionService {
             question.setCommentCount(0);
             int insert = questionMapper.insert(question);
             if (insert!=1) {
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_SAVE_FAIL);
+                throw new ServiceException(QuestionExceptionEnum.QUESTION_SAVE_FAIL);
             }
         } else {
             //更新
             Question dbQuestion = questionMapper.selectByPrimaryKey(question.getId());
             if (dbQuestion == null) {
                 //数据库无此条信息
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+                throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
             if (dbQuestion.getCreator() != question.getCreator()) {
                 //与数据库中创建者不一致
-                throw new CustomizeException(CustomizeErrorCode.INVALID_OPERATION);
+                throw new ServiceException(CoreExceptionEnum.INVALID_OPERATION);
             }
             Question updateQuestion = new Question();
             updateQuestion.setTitle(question.getTitle());
@@ -137,7 +138,7 @@ public class QuestionService {
             example.createCriteria().andIdEqualTo(dbQuestion.getId());
             int update = questionMapper.updateByExampleSelective(updateQuestion, example);
             if (update!=1) {
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+                throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
         }
     }

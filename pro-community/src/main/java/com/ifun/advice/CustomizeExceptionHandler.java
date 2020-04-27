@@ -1,7 +1,9 @@
 package com.ifun.advice;
 
-import com.ifun.exception.CustomizeErrorCode;
-import com.ifun.exception.CustomizeException;
+import com.ifun.exception.ServiceException;
+import com.ifun.exception.enums.CoreExceptionEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,13 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice()
 public class CustomizeExceptionHandler {
 
+    private static final Logger log = LoggerFactory.getLogger(CustomizeExceptionHandler.class);
+
     @ExceptionHandler(Exception.class)
     ModelAndView handleControllerException(Throwable e, Model model) {
+        log.error("业务异常:",e);
         // 错误页面跳转
-        if (e instanceof CustomizeException) {
+        if (e instanceof ServiceException) {
             model.addAttribute("message", e.getMessage());
         } else {
-            model.addAttribute("message", CustomizeErrorCode.SYS_ERROR.getMessage());
+            model.addAttribute("message", CoreExceptionEnum.SERVICE_ERROR.getMessage());
         }
         return new ModelAndView("error");
     }
