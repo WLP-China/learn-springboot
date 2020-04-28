@@ -1,5 +1,6 @@
 package com.ifun.service;
 
+import com.ifun.dao.QuestionDao;
 import com.ifun.dto.PaginationDTO;
 import com.ifun.dto.QuestionDTO;
 import com.ifun.exception.ServiceException;
@@ -25,6 +26,8 @@ public class QuestionService {
     private UserMapper userMapper;
     @Autowired(required = false)
     private QuestionMapper questionMapper;
+    @Autowired(required = false)
+    private QuestionDao questionDao;
 
     public PaginationDTO list(Integer page, Integer size) {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
@@ -125,7 +128,7 @@ public class QuestionService {
                 //数据库无此条信息
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
-            if (dbQuestion.getCreator() != question.getCreator()) {
+            if (!dbQuestion.getCreator().equals(question.getCreator())) {
                 //与数据库中创建者不一致
                 throw new ServiceException(CoreExceptionEnum.INVALID_OPERATION);
             }
@@ -141,5 +144,9 @@ public class QuestionService {
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    public void increaseView(Integer questionId) {
+        questionDao.increaseView(questionId);
     }
 }

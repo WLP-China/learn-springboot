@@ -19,15 +19,16 @@ public class QustionController {
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id") String id,
                            Model model) {
-        Integer questionId = null;
+        Integer questionId;
         try {
             questionId = Integer.parseInt(id);
         } catch (NumberFormatException e) {
             throw new ServiceException(CoreExceptionEnum.INVALID_INPUT);
         }
         QuestionDTO questionDTO = questionService.getById(questionId);
+        //增加阅读数
+        questionService.increaseView(questionId);
         model.addAttribute("question", questionDTO);
-
         return "question";
     }
 }
