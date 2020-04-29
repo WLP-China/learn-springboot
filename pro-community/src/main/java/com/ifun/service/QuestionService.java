@@ -1,11 +1,11 @@
 package com.ifun.service;
 
+import com.ifun.common.api.ResultCode;
 import com.ifun.dao.QuestionDao;
 import com.ifun.dto.PaginationDTO;
 import com.ifun.dto.QuestionDTO;
-import com.ifun.exception.ServiceException;
-import com.ifun.exception.enums.CoreExceptionEnum;
-import com.ifun.exception.enums.QuestionExceptionEnum;
+import com.ifun.common.exception.ServiceException;
+import com.ifun.enums.exception.QuestionExceptionEnum;
 import com.ifun.mbg.mapper.QuestionMapper;
 import com.ifun.mbg.mapper.UserMapper;
 import com.ifun.mbg.model.Question;
@@ -130,7 +130,7 @@ public class QuestionService {
             }
             if (!dbQuestion.getCreator().equals(question.getCreator())) {
                 //与数据库中创建者不一致
-                throw new ServiceException(CoreExceptionEnum.INVALID_OPERATION);
+                throw new ServiceException(ResultCode.FORBIDDEN);
             }
             Question updateQuestion = new Question();
             updateQuestion.setTitle(question.getTitle());

@@ -1,24 +1,35 @@
 package com.ifun.common.api;
 
+import com.ifun.common.exception.AbstractBaseExceptionEnum;
+
 /**
  * 枚举了一些常用API操作码
  */
-public enum ResultCode implements IErrorCode {
+public enum ResultCode implements AbstractBaseExceptionEnum {
     SUCCESS(200, "操作成功"),
-    FAILED(500, "操作失败"),
-    VALIDATE_FAILED(404, "参数检验失败"),
-    UNAUTHORIZED(401, "暂未登录或token已经过期"),
-    FORBIDDEN(403, "没有相关权限");
-    private long code;
+    FAILED(500, "操作失败"),//SERVICE_ERROR
+
+    UNAUTHORIZED(501, "暂未登录或访问过期"),//TOKEN_ILLEGAL 访问过期或无效,请重新授权
+    FORBIDDEN(502, "没有相关权限"),
+    INVALID_OPERATION(503, "非法操作"),
+    VALIDATE_FAILED(504, "参数检验失败");//PARAM_INVALID INPUT_INVALID
+
+    /**
+     * 返回代码
+     */
+    private Integer code;
+    /**
+     * 返回消息
+     */
     private String message;
 
-    private ResultCode(long code, String message) {
+    private ResultCode(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
     @Override
-    public long getCode() {
+    public Integer getCode() {
         return code;
     }
 

@@ -1,7 +1,7 @@
 package com.ifun.advice;
 
-import com.ifun.exception.ServiceException;
-import com.ifun.exception.enums.CoreExceptionEnum;
+import com.ifun.common.api.ResultCode;
+import com.ifun.common.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class CustomizeExceptionHandler {
         if (e instanceof ServiceException) {
             model.addAttribute("message", e.getMessage());
         } else {
-            model.addAttribute("message", CoreExceptionEnum.SERVICE_ERROR.getMessage());
+            model.addAttribute("message", ResultCode.FAILED.getMessage());
         }
         return new ModelAndView("error");
     }

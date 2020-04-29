@@ -1,4 +1,4 @@
-package com.ifun.exception;
+package com.ifun.common.exception;
 
 public interface AbstractBaseExceptionEnum {
     Integer getCode();

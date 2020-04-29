@@ -1,4 +1,4 @@
-package com.ifun.exception;
+package com.ifun.common.exception;
 
 public class ServiceException extends RuntimeException {
     private Integer code;

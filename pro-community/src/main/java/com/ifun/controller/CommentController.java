@@ -2,9 +2,11 @@ package com.ifun.controller;
 
 import com.ifun.common.api.CommonResult;
 import com.ifun.dto.CommentCreateDTO;
+import com.ifun.enums.exception.CommentExceptionEnum;
 import com.ifun.mbg.model.Comment;
 import com.ifun.mbg.model.User;
 import com.ifun.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +30,12 @@ public class CommentController {
     public CommonResult post(@RequestBody CommentCreateDTO commentCreateDTO,
                              HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("user");
+        if (user==null) {
+            return CommonResult.unauthorized(null);
+        }
+        if (commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())) {
+            return CommonResult.failed(CommentExceptionEnum.CONTENT_IS_EMPTY);
+        }
 
         Comment comment=new Comment();
         comment.setParentId(commentCreateDTO.getParentId());

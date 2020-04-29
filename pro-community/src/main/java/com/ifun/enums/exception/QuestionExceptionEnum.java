@@ -1,13 +1,10 @@
-package com.ifun.exception.enums;
+package com.ifun.enums.exception;
 
-import com.ifun.exception.AbstractBaseExceptionEnum;
+import com.ifun.common.exception.AbstractBaseExceptionEnum;
 
-/**
- * Create by iFun on 2020/04/27
- */
 public enum QuestionExceptionEnum implements AbstractBaseExceptionEnum {
-    QUESTION_NOT_FOUND(11001, "问题不存在或已被删除"),
-    QUESTION_SAVE_FAIL(11002, "问题保存失败");
+    QUESTION_NOT_FOUND(10101, "问题不存在或已被删除"),
+    QUESTION_SAVE_FAIL(10102, "问题保存失败");
 
     /**
      * 异常代码
