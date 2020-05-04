@@ -1,6 +1,7 @@
 package com.ifun.common.api;
 
 import com.ifun.common.exception.AbstractBaseExceptionEnum;
+import com.ifun.common.exception.ServiceException;
 import lombok.Data;
 
 /**
@@ -53,6 +54,14 @@ public class CommonResult<T> {
      */
     public static <T> CommonResult<T> failed(AbstractBaseExceptionEnum errorCode) {
         return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
+    }
+
+    /**
+     * 失败返回结果
+     * @param errorCode 错误码
+     */
+    public static <T> CommonResult<T> failed(ServiceException errorCode) {
+        return new CommonResult<T>(errorCode.getCode(), errorCode.getErrorMessage(), null);
     }
 
     /**

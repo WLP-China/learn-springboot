@@ -3,7 +3,11 @@ package com.ifun.enums.exception;
 import com.ifun.common.exception.AbstractBaseExceptionEnum;
 
 public enum  CommentExceptionEnum implements AbstractBaseExceptionEnum {
-    CONTENT_IS_EMPTY(10201, "提交内容为空");
+    CONTENT_IS_EMPTY(10201, "提交内容为空"),
+    TARGET_PARAM_NOT_FOUND(10202, "未选中任何问题或评论进行回复"),
+    TYPE_PARAM_WRONG(10203, "评论类型错误或不存在"),
+    COMMENT_NOT_FOUND(10204,"回复的评论不存在")
+    ;
 
     /**
      * 异常代码

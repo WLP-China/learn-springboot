@@ -147,6 +147,6 @@ public class QuestionService {
     }
 
     public void increaseView(Integer questionId) {
-        questionDao.increaseView(questionId);
+        questionDao.increaseViewCount(questionId);
     }
 }

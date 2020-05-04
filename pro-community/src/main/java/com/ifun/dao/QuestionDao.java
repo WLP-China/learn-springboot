@@ -1,7 +1,5 @@
 package com.ifun.dao;
 
-import com.ifun.mbg.model.Question;
-
 public interface QuestionDao {
 
     /**
@@ -9,5 +7,12 @@ public interface QuestionDao {
      * @param questionId
      * @return
      */
-    int increaseView(Integer questionId);
+    int increaseViewCount(Integer questionId);
+
+    /**
+     * 回复数+1
+     * @param questionId
+     * @return
+     */
+    int increaseCommentCount(Integer questionId);
 }
