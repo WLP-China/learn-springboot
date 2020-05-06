@@ -38,7 +38,7 @@ public class CustomizeExceptionHandler {
         if (StringUtils.equals("application/json", contentType)) {
             //返回json
             if (e instanceof ServiceException) {
-                return CommonResult.failed((AbstractBaseExceptionEnum) e);
+                return CommonResult.failed((ServiceException) e);
             } else {
                 return CommonResult.failed();
             }
