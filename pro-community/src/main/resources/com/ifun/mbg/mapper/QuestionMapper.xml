@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ifun.mbg.mapper.QuestionMapper">
   <resultMap id="BaseResultMap" type="com.ifun.mbg.model.Question">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="tag" jdbcType="VARCHAR" property="tag" />
     <result column="gmt_create" jdbcType="BIGINT" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="BIGINT" property="gmtModified" />
-    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
     <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
     <result column="view_count" jdbcType="INTEGER" property="viewCount" />
     <result column="like_count" jdbcType="INTEGER" property="likeCount" />
@@ -109,17 +109,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from question
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from question
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.ifun.mbg.model.QuestionExample">
     delete from question
@@ -128,7 +128,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ifun.mbg.model.Question">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into question (title, tag, gmt_create, 
@@ -136,12 +136,12 @@
       view_count, like_count, description
       )
     values (#{title,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, 
-      #{gmtModified,jdbcType=BIGINT}, #{creator,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{gmtModified,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{commentCount,jdbcType=INTEGER}, 
       #{viewCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{description,jdbcType=LONGVARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ifun.mbg.model.Question">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into question
@@ -188,7 +188,7 @@
         #{gmtModified,jdbcType=BIGINT},
       </if>
       <if test="creator != null">
-        #{creator,jdbcType=INTEGER},
+        #{creator,jdbcType=BIGINT},
       </if>
       <if test="commentCount != null">
         #{commentCount,jdbcType=INTEGER},
@@ -214,7 +214,7 @@
     update question
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
@@ -229,7 +229,7 @@
         gmt_modified = #{record.gmtModified,jdbcType=BIGINT},
       </if>
       <if test="record.creator != null">
-        creator = #{record.creator,jdbcType=INTEGER},
+        creator = #{record.creator,jdbcType=BIGINT},
       </if>
       <if test="record.commentCount != null">
         comment_count = #{record.commentCount,jdbcType=INTEGER},
@@ -250,12 +250,12 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update question
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       tag = #{record.tag,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{record.gmtModified,jdbcType=BIGINT},
-      creator = #{record.creator,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=BIGINT},
       comment_count = #{record.commentCount,jdbcType=INTEGER},
       view_count = #{record.viewCount,jdbcType=INTEGER},
       like_count = #{record.likeCount,jdbcType=INTEGER},
@@ -266,12 +266,12 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update question
-    set id = #{record.id,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       tag = #{record.tag,jdbcType=VARCHAR},
       gmt_create = #{record.gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{record.gmtModified,jdbcType=BIGINT},
-      creator = #{record.creator,jdbcType=INTEGER},
+      creator = #{record.creator,jdbcType=BIGINT},
       comment_count = #{record.commentCount,jdbcType=INTEGER},
       view_count = #{record.viewCount,jdbcType=INTEGER},
       like_count = #{record.likeCount,jdbcType=INTEGER}
@@ -295,7 +295,7 @@
         gmt_modified = #{gmtModified,jdbcType=BIGINT},
       </if>
       <if test="creator != null">
-        creator = #{creator,jdbcType=INTEGER},
+        creator = #{creator,jdbcType=BIGINT},
       </if>
       <if test="commentCount != null">
         comment_count = #{commentCount,jdbcType=INTEGER},
@@ -310,7 +310,7 @@
         description = #{description,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ifun.mbg.model.Question">
     update question
@@ -318,12 +318,12 @@
       tag = #{tag,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{gmtModified,jdbcType=BIGINT},
-      creator = #{creator,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
       comment_count = #{commentCount,jdbcType=INTEGER},
       view_count = #{viewCount,jdbcType=INTEGER},
       like_count = #{likeCount,jdbcType=INTEGER},
       description = #{description,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ifun.mbg.model.Question">
     update question
@@ -331,11 +331,11 @@
       tag = #{tag,jdbcType=VARCHAR},
       gmt_create = #{gmtCreate,jdbcType=BIGINT},
       gmt_modified = #{gmtModified,jdbcType=BIGINT},
-      creator = #{creator,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=BIGINT},
       comment_count = #{commentCount,jdbcType=INTEGER},
       view_count = #{viewCount,jdbcType=INTEGER},
       like_count = #{likeCount,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <select id="selectByExampleWithBLOBsWithRowbounds" parameterType="com.ifun.mbg.model.QuestionExample" resultMap="ResultMapWithBLOBs">
     select

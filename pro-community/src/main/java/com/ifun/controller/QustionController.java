@@ -19,9 +19,9 @@ public class QustionController {
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name = "id") String id,
                            Model model) {
-        Integer questionId;
+        Long questionId;
         try {
-            questionId = Integer.parseInt(id);
+            questionId = Long.parseLong(id);
         } catch (NumberFormatException e) {
             throw new ServiceException(ResultCode.VALIDATE_FAILED);
         }

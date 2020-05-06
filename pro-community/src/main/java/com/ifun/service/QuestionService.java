@@ -61,7 +61,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         QuestionExample example = new QuestionExample();
         example.createCriteria().andCreatorEqualTo(userId);
@@ -97,7 +97,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question==null) {
             throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
@@ -146,7 +146,7 @@ public class QuestionService {
         }
     }
 
-    public void increaseView(Integer questionId) {
+    public void increaseView(Long questionId) {
         questionDao.increaseViewCount(questionId);
     }
 }

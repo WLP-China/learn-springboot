@@ -41,8 +41,7 @@ public class CommentController {
         comment.setParentId(commentCreateDTO.getParentId());
         comment.setType(commentCreateDTO.getType());
         comment.setContent(commentCreateDTO.getContent());
-        //TODO id类型不对应 重新生成model.User后修改此处
-        comment.setCommentator(Long.valueOf(user.getId()));
+        comment.setCommentator(user.getId());
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(comment.getGmtCreate());
         comment.setLikeCount(0);

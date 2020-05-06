@@ -7,12 +7,12 @@ public interface QuestionDao {
      * @param questionId
      * @return
      */
-    int increaseViewCount(Integer questionId);
+    int increaseViewCount(Long questionId);
 
     /**
      * 回复数+1
      * @param questionId
      * @return
      */
-    int increaseCommentCount(Integer questionId);
+    int increaseCommentCount(Long questionId);
 }

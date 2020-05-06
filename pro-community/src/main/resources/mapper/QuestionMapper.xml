@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ifun.dao.QuestionDao">
 
-  <update id="increaseViewCount" parameterType="java.lang.Integer">
+  <update id="increaseViewCount" parameterType="java.lang.Long">
     update question
     set
         view_count = view_count + 1
     where
-        id = #{questionId,jdbcType=INTEGER}
+        id = #{questionId,jdbcType=BIGINT}
   </update>
 
-  <update id="increaseCommentCount" parameterType="java.lang.Integer">
+  <update id="increaseCommentCount" parameterType="java.lang.Long">
     update question
     set
         comment_count = comment_count + 1
     where
-        id = #{questionId,jdbcType=INTEGER}
+        id = #{questionId,jdbcType=BIGINT}
   </update>
 
 </mapper>

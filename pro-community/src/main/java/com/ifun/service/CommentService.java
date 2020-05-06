@@ -38,7 +38,7 @@ public class CommentService {
             if (dbComment==null) {
                 throw new ServiceException(CommentExceptionEnum.COMMENT_NOT_FOUND);
             }
-            Question question = questionMapper.selectByPrimaryKey(Math.toIntExact(comment.getParentId()));
+            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (question == null) {//回复过程中问题被删除的情况
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
@@ -48,8 +48,7 @@ public class CommentService {
 
         }else {
             //回复问题
-            //TODO id类型不对应 重新生成model.Question后修改此处
-            Question question = questionMapper.selectByPrimaryKey(Math.toIntExact(comment.getParentId()));
+            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (question == null) {
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }

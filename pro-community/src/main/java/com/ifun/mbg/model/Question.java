@@ -3,7 +3,7 @@ package com.ifun.mbg.model;
 import java.io.Serializable;
 
 public class Question implements Serializable {
-    private Integer id;
+    private Long id;
 
     /**
      * 标题
@@ -28,7 +28,7 @@ public class Question implements Serializable {
     /**
      * 创建者ID
      */
-    private Integer creator;
+    private Long creator;
 
     /**
      * 回复数
@@ -52,11 +52,11 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -92,11 +92,11 @@ public class Question implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    public Integer getCreator() {
+    public Long getCreator() {
         return creator;
     }
 
-    public void setCreator(Integer creator) {
+    public void setCreator(Long creator) {
         this.creator = creator;
     }
 
