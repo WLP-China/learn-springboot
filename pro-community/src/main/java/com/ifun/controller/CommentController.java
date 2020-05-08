@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommentController {
 
     @Autowired
-    CommentService commentService;
+    private CommentService commentService;
 
     @ResponseBody
     @RequestMapping(value = "/comment",method = RequestMethod.POST)

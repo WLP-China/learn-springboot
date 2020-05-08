@@ -99,7 +99,7 @@ public class QuestionService {
 
     public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
-        if (question==null) {
+        if (question == null) {
             throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
         }
         QuestionDTO questionDTO = new QuestionDTO();
@@ -118,7 +118,7 @@ public class QuestionService {
             question.setLikeCount(0);
             question.setCommentCount(0);
             int insert = questionMapper.insert(question);
-            if (insert!=1) {
+            if (insert != 1) {
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_SAVE_FAIL);
             }
         } else {
@@ -140,7 +140,7 @@ public class QuestionService {
             QuestionExample example = new QuestionExample();
             example.createCriteria().andIdEqualTo(dbQuestion.getId());
             int update = questionMapper.updateByExampleSelective(updateQuestion, example);
-            if (update!=1) {
+            if (update != 1) {
                 throw new ServiceException(QuestionExceptionEnum.QUESTION_NOT_FOUND);
             }
         }
