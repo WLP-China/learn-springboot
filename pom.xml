@@ -20,7 +20,8 @@
 <!--        <module>demo-schedulingTasks</module>-->
 <!--        <module>demo-thymeleaf</module>-->
 
-        <module>pro-community</module>
+<!--        <module>pro-community</module>-->
+        <module>pro-mini</module>
     </modules>
 
 </project>
