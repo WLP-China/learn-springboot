@@ -1,4 +1,4 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.NotEmpty;

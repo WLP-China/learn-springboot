@@ -1,4 +1,4 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;

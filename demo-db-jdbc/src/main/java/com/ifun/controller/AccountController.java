@@ -1,7 +1,7 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.entity.Account;
-import com.ifun.service.AccountService;
+import com.muqing.entity.Account;
+import com.muqing.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

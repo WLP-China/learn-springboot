@@ -1,11 +1,11 @@
-package com.ifun.config;
+package com.muqing.config;
 
-import com.ifun.common.utils.ResponseUtil;
-import com.ifun.dto.LoginUserDTO;
-import com.ifun.dto.ResponseInfoDTO;
-import com.ifun.dto.TokenDTO;
-import com.ifun.filter.TokenFilter;
-import com.ifun.service.TokenService;
+import com.muqing.common.utils.ResponseUtil;
+import com.muqing.dto.LoginUserDTO;
+import com.muqing.dto.ResponseInfoDTO;
+import com.muqing.dto.TokenDTO;
+import com.muqing.filter.TokenFilter;
+import com.muqing.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

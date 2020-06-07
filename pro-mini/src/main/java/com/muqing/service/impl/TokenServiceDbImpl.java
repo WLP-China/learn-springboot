@@ -1,12 +1,12 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
 
 import com.alibaba.fastjson.JSONObject;
-import com.ifun.dao.TokenDao;
-import com.ifun.dto.LoginUserDTO;
-import com.ifun.dto.TokenDTO;
-import com.ifun.model.Token;
-import com.ifun.service.TokenService;
+import com.muqing.dao.TokenDao;
+import com.muqing.dto.LoginUserDTO;
+import com.muqing.dto.TokenDTO;
+import com.muqing.model.Token;
+import com.muqing.service.TokenService;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

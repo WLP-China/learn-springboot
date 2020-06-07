@@ -1,4 +1,4 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
 import com.github.pagehelper.PageInfo;
 

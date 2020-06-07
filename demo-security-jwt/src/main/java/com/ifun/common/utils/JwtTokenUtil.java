@@ -1,4 +1,4 @@
-package com.ifun.common.utils;
+package com.muqing.common.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

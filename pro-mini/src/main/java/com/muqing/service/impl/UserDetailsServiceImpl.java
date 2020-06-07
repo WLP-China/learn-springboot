@@ -1,12 +1,12 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
 import java.util.List;
 
-import com.ifun.dao.PermissionDao;
-import com.ifun.dto.LoginUserDTO;
-import com.ifun.model.SysPermission;
-import com.ifun.model.SysUser;
-import com.ifun.service.UserService;
+import com.muqing.dao.PermissionDao;
+import com.muqing.dto.LoginUserDTO;
+import com.muqing.model.SysPermission;
+import com.muqing.model.SysUser;
+import com.muqing.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;

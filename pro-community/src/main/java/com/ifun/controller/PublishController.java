@@ -1,9 +1,9 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.dto.QuestionDTO;
-import com.ifun.mbg.model.Question;
-import com.ifun.mbg.model.User;
-import com.ifun.service.QuestionService;
+import com.muqing.dto.QuestionDTO;
+import com.muqing.mbg.model.Question;
+import com.muqing.mbg.model.User;
+import com.muqing.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

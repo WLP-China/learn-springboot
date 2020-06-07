@@ -1,4 +1,4 @@
-package com.ifun.config;
+package com.muqing.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

@@ -1,9 +1,9 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.common.api.CommonPage;
-import com.ifun.common.api.CommonResult;
-import com.ifun.mbg.model.PmsBrand;
-import com.ifun.service.PmsBrandService;
+import com.muqing.common.api.CommonPage;
+import com.muqing.common.api.CommonResult;
+import com.muqing.mbg.model.PmsBrand;
+import com.muqing.service.PmsBrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

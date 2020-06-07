@@ -1,6 +1,6 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.mbg.model.PmsBrand;
+import com.muqing.mbg.model.PmsBrand;
 
 import java.util.List;
 

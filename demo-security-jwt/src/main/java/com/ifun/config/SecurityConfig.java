@@ -1,12 +1,12 @@
-package com.ifun.config;
+package com.muqing.config;
 
-import com.ifun.component.JwtAuthenticationTokenFilter;
-import com.ifun.component.RestAuthenticationEntryPoint;
-import com.ifun.component.RestfulAccessDeniedHandler;
-import com.ifun.dto.AdminUserDetails;
-import com.ifun.mbg.model.UmsAdmin;
-import com.ifun.mbg.model.UmsPermission;
-import com.ifun.service.UmsAdminService;
+import com.muqing.component.JwtAuthenticationTokenFilter;
+import com.muqing.component.RestAuthenticationEntryPoint;
+import com.muqing.component.RestfulAccessDeniedHandler;
+import com.muqing.dto.AdminUserDetails;
+import com.muqing.mbg.model.UmsAdmin;
+import com.muqing.mbg.model.UmsPermission;
+import com.muqing.service.UmsAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

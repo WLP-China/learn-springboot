@@ -1,7 +1,7 @@
-package com.ifun.mbg.mapper;
+package com.muqing.mbg.mapper;
 
-import com.ifun.mbg.model.Comment;
-import com.ifun.mbg.model.CommentExample;
+import com.muqing.mbg.model.Comment;
+import com.muqing.mbg.model.CommentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

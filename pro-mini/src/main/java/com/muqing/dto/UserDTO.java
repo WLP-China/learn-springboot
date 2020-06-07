@@ -1,8 +1,8 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
 import java.util.List;
 
-import com.ifun.model.SysUser;
+import com.muqing.model.SysUser;
 
 public class UserDTO extends SysUser {
 

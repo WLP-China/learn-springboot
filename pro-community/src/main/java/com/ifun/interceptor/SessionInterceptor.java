@@ -1,8 +1,8 @@
-package com.ifun.interceptor;
+package com.muqing.interceptor;
 
-import com.ifun.mbg.mapper.UserMapper;
-import com.ifun.mbg.model.User;
-import com.ifun.mbg.model.UserExample;
+import com.muqing.mbg.mapper.UserMapper;
+import com.muqing.mbg.model.User;
+import com.muqing.mbg.model.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;

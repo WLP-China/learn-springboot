@@ -1,7 +1,7 @@
-package com.ifun.mbg.mapper;
+package com.muqing.mbg.mapper;
 
-import com.ifun.mbg.model.UmsAdminPermissionRelation;
-import com.ifun.mbg.model.UmsAdminPermissionRelationExample;
+import com.muqing.mbg.model.UmsAdminPermissionRelation;
+import com.muqing.mbg.model.UmsAdminPermissionRelationExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

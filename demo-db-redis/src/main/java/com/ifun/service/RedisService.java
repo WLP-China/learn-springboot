@@ -1,4 +1,4 @@
-package com.ifun.service;
+package com.muqing.service;
 
 /**
  * redis操作Service,

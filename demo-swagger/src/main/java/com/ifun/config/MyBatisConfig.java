@@ -1,4 +1,4 @@
-package com.ifun.config;
+package com.muqing.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;

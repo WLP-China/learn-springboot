@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 mybatis:
-  type-aliases-package: com.ifun.model
+  type-aliases-package: com.muqing.model
   mapper-locations: classpath:/mybatis-mappers/* # MyBatis的mapper.xml的路径配置
   configuration:
     mapUnderscoreToCamelCase: true

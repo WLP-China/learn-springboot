@@ -1,4 +1,4 @@
-package com.ifun.mbg;
+package com.muqing.mbg;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;

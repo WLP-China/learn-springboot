@@ -1,7 +1,7 @@
-package com.ifun.component;
+package com.muqing.component;
 
 import cn.hutool.json.JSONUtil;
-import com.ifun.common.api.CommonResult;
+import com.muqing.common.api.CommonResult;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

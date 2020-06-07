@@ -1,7 +1,7 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.dto.UserDTO;
-import com.ifun.model.SysUser;
+import com.muqing.dto.UserDTO;
+import com.muqing.model.SysUser;
 
 public interface UserService {
 

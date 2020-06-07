@@ -1,4 +1,4 @@
-package com.ifun.enums;
+package com.muqing.enums;
 
 /**
  * 评论类型枚举 对应comment表中的type

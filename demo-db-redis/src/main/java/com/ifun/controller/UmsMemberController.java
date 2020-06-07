@@ -1,7 +1,7 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.common.api.CommonResult;
-import com.ifun.service.UmsMemberService;
+import com.muqing.common.api.CommonResult;
+import com.muqing.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

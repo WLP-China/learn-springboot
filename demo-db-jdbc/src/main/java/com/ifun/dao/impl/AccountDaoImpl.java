@@ -1,7 +1,7 @@
-package com.ifun.dao.impl;
+package com.muqing.dao.impl;
 
-import com.ifun.dao.AccountDao;
-import com.ifun.entity.Account;
+import com.muqing.dao.AccountDao;
+import com.muqing.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,7 +1,7 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.mbg.model.UmsAdmin;
-import com.ifun.mbg.model.UmsPermission;
+import com.muqing.mbg.model.UmsAdmin;
+import com.muqing.mbg.model.UmsPermission;
 
 import java.util.List;
 

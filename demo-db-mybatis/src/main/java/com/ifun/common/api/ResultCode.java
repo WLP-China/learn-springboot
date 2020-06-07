@@ -1,4 +1,4 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
 /**
  * 枚举了一些常用API操作码

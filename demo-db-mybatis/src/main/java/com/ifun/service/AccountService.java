@@ -1,7 +1,7 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.dao.AccountMapper;
-import com.ifun.entity.Account;
+import com.muqing.dao.AccountMapper;
+import com.muqing.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.entity.Account;
+import com.muqing.entity.Account;
 
 import java.util.List;
 

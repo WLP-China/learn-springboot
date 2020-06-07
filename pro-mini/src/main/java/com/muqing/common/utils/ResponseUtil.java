@@ -1,4 +1,4 @@
-package com.ifun.common.utils;
+package com.muqing.common.utils;
 
 import java.io.IOException;
 

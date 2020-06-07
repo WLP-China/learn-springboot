@@ -1,4 +1,4 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
 /**
  * 封装API的错误码

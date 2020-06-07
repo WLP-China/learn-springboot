@@ -1,4 +1,4 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
 import java.io.Serializable;
 

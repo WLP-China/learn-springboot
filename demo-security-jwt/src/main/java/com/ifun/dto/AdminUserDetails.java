@@ -1,7 +1,7 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
-import com.ifun.mbg.model.UmsAdmin;
-import com.ifun.mbg.model.UmsPermission;
+import com.muqing.mbg.model.UmsAdmin;
+import com.muqing.mbg.model.UmsPermission;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

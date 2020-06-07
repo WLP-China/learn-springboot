@@ -1,7 +1,7 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.dto.LoginUserDTO;
-import com.ifun.dto.TokenDTO;
+import com.muqing.dto.LoginUserDTO;
+import com.muqing.dto.TokenDTO;
 
 /**
  * Token管理器

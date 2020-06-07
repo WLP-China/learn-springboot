@@ -1,12 +1,12 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
-import com.ifun.common.utils.JwtTokenUtil;
-import com.ifun.dao.UmsAdminRoleRelationDao;
-import com.ifun.mbg.mapper.UmsAdminMapper;
-import com.ifun.mbg.model.UmsAdmin;
-import com.ifun.mbg.model.UmsAdminExample;
-import com.ifun.mbg.model.UmsPermission;
-import com.ifun.service.UmsAdminService;
+import com.muqing.common.utils.JwtTokenUtil;
+import com.muqing.dao.UmsAdminRoleRelationDao;
+import com.muqing.mbg.mapper.UmsAdminMapper;
+import com.muqing.mbg.model.UmsAdmin;
+import com.muqing.mbg.model.UmsAdminExample;
+import com.muqing.mbg.model.UmsPermission;
+import com.muqing.service.UmsAdminService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

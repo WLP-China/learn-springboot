@@ -1,10 +1,10 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.ifun.mbg.mapper.PmsBrandMapper;
-import com.ifun.mbg.model.PmsBrand;
-import com.ifun.mbg.model.PmsBrandExample;
-import com.ifun.service.PmsBrandService;
+import com.muqing.mbg.mapper.PmsBrandMapper;
+import com.muqing.mbg.model.PmsBrand;
+import com.muqing.mbg.model.PmsBrandExample;
+import com.muqing.service.PmsBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

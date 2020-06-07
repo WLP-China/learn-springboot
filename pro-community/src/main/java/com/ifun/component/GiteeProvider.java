@@ -1,8 +1,8 @@
-package com.ifun.component;
+package com.muqing.component;
 
 import com.alibaba.fastjson.JSON;
-import com.ifun.dto.GiteeAccessTokenDTO;
-import com.ifun.dto.UserDTO;
+import com.muqing.dto.GiteeAccessTokenDTO;
+import com.muqing.dto.UserDTO;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 

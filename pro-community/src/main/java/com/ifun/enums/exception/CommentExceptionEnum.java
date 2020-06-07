@@ -1,6 +1,6 @@
-package com.ifun.enums.exception;
+package com.muqing.enums.exception;
 
-import com.ifun.common.exception.AbstractBaseExceptionEnum;
+import com.muqing.common.exception.AbstractBaseExceptionEnum;
 
 public enum  CommentExceptionEnum implements AbstractBaseExceptionEnum {
     CONTENT_IS_EMPTY(10201, "提交内容为空"),

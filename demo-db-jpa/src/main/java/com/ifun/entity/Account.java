@@ -1,4 +1,4 @@
-package com.ifun.entity;
+package com.muqing.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,12 +1,12 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.component.GiteeProvider;
-import com.ifun.component.GithubProvider;
-import com.ifun.dto.AccessTokenDTO;
-import com.ifun.dto.GiteeAccessTokenDTO;
-import com.ifun.dto.UserDTO;
-import com.ifun.mbg.model.User;
-import com.ifun.service.UserService;
+import com.muqing.component.GiteeProvider;
+import com.muqing.component.GithubProvider;
+import com.muqing.dto.AccessTokenDTO;
+import com.muqing.dto.GiteeAccessTokenDTO;
+import com.muqing.dto.UserDTO;
+import com.muqing.mbg.model.User;
+import com.muqing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

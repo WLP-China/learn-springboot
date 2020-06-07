@@ -1,9 +1,9 @@
-package com.ifun.dao;
+package com.muqing.dao;
 
 import java.util.List;
 import java.util.Set;
 
-import com.ifun.model.SysPermission;
+import com.muqing.model.SysPermission;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

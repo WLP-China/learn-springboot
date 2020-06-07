@@ -1,4 +1,4 @@
-package com.ifun.model;
+package com.muqing.model;
 
 import java.util.List;
 

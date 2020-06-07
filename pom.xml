@@ -10,17 +10,17 @@
     <packaging>pom</packaging>
 
     <modules>
-<!--        <module>demo01-firstapp</module>-->
-<!--        <module>demo-db-jpa</module>-->
-<!--        <module>demo-db-jdbc</module>-->
-<!--        <module>demo-db-mybatis</module>-->
-<!--        <module>demo-swagger</module>-->
-<!--        <module>demo-db-redis</module>-->
-<!--        <module>demo-security-jwt</module>-->
-<!--        <module>demo-schedulingTasks</module>-->
-<!--        <module>demo-thymeleaf</module>-->
+        <module>demo01-firstapp</module>
+        <module>demo-db-jpa</module>
+        <module>demo-db-jdbc</module>
+        <module>demo-db-mybatis</module>
+        <module>demo-swagger</module>
+        <module>demo-db-redis</module>
+        <module>demo-security-jwt</module>
+        <module>demo-schedulingTasks</module>
+        <module>demo-thymeleaf</module>
 
-<!--        <module>pro-community</module>-->
+        <module>pro-community</module>
         <module>pro-mini</module>
     </modules>
 

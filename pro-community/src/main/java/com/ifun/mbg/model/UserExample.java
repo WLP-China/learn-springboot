@@ -1,4 +1,4 @@
-package com.ifun.mbg.model;
+package com.muqing.mbg.model;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.ifun.dao;
+package com.muqing.dao;
 
-import com.ifun.entity.Account;
+import com.muqing.entity.Account;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.entity.ConfigBean;
-import com.ifun.entity.User;
+import com.muqing.entity.ConfigBean;
+import com.muqing.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestMapping;

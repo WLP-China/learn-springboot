@@ -1,4 +1,4 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

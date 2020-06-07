@@ -1,8 +1,8 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
-import com.ifun.common.api.CommonResult;
-import com.ifun.service.RedisService;
-import com.ifun.service.UmsMemberService;
+import com.muqing.common.api.CommonResult;
+import com.muqing.service.RedisService;
+import com.muqing.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

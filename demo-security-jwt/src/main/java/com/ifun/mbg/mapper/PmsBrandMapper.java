@@ -1,7 +1,7 @@
-package com.ifun.mbg.mapper;
+package com.muqing.mbg.mapper;
 
-import com.ifun.mbg.model.PmsBrand;
-import com.ifun.mbg.model.PmsBrandExample;
+import com.muqing.mbg.model.PmsBrand;
+import com.muqing.mbg.model.PmsBrandExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

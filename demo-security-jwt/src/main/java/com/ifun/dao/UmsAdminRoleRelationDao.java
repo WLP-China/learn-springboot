@@ -1,6 +1,6 @@
-package com.ifun.dao;
+package com.muqing.dao;
 
-import com.ifun.mbg.model.UmsPermission;
+import com.muqing.mbg.model.UmsPermission;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

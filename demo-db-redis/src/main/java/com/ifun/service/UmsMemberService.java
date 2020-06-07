@@ -1,6 +1,6 @@
-package com.ifun.service;
+package com.muqing.service;
 
-import com.ifun.common.api.CommonResult;
+import com.muqing.common.api.CommonResult;
 
 /**
  * 会员管理Service

@@ -1,7 +1,7 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
-import com.ifun.common.exception.AbstractBaseExceptionEnum;
-import com.ifun.common.exception.ServiceException;
+import com.muqing.common.exception.AbstractBaseExceptionEnum;
+import com.muqing.common.exception.ServiceException;
 import lombok.Data;
 
 /**

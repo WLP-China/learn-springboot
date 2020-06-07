@@ -1,4 +1,4 @@
-package com.ifun.mbg.model;
+package com.muqing.mbg.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;

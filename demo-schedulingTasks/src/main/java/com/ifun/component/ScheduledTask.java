@@ -1,4 +1,4 @@
-package com.ifun.component;
+package com.muqing.component;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

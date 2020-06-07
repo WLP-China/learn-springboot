@@ -1,4 +1,4 @@
-package com.ifun;
+package com.muqing;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;

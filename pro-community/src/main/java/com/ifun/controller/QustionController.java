@@ -1,12 +1,12 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.common.api.ResultCode;
-import com.ifun.dto.CommentDTO;
-import com.ifun.dto.QuestionDTO;
-import com.ifun.common.exception.ServiceException;
-import com.ifun.enums.CommentTypeEnum;
-import com.ifun.service.CommentService;
-import com.ifun.service.QuestionService;
+import com.muqing.common.api.ResultCode;
+import com.muqing.dto.CommentDTO;
+import com.muqing.dto.QuestionDTO;
+import com.muqing.common.exception.ServiceException;
+import com.muqing.enums.CommentTypeEnum;
+import com.muqing.service.CommentService;
+import com.muqing.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

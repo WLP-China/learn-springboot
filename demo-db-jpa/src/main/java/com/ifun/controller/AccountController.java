@@ -1,7 +1,7 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.dao.AccountDao;
-import com.ifun.entity.Account;
+import com.muqing.dao.AccountDao;
+import com.muqing.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

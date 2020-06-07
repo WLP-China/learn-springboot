@@ -1,4 +1,4 @@
-package com.ifun.filter;
+package com.muqing.filter;
 
 import java.io.IOException;
 
@@ -7,8 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ifun.dto.LoginUserDTO;
-import com.ifun.service.TokenService;
+import com.muqing.dto.LoginUserDTO;
+import com.muqing.service.TokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

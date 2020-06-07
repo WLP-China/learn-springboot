@@ -1,10 +1,10 @@
-package com.ifun.advice;
+package com.muqing.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.ifun.common.api.CommonResult;
-import com.ifun.common.api.ResultCode;
-import com.ifun.common.exception.AbstractBaseExceptionEnum;
-import com.ifun.common.exception.ServiceException;
+import com.muqing.common.api.CommonResult;
+import com.muqing.common.api.ResultCode;
+import com.muqing.common.exception.AbstractBaseExceptionEnum;
+import com.muqing.common.exception.ServiceException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

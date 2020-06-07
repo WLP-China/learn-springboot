@@ -1,6 +1,6 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
-import com.ifun.mbg.model.User;
+import com.muqing.mbg.model.User;
 import lombok.Data;
 
 @Data

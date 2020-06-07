@@ -1,11 +1,11 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
 import java.util.List;
 
-import com.ifun.dao.UserDao;
-import com.ifun.dto.UserDTO;
-import com.ifun.model.SysUser;
-import com.ifun.service.UserService;
+import com.muqing.dao.UserDao;
+import com.muqing.dto.UserDTO;
+import com.muqing.model.SysUser;
+import com.muqing.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.ifun.dao;
+package com.muqing.dao;
 
-import com.ifun.model.Token;
+import com.muqing.model.Token;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

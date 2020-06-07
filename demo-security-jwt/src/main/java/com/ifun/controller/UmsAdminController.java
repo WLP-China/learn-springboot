@@ -1,10 +1,10 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.common.api.CommonResult;
-import com.ifun.dto.UmsAdminLoginParam;
-import com.ifun.mbg.model.UmsAdmin;
-import com.ifun.mbg.model.UmsPermission;
-import com.ifun.service.UmsAdminService;
+import com.muqing.common.api.CommonResult;
+import com.muqing.dto.UmsAdminLoginParam;
+import com.muqing.mbg.model.UmsAdmin;
+import com.muqing.mbg.model.UmsPermission;
+import com.muqing.service.UmsAdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

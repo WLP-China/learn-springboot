@@ -1,8 +1,8 @@
-package com.ifun.component;
+package com.muqing.component;
 
 import cn.hutool.json.JSONUtil;
-import com.ifun.common.api.CommonResult;
-import com.ifun.common.api.ResultCode;
+import com.muqing.common.api.CommonResult;
+import com.muqing.common.api.ResultCode;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

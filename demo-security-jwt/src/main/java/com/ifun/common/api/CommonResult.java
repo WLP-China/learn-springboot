@@ -1,4 +1,4 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
 /**
  * 通用返回对象

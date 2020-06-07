@@ -1,4 +1,4 @@
-package com.ifun;
+package com.muqing;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
-package com.ifun.service.impl;
+package com.muqing.service.impl;
 
-import com.ifun.service.RedisService;
+import com.muqing.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;

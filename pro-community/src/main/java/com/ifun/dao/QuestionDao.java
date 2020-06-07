@@ -1,4 +1,4 @@
-package com.ifun.dao;
+package com.muqing.dao;
 
 public interface QuestionDao {
 

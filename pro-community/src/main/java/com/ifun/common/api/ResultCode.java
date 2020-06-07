@@ -1,6 +1,6 @@
-package com.ifun.common.api;
+package com.muqing.common.api;
 
-import com.ifun.common.exception.AbstractBaseExceptionEnum;
+import com.muqing.common.exception.AbstractBaseExceptionEnum;
 
 /**
  * 枚举了一些常用API操作码

@@ -1,7 +1,7 @@
-package com.ifun.mbg.mapper;
+package com.muqing.mbg.mapper;
 
-import com.ifun.mbg.model.UmsRole;
-import com.ifun.mbg.model.UmsRoleExample;
+import com.muqing.mbg.model.UmsRole;
+import com.muqing.mbg.model.UmsRoleExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

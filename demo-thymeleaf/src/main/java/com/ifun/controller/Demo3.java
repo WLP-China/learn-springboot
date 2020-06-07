@@ -1,6 +1,6 @@
-package com.ifun.controller;
+package com.muqing.controller;
 
-import com.ifun.entity.Person;
+import com.muqing.entity.Person;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

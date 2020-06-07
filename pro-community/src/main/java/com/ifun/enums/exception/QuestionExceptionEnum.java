@@ -1,6 +1,6 @@
-package com.ifun.enums.exception;
+package com.muqing.enums.exception;
 
-import com.ifun.common.exception.AbstractBaseExceptionEnum;
+import com.muqing.common.exception.AbstractBaseExceptionEnum;
 
 public enum QuestionExceptionEnum implements AbstractBaseExceptionEnum {
     QUESTION_NOT_FOUND(10101, "问题不存在或已被删除"),

@@ -1,6 +1,6 @@
-package com.ifun.config;
+package com.muqing.config;
 
-import com.ifun.filter.TokenFilter;
+import com.muqing.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

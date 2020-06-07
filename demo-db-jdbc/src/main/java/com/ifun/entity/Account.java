@@ -1,4 +1,4 @@
-package com.ifun.entity;
+package com.muqing.entity;
 
 public class Account {
     private int id;

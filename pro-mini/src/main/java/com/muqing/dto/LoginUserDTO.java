@@ -1,11 +1,11 @@
-package com.ifun.dto;
+package com.muqing.dto;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.ifun.model.SysPermission;
-import com.ifun.model.SysUser;
+import com.muqing.model.SysPermission;
+import com.muqing.model.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

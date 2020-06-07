@@ -23,17 +23,18 @@ mybatis:
     - classpath*:com/**/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true # mapUnderscoreToCamelCase 映射下划线到驼峰标识
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 github:
   client:
-    id:
-    secret:
+    id: d652f5db17b798fc512f
+    secret: 0ceaa07b0be47f952e8d38d55a01050d940cee3e
   redirect:
     uri: http://localhost:8080/callback
 gitee:
   client:
-    id:
-    secret:
+    id: 12ae6cd285a5695182048a47a0187e084dba672a01cd73e9aadbec7f573927b3
+    secret: 25741fb52a551fea8baeea956bc1188e8d3856c251c56da0dece41af9f404791
   redirect:
     uri: http://127.0.0.1:8080/callback/gitee
+

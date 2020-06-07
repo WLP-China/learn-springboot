@@ -1,7 +1,7 @@
-package com.ifun.mbg.mapper;
+package com.muqing.mbg.mapper;
 
-import com.ifun.mbg.model.Question;
-import com.ifun.mbg.model.QuestionExample;
+import com.muqing.mbg.model.Question;
+import com.muqing.mbg.model.QuestionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
