@@ -2,7 +2,7 @@ package com.muqing.service.impl;
 
 import com.muqing.common.api.CommonResult;
 import com.muqing.service.RedisService;
-import com.muqing.service.UmsMemberService;
+import com.muqing.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Random;
  * 会员管理Service实现类
  */
 @Service
-public class UmsMemberServiceImpl implements UmsMemberService {
+public class MemberServiceImpl implements MemberService {
     @Autowired
     private RedisService redisService;
     @Value("${redis.key.prefix.authCode}")

@@ -1,7 +1,7 @@
 package com.muqing.controller;
 
 import com.muqing.common.api.CommonResult;
-import com.muqing.service.UmsMemberService;
+import com.muqing.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/sso")
 public class UmsMemberController {
     @Autowired
-    private UmsMemberService memberService;
+    private MemberService memberService;
 
     /**
      * 获取验证码

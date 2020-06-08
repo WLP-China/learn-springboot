@@ -5,7 +5,7 @@ import com.muqing.common.api.CommonResult;
 /**
  * 会员管理Service
  */
-public interface UmsMemberService {
+public interface MemberService {
 
     /**
      * 生成验证码
