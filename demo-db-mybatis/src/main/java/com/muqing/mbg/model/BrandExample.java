@@ -3,14 +3,14 @@ package com.muqing.mbg.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PmsBrandExample {
+public class BrandExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PmsBrandExample() {
+    public BrandExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

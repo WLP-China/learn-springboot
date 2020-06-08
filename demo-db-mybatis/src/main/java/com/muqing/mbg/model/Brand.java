@@ -2,7 +2,7 @@ package com.muqing.mbg.model;
 
 import java.io.Serializable;
 
-public class PmsBrand implements Serializable {
+public class Brand implements Serializable {
     private Long id;
 
     private String name;

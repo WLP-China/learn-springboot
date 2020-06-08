@@ -2,7 +2,7 @@ spring:
   datasource:
     # 基本属性
     name: dev
-    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: mysql123456
     # 可以不配置，根据url自动识别，建议配置
