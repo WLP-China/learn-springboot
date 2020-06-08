@@ -4,24 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.ifun</groupId>
+    <groupId>org.muqing</groupId>
     <artifactId>learn-springboot</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>demo01-firstapp</module>
-        <module>demo-db-jpa</module>
         <module>demo-db-jdbc</module>
-        <module>demo-db-mybatis</module>
-        <module>demo-swagger</module>
-        <module>demo-db-redis</module>
-        <module>demo-security-jwt</module>
-        <module>demo-schedulingTasks</module>
-        <module>demo-thymeleaf</module>
+        <module>demo-db-jpa</module>
+<!--        <module>demo-db-mybatis</module>-->
+<!--        <module>demo-swagger</module>-->
+<!--        <module>demo-db-redis</module>-->
+<!--        <module>demo-security-jwt</module>-->
+<!--        <module>demo-schedulingTasks</module>-->
+<!--        <module>demo-thymeleaf</module>-->
 
-        <module>pro-community</module>
-        <module>pro-mini</module>
+<!--        <module>pro-community</module>-->
+<!--        <module>pro-mini</module>-->
     </modules>
 
 </project>
