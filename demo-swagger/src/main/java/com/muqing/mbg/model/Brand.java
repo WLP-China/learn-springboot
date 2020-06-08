@@ -3,7 +3,7 @@ package com.muqing.mbg.model;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
-public class PmsBrand implements Serializable {
+public class Brand implements Serializable {
     private Long id;
 
     private String name;

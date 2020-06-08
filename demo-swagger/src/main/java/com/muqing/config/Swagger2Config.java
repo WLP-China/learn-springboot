@@ -30,7 +30,7 @@ public class Swagger2Config {
                 .apiInfo(apiInfo())
                 .select()
                 //(1)为指定包下controller生成API文档
-                .apis(RequestHandlerSelectors.basePackage("com.ifun.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.muqing.controller"))
                 //(2)为有@Api注解的Controller生成API文档
 //                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 //(3)为有@ApiOperation注解的方法生成API文档
@@ -44,7 +44,7 @@ public class Swagger2Config {
                 .title("SwaggerUI演示")
                 .version("1.0")
                 .description("描述")
-                .contact(new Contact("iFun", "", "ifunning@163.com"))
+                .contact(new Contact("MQing", "", "xxx@163.com"))
                 .build();
     }
 }

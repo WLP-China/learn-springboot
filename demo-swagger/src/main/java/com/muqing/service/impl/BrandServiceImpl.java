@@ -1,33 +1,33 @@
 package com.muqing.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.muqing.mbg.mapper.PmsBrandMapper;
-import com.muqing.mbg.model.PmsBrand;
-import com.muqing.mbg.model.PmsBrandExample;
-import com.muqing.service.PmsBrandService;
+import com.muqing.mbg.mapper.BrandMapper;
+import com.muqing.mbg.model.Brand;
+import com.muqing.mbg.model.BrandExample;
+import com.muqing.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PmsBrandServiceImpl implements PmsBrandService {
+public class BrandServiceImpl implements BrandService {
 
     @Autowired
-    private PmsBrandMapper brandMapper;
+    private BrandMapper brandMapper;
 
     @Override
-    public List<PmsBrand> listAllBrand() {
-        return brandMapper.selectByExample(new PmsBrandExample());
+    public List<Brand> listAllBrand() {
+        return brandMapper.selectByExample(new BrandExample());
     }
 
     @Override
-    public int createBrand(PmsBrand brand) {
+    public int createBrand(Brand brand) {
         return brandMapper.insertSelective(brand);
     }
 
     @Override
-    public int updateBrand(Long id, PmsBrand brand) {
+    public int updateBrand(Long id, Brand brand) {
         brand.setId(id);
         return brandMapper.updateByPrimaryKeySelective(brand);
     }
@@ -38,13 +38,13 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     }
 
     @Override
-    public List<PmsBrand> listBrand(int pageNum, int pageSize) {
+    public List<Brand> listBrand(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        return brandMapper.selectByExample(new PmsBrandExample());
+        return brandMapper.selectByExample(new BrandExample());
     }
 
     @Override
-    public PmsBrand getBrand(Long id) {
+    public Brand getBrand(Long id) {
         return brandMapper.selectByPrimaryKey(id);
     }
 }
