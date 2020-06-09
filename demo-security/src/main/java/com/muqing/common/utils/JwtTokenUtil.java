@@ -37,7 +37,7 @@ public class JwtTokenUtil {
 
     private static final String CLAIM_KEY_USERID = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
-    private static Key KEY = null;
+//    private static Key KEY = null;
 
     /**
      * JWT密钥
@@ -57,22 +57,22 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-//                .signWith(SignatureAlgorithm.HS512, secret)
-                .signWith(SignatureAlgorithm.HS512, getKeyInstance())
+                .signWith(SignatureAlgorithm.HS512, secret)
+//                .signWith(SignatureAlgorithm.HS512, getKeyInstance())
                 .compact();
     }
 
-    private Key getKeyInstance() {
-        if (KEY == null) {
-            synchronized (TokenServiceDbImpl.class) {
-                if (KEY == null) {// 双重锁
-                    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secret);
-                    KEY = new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
-                }
-            }
-        }
-        return KEY;
-    }
+//    private Key getKeyInstance() {
+//        if (KEY == null) {
+//            synchronized (TokenServiceDbImpl.class) {
+//                if (KEY == null) {// 双重锁
+//                    byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(secret);
+//                    KEY = new SecretKeySpec(apiKeySecretBytes, SignatureAlgorithm.HS256.getJcaName());
+//                }
+//            }
+//        }
+//        return KEY;
+//    }
 
     /**
      * 从token中获取JWT中的负载
@@ -80,7 +80,8 @@ public class JwtTokenUtil {
     private Claims getClaimsFromToken(String token) {
         try {
             return Jwts.parser()
-                    .setSigningKey(getKeyInstance())
+//                    .setSigningKey(getKeyInstance())
+                    .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
