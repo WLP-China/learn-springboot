@@ -1,5 +1,6 @@
 package com.muqing.config;
 
+import com.muqing.common.api.CommonResult;
 import com.muqing.common.utils.ResponseUtil;
 import com.muqing.dto.LoginUserDTO;
 import com.muqing.dto.ResponseInfoDTO;
@@ -50,7 +51,8 @@ public class SecurityHandlerConfig {
                 LoginUserDTO loginUser = (LoginUserDTO) authentication.getPrincipal();
 
                 TokenDTO token = tokenService.saveToken(loginUser);
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
+//                ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.success(token));
             }
         };
     }
@@ -70,12 +72,13 @@ public class SecurityHandlerConfig {
                                                 AuthenticationException e) throws IOException, ServletException {
                 String msg = null;
                 if (e instanceof BadCredentialsException) {
-                    msg = "密码错误";
+                    msg = "账户或密码错误";
                 } else {
                     msg = e.getMessage();
                 }
-                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", msg);
-                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", msg);
+//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.failed(msg));
             }
         };
     }
@@ -93,8 +96,9 @@ public class SecurityHandlerConfig {
             public void commence(HttpServletRequest request,
                                  HttpServletResponse response,
                                  AuthenticationException e) throws IOException, ServletException {
-                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", "请先登录");
-                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", "请先登录");
+//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.unauthorized(e.getMessage()));
             }
         };
     }
@@ -111,8 +115,10 @@ public class SecurityHandlerConfig {
             public void handle(HttpServletRequest request,
                                HttpServletResponse response,
                                AccessDeniedException e) throws IOException, ServletException {
-                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", e.getMessage());
-                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", e.getMessage());
+//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.forbidden(e.getMessage()));
+
             }
         };
     }
@@ -130,12 +136,13 @@ public class SecurityHandlerConfig {
             public void onLogoutSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.OK.value() + "", "退出成功");
+//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.OK.value() + "", "退出成功");
 
                 String token = TokenFilter.getToken(request);
                 tokenService.deleteToken(token);
 
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), info);
+//                ResponseUtil.responseJson(response, HttpStatus.OK.value(), info);
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.success(null, "退出成功"));
             }
         };
     }

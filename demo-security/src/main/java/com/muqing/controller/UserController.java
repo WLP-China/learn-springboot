@@ -1,7 +1,9 @@
 package com.muqing.controller;
 
+import com.muqing.common.api.CommonResult;
 import com.muqing.common.utils.UserUtil;
 import com.muqing.dao.UserDao;
+import com.muqing.dto.LoginUserDTO;
 import com.muqing.dto.UserDTO;
 import com.muqing.model.SysUser;
 import com.muqing.service.UserService;
@@ -29,14 +31,20 @@ public class UserController {
      * @return
      */
     @PostMapping
+    @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:add')")
-    public SysUser saveUser(@RequestBody UserDTO userDTO) {
+    public CommonResult<SysUser> saveUser(@RequestBody UserDTO userDTO) {
         SysUser u = userService.getUser(userDTO.getUsername());
         if (u != null) {
-            throw new IllegalArgumentException(userDTO.getUsername() + "已存在");
+//            throw new IllegalArgumentException(userDTO.getUsername() + "已存在");
+            return CommonResult.failed("用户名[" + userDTO.getUsername() + "]已存在");
         }
 
-        return userService.saveUser(userDTO);
+        SysUser user = userService.saveUser(userDTO);
+        if (user == null) {
+            return CommonResult.failed();
+        }
+        return CommonResult.success(user);
     }
 
     /**
@@ -46,9 +54,14 @@ public class UserController {
      * @return
      */
     @PutMapping
+    @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:add')")
-    public SysUser updateUser(@RequestBody UserDTO userDTO) {
-        return userService.updateUser(userDTO);
+    public CommonResult<SysUser> updateUser(@RequestBody UserDTO userDTO) {
+        SysUser user = userService.updateUser(userDTO);
+        if (user == null) {
+            return CommonResult.failed();
+        }
+        return CommonResult.success(user);
     }
 
     /**
@@ -57,13 +70,18 @@ public class UserController {
      * @param headImgUrl
      */
     @PutMapping(params = "headImgUrl")
-    public void updateHeadImgUrl(String headImgUrl) {
+    @ResponseBody
+    public CommonResult updateHeadImgUrl(String headImgUrl) {
         SysUser user = UserUtil.getLoginUser();
-        UserDTO userDto = new UserDTO();
-        BeanUtils.copyProperties(user, userDto);
-        userDto.setHeadImgUrl(headImgUrl);
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(user, userDTO);
+        userDTO.setHeadImgUrl(headImgUrl);
 
-        userService.updateUser(userDto);
+        SysUser u = userService.updateUser(userDTO);
+        if (u == null) {
+            return CommonResult.failed();
+        }
+        return CommonResult.success(null);
     }
 
     /**
@@ -74,9 +92,11 @@ public class UserController {
      * @param newPassword
      */
     @PutMapping("/{username}")
+    @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:password')")
-    public void changePassword(@PathVariable String username, String oldPassword, String newPassword) {
+    public CommonResult changePassword(@PathVariable String username, String oldPassword, String newPassword) {
         userService.changePassword(username, oldPassword, newPassword);
+        return CommonResult.success(null);
     }
 
     /**
@@ -85,8 +105,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/current")
-    public SysUser currentUser() {
-        return UserUtil.getLoginUser();
+    @ResponseBody
+    public CommonResult<SysUser> currentUser() {
+        LoginUserDTO userDTO = UserUtil.getLoginUser();
+        if (userDTO == null) {
+            return CommonResult.failed();
+        }
+        return CommonResult.success(userDTO);
     }
 
     /**
@@ -96,8 +121,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/{id}")
+    @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:query')")
-    public SysUser user(@PathVariable Long id) {
-        return userDao.getById(id);
+    public CommonResult<SysUser> user(@PathVariable Long id) {
+        SysUser user = userDao.getById(id);
+        if (user == null) {
+            return CommonResult.failed();
+        }
+        return CommonResult.success(user);
     }
 }

@@ -2,6 +2,10 @@ package com.muqing.dto;
 
 import java.io.Serializable;
 
+/**
+ * 建议使用com.muqing.common.api.CommonResult 作为json格式的统一返回结果
+ */
+@Deprecated
 public class ResponseInfoDTO implements Serializable {
     private static final long serialVersionUID = -4417715614021482064L;
 
