@@ -18,7 +18,6 @@
         <module>demo-db-redis</module>
         <module>demo-schedulingTasks</module>
         <module>demo-thymeleaf</module>
-        <module>demo-security-jwt</module>
         <module>demo-security</module>
 
 <!--        <module>pro-community</module>-->
