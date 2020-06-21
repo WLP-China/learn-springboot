@@ -12,9 +12,9 @@ import com.muqing.dto.TokenDTO;
  */
 public interface TokenService {
 
-    TokenDTO saveToken(LoginUserDTO loginUser);
+    TokenDTO saveToken(LoginUserDTO loginUserDTO);
 
-    void refresh(LoginUserDTO loginUser);
+    void refresh(LoginUserDTO loginUserDTO);
 
     LoginUserDTO getLoginUser(String token);
 

@@ -45,6 +45,12 @@
             <version>1.3.2</version>
         </dependency>
 
+        <!--redis依赖配置-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
         <!--SpringSecurity依赖配置-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

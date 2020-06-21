@@ -6,7 +6,6 @@ import java.util.Date;
  * t_token
  */
 public class Token extends BaseEntity<String> {
-
     private static final long serialVersionUID = 4566334160572911795L;
 
     /**

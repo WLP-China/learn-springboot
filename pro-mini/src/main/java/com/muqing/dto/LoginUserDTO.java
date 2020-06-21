@@ -1,31 +1,24 @@
 package com.muqing.dto;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.muqing.model.SysPermission;
 import com.muqing.model.SysUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginUserDTO extends SysUser implements UserDetails {
-
     private static final long serialVersionUID = -1379274258881257107L;
 
     private List<SysPermission> permissions;
     private String token;
-    /**
-     * 登陆时间戳（毫秒）
-     */
-    private Long loginTime;
-    /**
-     * 过期时间戳
-     */
-    private Long expireTime;
+    private Long loginTime;//登陆时间戳（毫秒）
+    private Long expireTime;//过期时间戳
 
     public List<SysPermission> getPermissions() {
         return permissions;
@@ -43,8 +36,24 @@ public class LoginUserDTO extends SysUser implements UserDetails {
         this.token = token;
     }
 
-    @Override
+    public Long getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(Long loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public Long getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(Long expireTime) {
+        this.expireTime = expireTime;
+    }
+
     @JsonIgnore
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return permissions.parallelStream().filter(p -> !StringUtils.isEmpty(p.getPermission()))
                 .map(p -> new SimpleGrantedAuthority(p.getPermission())).collect(Collectors.toSet());
@@ -81,21 +90,4 @@ public class LoginUserDTO extends SysUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    public Long getLoginTime() {
-        return loginTime;
-    }
-
-    public void setLoginTime(Long loginTime) {
-        this.loginTime = loginTime;
-    }
-
-    public Long getExpireTime() {
-        return expireTime;
-    }
-
-    public void setExpireTime(Long expireTime) {
-        this.expireTime = expireTime;
-    }
-
 }

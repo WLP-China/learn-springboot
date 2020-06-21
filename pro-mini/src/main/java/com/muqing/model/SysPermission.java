@@ -3,7 +3,6 @@ package com.muqing.model;
 import java.util.List;
 
 public class SysPermission extends BaseEntity<Long> {
-
     private static final long serialVersionUID = 6180869216498363919L;
 
     private Long parentId;

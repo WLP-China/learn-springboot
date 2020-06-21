@@ -4,6 +4,7 @@ import com.muqing.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -32,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationFailureHandler authenticationFailureHandler;
     @Autowired
     private AuthenticationEntryPoint authenticationEntryPoint;
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
     @Autowired
     private LogoutSuccessHandler logoutSuccessHandler;
 
@@ -62,18 +66,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/",
                         "/*.html",
                         "/favicon.ico",
-                        "/pages/**",
-                        "/css/**",
-                        "/js/**",
+                        "/pages/**",// /**/*.html
+                        "/css/**",  // /**/*.css
+                        "/js/**",   // /**/*.js
                         "/fonts/**",
                         "/img/**",
-//                        "/layui/**",
+                        "/statics/**"
 //                        "/v2/api-docs/**",
 //                        "/swagger-resources/**",
 //                        "/webjars/**",
 //                        "/druid/**",
-                        "/statics/**").permitAll()
+                ).permitAll()
+                /*
+                 * Filter拦截请求两次的问题
+                 * 跨域请求会先进行一次options请求。跨域的post的请求会验证两次，get不会。
+                 * 网上的解释是，post请求第一次是预检请求，Request Method： OPTIONS。
+                 * */
+                //.antMatchers(HttpMethod.OPTIONS).permitAll()//不拦截options请求
+
+                // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
+                //测试时全部运行访问
+                //.antMatchers("/**").permitAll();
 
         httpSecurity
                 .formLogin()//允许表单登录
@@ -81,7 +95,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
                 .and()
-                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
+                .exceptionHandling()//添加自定义未授权和未登录结果返回
+                .accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint);
 
         httpSecurity
                 .logout()
@@ -90,8 +106,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         // 解决不允许显示在iframe的问题
         httpSecurity.headers().frameOptions().disable();
+
         // 禁用缓存
         httpSecurity.headers().cacheControl();
+
         // 添加tokenFilter来验证token有效性
         // 在用户名和密码校验前添加的过滤器，如果有token，会自行根据token信息进行登录
         httpSecurity.addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -115,6 +133,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //密码生成策略
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();//使用BCrypt密码编码器
+        /*
+         * BCrypt是一种跨平台的文件加密工具。使用的是Blowfish加密算法
+         * 由它加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥。
+         * */
     }
 }
