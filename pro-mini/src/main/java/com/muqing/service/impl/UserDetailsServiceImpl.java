@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         SysUser sysUser = userService.getUser(username);
         if (sysUser == null) {
-            throw new AuthenticationCredentialsNotFoundException("用户名不存在");
+            throw new AuthenticationCredentialsNotFoundException("账户或密码错误");//用户名不存在
         } else if (sysUser.getStatus() == SysUser.Status.LOCKED) {
             throw new LockedException("用户被锁定,请联系管理员");
         } else if (sysUser.getStatus() == SysUser.Status.DISABLED) {

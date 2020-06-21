@@ -50,8 +50,8 @@ public class SecurityHandlerConfig {
                 LoginUserDTO loginUser = (LoginUserDTO) authentication.getPrincipal();
 
                 TokenDTO token = tokenService.saveToken(loginUser);
-//                ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.success(token));
+                ResponseUtil.responseJson(response, HttpStatus.OK.value(), token);
+//                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.success(token));
             }
         };
     }
@@ -75,9 +75,7 @@ public class SecurityHandlerConfig {
                 } else {
                     msg = e.getMessage();
                 }
-//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", msg);
-//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.failed(msg));
+                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), CommonResult.failed(msg));
             }
         };
     }
@@ -95,9 +93,7 @@ public class SecurityHandlerConfig {
             public void commence(HttpServletRequest request,
                                  HttpServletResponse response,
                                  AuthenticationException e) throws IOException, ServletException {
-//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", "请先登录");
-//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.unauthorized(e.getMessage()));
+                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), CommonResult.unauthorized(null));
             }
         };
     }
@@ -114,9 +110,7 @@ public class SecurityHandlerConfig {
             public void handle(HttpServletRequest request,
                                HttpServletResponse response,
                                AccessDeniedException e) throws IOException, ServletException {
-//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.UNAUTHORIZED.value() + "", e.getMessage());
-//                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), info);
-                ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.forbidden(e.getMessage()));
+                ResponseUtil.responseJson(response, HttpStatus.UNAUTHORIZED.value(), CommonResult.forbidden(null));
 
             }
         };
@@ -135,12 +129,8 @@ public class SecurityHandlerConfig {
             public void onLogoutSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-//                ResponseInfoDTO info = new ResponseInfoDTO(HttpStatus.OK.value() + "", "退出成功");
-
                 String token = TokenFilter.getToken(request);
                 tokenService.deleteToken(token);
-
-//                ResponseUtil.responseJson(response, HttpStatus.OK.value(), info);
                 ResponseUtil.responseJson(response, HttpStatus.OK.value(), CommonResult.success(null, "退出成功"));
             }
         };
