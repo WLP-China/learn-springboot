@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * token存到redis的实现类
  * jwt实现的token
  */
-@Primary
+//@Primary
 @Service
 public class TokenServiceJWTImpl implements TokenService {
 

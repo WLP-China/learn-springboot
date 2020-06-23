@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * token存到数据库的实现类
  */
-//@Primary
+@Primary
 @Service
 public class TokenServiceDbImpl implements TokenService {
 

@@ -5,9 +5,9 @@ import com.muqing.model.SysUser;
 
 public interface UserService {
 
-    SysUser saveUser(UserDTO userDto);
+    SysUser saveUser(UserDTO userDTO);
 
-    SysUser updateUser(UserDTO userDto);
+    SysUser updateUser(UserDTO userDTO);
 
     SysUser getUser(String username);
 
