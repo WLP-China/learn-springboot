@@ -5,11 +5,12 @@ function initMenu() {
         url: "/permissions/current",
         type: "get",
         async: false,
-        success: function (data) {
-            if (!$.isArray(data)) {
-                location.href = '/login.html';
-                return;
-            }
+        success: function (result) {
+            data = result.data;
+            // if (!$.isArray(data)) {
+            //     location.href = '/login.html';
+            //     return;
+            // }
             var menu = $("#menu");
             $.each(data, function (i, item) {
                 var a = $("<a href='javascript:;'></a>");
@@ -76,7 +77,8 @@ function showLoginInfo() {
         type: 'get',
         url: '/users/current',
         async: false,
-        success: function (data) {
+        success: function (result) {
+            data = result.data;
             $(".admin-header-user span").text(data.nickname);
 
             var pro = window.location.protocol;
@@ -101,6 +103,7 @@ function showLoginInfo() {
         }
     });
 }
+
 /*
 //公告
 showUnreadNotice();
