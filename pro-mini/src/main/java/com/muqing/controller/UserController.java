@@ -1,6 +1,11 @@
 package com.muqing.controller;
 
 import com.muqing.common.api.CommonResult;
+import com.muqing.common.page.table.PageTableHandler;
+import com.muqing.common.page.table.PageTableHandler.CountHandler;
+import com.muqing.common.page.table.PageTableHandler.ListHandler;
+import com.muqing.common.page.table.PageTableRequest;
+import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.common.utils.UserUtil;
 import com.muqing.dao.UserDao;
 import com.muqing.dto.LoginUserDTO;
@@ -11,6 +16,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户相关接口
@@ -129,5 +137,40 @@ public class UserController {
             return CommonResult.failed();
         }
         return CommonResult.success(user);
+    }
+
+    /**
+     * 用户列表
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping
+    @PreAuthorize("hasAuthority('sys:user:query')")
+    public PageTableResponse listUsers(PageTableRequest request) {
+        return new PageTableHandler(
+                new CountHandler() {
+                    @Override
+                    public int count(PageTableRequest request) {
+                        return userDao.count(request.getParams());
+                    }
+                },
+                new ListHandler() {
+                    @Override
+                    public List<SysUser> list(PageTableRequest request) {
+                        List<SysUser> list = userDao.list(request.getParams(), request.getOffset(), request.getLimit());
+                        return list;
+                    }
+                }
+        ).handle(request);
+    }
+
+    @GetMapping("/test")
+    @ResponseBody
+    public CommonResult test() {
+        int i = userDao.count(null);
+//        List<SysUser> list = userDao.list(null,1,2);
+
+        return CommonResult.success(i);
     }
 }

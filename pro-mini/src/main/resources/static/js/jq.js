@@ -9,6 +9,15 @@ $.ajaxSetup({
         var response = JSON.parse(msg);
         var code = response.code;
         var message = response.message;
+
+        console.log("================================================");
+        console.log("msg:" + msg);
+        console.log("response:" + response);
+        console.log("code:" + code);
+        console.log("message:" + message);
+        console.log("================================================");
+
+
         if (code == 400) {
             layer.msg(message);
         } else if (code == 401) {
@@ -22,6 +31,17 @@ $.ajaxSetup({
         }
     }
 });
+
+function buttonEdit(href, permission, pers) {
+    if (permission != "") {
+        if ($.inArray(permission, pers) < 0) {
+            return "";
+        }
+    }
+    var btn = $("<button class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href + "\"'><i class='layui-icon'>&#xe642;</i></button>");
+    return btn.prop("outerHTML");
+}
+
 /*
 function buttonDel(data, permission, pers) {
     if (permission != "") {
@@ -34,16 +54,7 @@ function buttonDel(data, permission, pers) {
     return btn.prop("outerHTML");
 }
 
-function buttonEdit(href, permission, pers) {
-    if (permission != "") {
-        if ($.inArray(permission, pers) < 0) {
-            return "";
-        }
-    }
 
-    var btn = $("<button class='layui-btn layui-btn-xs' title='编辑' onclick='window.location=\"" + href + "\"'><i class='layui-icon'>&#xe642;</i></button>");
-    return btn.prop("outerHTML");
-}
 
 
 function deleteCurrentTab() {
