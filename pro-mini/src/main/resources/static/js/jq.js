@@ -7,7 +7,8 @@ $.ajaxSetup({
     error: function (xhr, textStatus, errorThrown) {
         var msg = xhr.responseText;
         var response = JSON.parse(msg);
-        var code = response.status;//response.code;
+        var status = response.status;
+        var code = response.code;//通用返回对象CommonResult的code
         var message = response.message;
 
         console.log("================================================");
@@ -17,16 +18,15 @@ $.ajaxSetup({
         console.log("message:" + message);
         console.log("================================================");
 
-
-        if (code == 400) {
+        if (code == 400 || status == 400) {
             layer.msg(message);
-        } else if (code == 401) {
+        } else if (code == 401 || status == 401) {
             localStorage.removeItem("token");
             location.href = '/login.html';
-        } else if (code == 403) {
+        } else if (code == 403 || status == 403) {
             console.log("未授权:" + message);
             layer.msg('未授权');
-        } else if (code == 500) {
+        } else if (code == 500 || status == 500) {
             layer.msg('系统错误：' + message);
         }
     }
@@ -51,6 +51,7 @@ function buttonDel(data, permission, pers) {
     var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data + "\")'><i class='layui-icon'>&#xe640;</i></button>");
     return btn.prop("outerHTML");
 }
+
 /*
 function deleteCurrentTab() {
     var lay_id = $(parent.document).find("ul.layui-tab-title").children("li.layui-this").attr("lay-id");
