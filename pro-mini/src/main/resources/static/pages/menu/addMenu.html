@@ -90,7 +90,7 @@
 
     //样式(icon)
     function selectCss() {
-        layer.open({
+        var index = layer.open({
             type: 2,
             title: "样式",
             area: ['800px', '400px'],
@@ -98,6 +98,7 @@
             shadeClose: true,
             content: ['icon.html']
         });
+        layer.full(index);//最大化
     }
 
     function add() {
