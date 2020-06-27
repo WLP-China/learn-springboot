@@ -96,42 +96,41 @@ public class PermissionController {
         return permissions.parallelStream().filter(p -> !StringUtils.isEmpty(p.getPermission()))
                 .map(SysPermission::getPermission).collect(Collectors.toSet());
     }
-//---------------------------------------------------------
 
-//
-//    /**
-//     * 菜单列表
-//     * @return
-//     */
-//    @GetMapping
-//    @ResponseBody
-//    @PreAuthorize("hasAuthority('sys:menu:query')")
-//    public CommonResult<List<SysPermission>> permissionsList() {
-//        List<SysPermission> permissionsAll = permissionDao.listAll();
-//
-//        List<SysPermission> list = Lists.newArrayList();
-//        setPermissionsList(0L, permissionsAll, list);
-//
-//        return CommonResult.success(list);
-//    }
-//
-//    /**
-//     * 菜单列表
-//     *
-//     * @param pId
-//     * @param permissionsAll
-//     * @param list
-//     */
-//    private void setPermissionsList(Long pId, List<SysPermission> permissionsAll, List<SysPermission> list) {
-//        for (SysPermission per : permissionsAll) {
-//            if (per.getParentId().equals(pId)) {
-//                list.add(per);
-//                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
-//                    setPermissionsList(per.getId(), permissionsAll, list);
-//                }
-//            }
-//        }
-//    }
+    /**
+     * 菜单列表
+     *
+     * @return
+     */
+    @GetMapping
+    @PreAuthorize("hasAuthority('sys:menu:query')")
+    public List<SysPermission> permissionsList() {
+        List<SysPermission> permissionsAll = permissionDao.listAll();
+
+        List<SysPermission> list = Lists.newArrayList();
+        setPermissionsList(0L, permissionsAll, list);
+
+        return list;
+    }
+
+    /**
+     * 菜单列表
+     *
+     * @param pId
+     * @param permissionsAll
+     * @param list
+     */
+    private void setPermissionsList(Long pId, List<SysPermission> permissionsAll, List<SysPermission> list) {
+        for (SysPermission per : permissionsAll) {
+            if (per.getParentId().equals(pId)) {
+                list.add(per);
+                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
+                    setPermissionsList(per.getId(), permissionsAll, list);
+                }
+            }
+        }
+    }
+//---------------------------------------------------------
 //
 //    /**
 //     * 所有菜单
