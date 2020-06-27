@@ -228,11 +228,16 @@ public class PermissionController {
     public SysPermission get(@PathVariable Long id) {
         return permissionDao.getById(id);
     }
-    //---------------------------------------------------------
-//    @GetMapping(params = "roleId")
-////    @ApiOperation(value = "根据角色id获取权限")
-//    @PreAuthorize("hasAnyAuthority('sys:menu:query','sys:role:query')")
-//    public List<SysPermission> listByRoleId(Long roleId) {
-//        return permissionDao.listByRoleId(roleId);
-//    }
+
+    /**
+     * 根据角色id获取权限
+     *
+     * @param roleId
+     * @return
+     */
+    @GetMapping(params = "roleId")
+    @PreAuthorize("hasAnyAuthority('sys:menu:query','sys:role:query')")
+    public List<SysPermission> listByRoleId(Long roleId) {
+        return permissionDao.listByRoleId(roleId);
+    }
 }
