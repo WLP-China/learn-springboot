@@ -42,21 +42,16 @@ function buttonEdit(href, permission, pers) {
     return btn.prop("outerHTML");
 }
 
-/*
 function buttonDel(data, permission, pers) {
     if (permission != "") {
         if ($.inArray(permission, pers) < 0) {
             return "";
         }
     }
-
     var btn = $("<button class='layui-btn layui-btn-xs' title='删除' onclick='del(\"" + data + "\")'><i class='layui-icon'>&#xe640;</i></button>");
     return btn.prop("outerHTML");
 }
-
-
-
-
+/*
 function deleteCurrentTab() {
     var lay_id = $(parent.document).find("ul.layui-tab-title").children("li.layui-this").attr("lay-id");
     parent.active.tabDelete(lay_id);
