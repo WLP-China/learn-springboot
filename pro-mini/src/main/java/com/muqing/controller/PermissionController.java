@@ -130,93 +130,109 @@ public class PermissionController {
             }
         }
     }
-//---------------------------------------------------------
-//
-//    /**
-//     * 所有菜单
-//     * @return
-//     */
-//    @GetMapping("/all")
-//    @PreAuthorize("hasAuthority('sys:menu:query')")
-//    public JSONArray permissionsAll() {
-//        List<SysPermission> permissionsAll = permissionDao.listAll();
-//        JSONArray array = new JSONArray();
-//        setPermissionsTree(0L, permissionsAll, array);
-//
-//        return array;
-//    }
-//
-//    /**
-//     * 一级菜单
-//     * @return
-//     */
-//    @GetMapping("/parents")
-//    @PreAuthorize("hasAuthority('sys:menu:query')")
-//    public List<SysPermission> parentMenu() {
-//        List<SysPermission> parents = permissionDao.listParents();
-//
-//        return parents;
-//    }
-//
-//    /**
-//     * 菜单树
-//     *
-//     * @param pId
-//     * @param permissionsAll
-//     * @param array
-//     */
-//    private void setPermissionsTree(Long pId, List<SysPermission> permissionsAll, JSONArray array) {
-//        for (SysPermission per : permissionsAll) {
-//            if (per.getParentId().equals(pId)) {
-//                String string = JSONObject.toJSONString(per);
-//                JSONObject parent = (JSONObject) JSONObject.parse(string);
-//                array.add(parent);
-//
-//                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
-//                    JSONArray child = new JSONArray();
-//                    parent.put("child", child);
-//                    setPermissionsTree(per.getId(), permissionsAll, child);
-//                }
-//            }
-//        }
-//    }
-//
+
+    /**
+     * 一级菜单
+     *
+     * @return
+     */
+    @GetMapping("/parents")
+    @PreAuthorize("hasAuthority('sys:menu:query')")
+    public List<SysPermission> parentMenu() {
+        List<SysPermission> parents = permissionDao.listParents();
+        return parents;
+    }
+
+    /**
+     * 所有菜单
+     *
+     * @return
+     */
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('sys:menu:query')")
+    public JSONArray permissionsAll() {
+        List<SysPermission> permissionsAll = permissionDao.listAll();
+        JSONArray array = new JSONArray();
+        setPermissionsTree(0L, permissionsAll, array);
+
+        return array;
+    }
+
+    /**
+     * 菜单树
+     *
+     * @param pId
+     * @param permissionsAll
+     * @param array
+     */
+    private void setPermissionsTree(Long pId, List<SysPermission> permissionsAll, JSONArray array) {
+        for (SysPermission per : permissionsAll) {
+            if (per.getParentId().equals(pId)) {
+                String string = JSONObject.toJSONString(per);
+                JSONObject parent = (JSONObject) JSONObject.parse(string);
+                array.add(parent);
+
+                if (permissionsAll.stream().filter(p -> p.getParentId().equals(per.getId())).findAny() != null) {
+                    JSONArray child = new JSONArray();
+                    parent.put("child", child);
+                    setPermissionsTree(per.getId(), permissionsAll, child);
+                }
+            }
+        }
+    }
+
+    /**
+     * 添加菜单
+     *
+     * @param permission
+     */
+//    @LogAnnotation
+    @PostMapping
+    @PreAuthorize("hasAuthority('sys:menu:add')")
+    public void save(@RequestBody SysPermission permission) {
+        permissionDao.save(permission);
+    }
+
+    /**
+     * 修改菜单
+     *
+     * @param permission
+     */
+//    @LogAnnotation
+    @PutMapping
+    @PreAuthorize("hasAuthority('sys:menu:add')")
+    public void update(@RequestBody SysPermission permission) {
+        permissionService.update(permission);
+    }
+
+    /**
+     * 删除菜单
+     *
+     * @param id
+     */
+    //    @LogAnnotation
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('sys:menu:del')")
+    public void delete(@PathVariable Long id) {
+        permissionService.delete(id);
+    }
+
+    /**
+     * 根据菜单id获取菜单
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('sys:menu:query')")
+    public SysPermission get(@PathVariable Long id) {
+        return permissionDao.getById(id);
+    }
+    //---------------------------------------------------------
 //    @GetMapping(params = "roleId")
 ////    @ApiOperation(value = "根据角色id获取权限")
 //    @PreAuthorize("hasAnyAuthority('sys:menu:query','sys:role:query')")
 //    public List<SysPermission> listByRoleId(Long roleId) {
 //        return permissionDao.listByRoleId(roleId);
-//    }
-//
-//    //    @LogAnnotation
-//    @PostMapping
-////    @ApiOperation(value = "保存菜单")
-//    @PreAuthorize("hasAuthority('sys:menu:add')")
-//    public void save(@RequestBody SysPermission permission) {
-//        permissionDao.save(permission);
-//    }
-//
-//    @GetMapping("/{id}")
-////    @ApiOperation(value = "根据菜单id获取菜单")
-//    @PreAuthorize("hasAuthority('sys:menu:query')")
-//    public SysPermission get(@PathVariable Long id) {
-//        return permissionDao.getById(id);
-//    }
-//
-//    //    @LogAnnotation
-//    @PutMapping
-////    @ApiOperation(value = "修改菜单")
-//    @PreAuthorize("hasAuthority('sys:menu:add')")
-//    public void update(@RequestBody SysPermission permission) {
-//        permissionService.update(permission);
-//    }
-
-
-//    //    @LogAnnotation
-//    @DeleteMapping("/{id}")
-////    @ApiOperation(value = "删除菜单")
-//    @PreAuthorize("hasAuthority('sys:menu:del')")
-//    public void delete(@PathVariable Long id) {
-//        permissionService.delete(id);
 //    }
 }

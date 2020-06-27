@@ -7,7 +7,7 @@ $.ajaxSetup({
     error: function (xhr, textStatus, errorThrown) {
         var msg = xhr.responseText;
         var response = JSON.parse(msg);
-        var code = response.code;
+        var code = response.status;//response.code;
         var message = response.message;
 
         console.log("================================================");
