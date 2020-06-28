@@ -190,7 +190,7 @@ public class PermissionController {
     @PostMapping
     @PreAuthorize("hasAuthority('sys:menu:add')")
     public void save(@RequestBody SysPermission permission) {
-        permissionDao.save(permission);
+        permissionService.save(permission);
     }
 
     /**

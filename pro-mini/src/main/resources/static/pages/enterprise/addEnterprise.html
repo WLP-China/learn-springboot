@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <input type="hidden" id="id" name="id">
+            <div class="form-group">
+                <label class="col-md-2 control-label">角色</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="企业名称" type="text" name="eName" id="eName"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="企业名称 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">企业简介</label>
+                <div class="col-md-10">
+                    <textarea class="form-control" placeholder="企业简介" name="eInfo" id="eInfo"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">统一社会信用代码</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="统一社会信用代码（税号）" type="text" name="creditCode"
+                           id="creditCode"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">地址</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="单位地址" type="text" name="addr" id="addr"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">电话号码</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="电话号码" type="text" name="telephone" id="telephone"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">状态</label>
+                <div class="col-md-10" style="width: 100px">
+                    <select class="form-control input-sm" name="status" id="status">
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="location.href='enterpriseList.html'">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script type="text/javascript" src="/js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/jq.js"></script>
+<script type="text/javascript" src="/js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/dict.js"></script>
+
+<script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
+
+    showDictSelect("status", "userStatus");
+
+    initData();
+
+    function initData() {
+        var id = getUrlParam("id");
+        if (id != "") {
+            $.ajax({
+                type: 'get',
+                url: '/enterprises/' + id,
+                async: false,
+                success: function (data) {
+                    console.log(data)
+                    $("#id").val(data.id);
+                    $("#eName").val(data.eName);
+                    $("#eInfo").val(data.eInfo);
+                    $("#creditCode").val(data.creditCode);
+                    $("#addr").val(data.addr);
+                    $("#telephone").val(data.telephone);
+                    $("#status").val(data.status);
+                }
+            });
+        }
+    }
+
+    $('#form').bootstrapValidator({
+        message: '非法输入',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            creditCode: {
+                message: '无效的值',
+                validators: {
+                    stringLength: {
+                        // min: 6,
+                        max: 18,
+                        message: '统一社会信用代码长度为18位，请核实后重新输入'
+                    }
+                }
+            },
+            // telephone: {
+            //     validators: {
+            //         regexp: {
+            //             regexp: /^(((\(\d{3,4}\)|\d{3,4})?\d{7,8})|(1[3-9][0-9]{9}))$/,
+            //             message: '无效的号码'
+            //         }
+            //     }
+            // }
+        }
+    });
+
+    function add() {
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+
+        $.ajax({
+            type: 'post',
+            url: '/enterprises',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("成功", {shift: -1, time: 1000}, function () {
+                    location.href = "enterpriseList.html";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

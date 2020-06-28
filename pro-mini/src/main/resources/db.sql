@@ -19,7 +19,7 @@ CREATE TABLE `sys_permission`  (
   `permission` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -42,6 +42,10 @@ INSERT INTO `sys_permission` VALUES (37, 0, '字典管理', 'fa-reddit', 'pages/
 INSERT INTO `sys_permission` VALUES (38, 37, '查询', '', '', 2, 'dict:query', 100);
 INSERT INTO `sys_permission` VALUES (39, 37, '新增', '', '', 2, 'dict:add', 100);
 INSERT INTO `sys_permission` VALUES (40, 37, '删除', '', '', 2, 'dict:del', 100);
+INSERT INTO `sys_permission` VALUES (44, 0, '企业管理', 'fa-codepen', 'pages/enterprise/enterpriseList.html', 1, '', 8);
+INSERT INTO `sys_permission` VALUES (45, 44, '查询', '', '', 2, 'enterprise:query', 100);
+INSERT INTO `sys_permission` VALUES (46, 44, '新增', '', '', 2, 'enterprise:add', 100);
+INSERT INTO `sys_permission` VALUES (47, 44, '删除', '', '', 2, 'enterprise:del', 100);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -55,7 +59,7 @@ CREATE TABLE `sys_role`  (
   `updateTime` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -94,6 +98,10 @@ INSERT INTO `sys_role_permission` VALUES (1, 37);
 INSERT INTO `sys_role_permission` VALUES (1, 38);
 INSERT INTO `sys_role_permission` VALUES (1, 39);
 INSERT INTO `sys_role_permission` VALUES (1, 40);
+INSERT INTO `sys_role_permission` VALUES (1, 44);
+INSERT INTO `sys_role_permission` VALUES (1, 45);
+INSERT INTO `sys_role_permission` VALUES (1, 46);
+INSERT INTO `sys_role_permission` VALUES (1, 47);
 INSERT INTO `sys_role_permission` VALUES (2, 1);
 INSERT INTO `sys_role_permission` VALUES (2, 2);
 INSERT INTO `sys_role_permission` VALUES (2, 3);
@@ -186,6 +194,27 @@ CREATE TABLE `t_token`  (
 
 -- ----------------------------
 -- Records of t_token
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for t_enterprise
+-- ----------------------------
+DROP TABLE IF EXISTS `t_enterprise`;
+CREATE TABLE `t_enterprise`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '企业名称',
+  `eInfo` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '企业信息',
+  `creditCode` varchar(18) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '统一社会信用代码/税号',
+  `addr` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '单位地址',
+  `telephone` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电话号码',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
+  `createTime` datetime(0) NOT NULL,
+  `updateTime` datetime(0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_enterprise
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;

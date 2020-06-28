@@ -18,7 +18,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户相关接口
@@ -163,14 +162,5 @@ public class UserController {
                     }
                 }
         ).handle(request);
-    }
-
-    @GetMapping("/test")
-    @ResponseBody
-    public CommonResult test() {
-        int i = userDao.count(null);
-//        List<SysUser> list = userDao.list(null,1,2);
-
-        return CommonResult.success(i);
     }
 }
