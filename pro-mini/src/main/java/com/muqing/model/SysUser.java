@@ -1,7 +1,6 @@
 package com.muqing.model;
 
 import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class SysUser extends BaseEntity<Long> {
@@ -9,16 +8,13 @@ public class SysUser extends BaseEntity<Long> {
 
     private String username;
     private String password;
-    private String nickname;
-    private String headImgUrl;
+    private String name;
     private String phone;
-    private String telephone;
-    private String email;
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date birthday;
-    private Integer sex;
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+//    private Date birthday;
+    private Integer eid;
+    private String eName;
     private Integer status;
-    private String intro;
 
     public interface Status {
         int DISABLED = 0;
@@ -42,20 +38,12 @@ public class SysUser extends BaseEntity<Long> {
         this.password = password;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getName() {
+        return name;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhone() {
@@ -66,36 +54,20 @@ public class SysUser extends BaseEntity<Long> {
         this.phone = phone;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public Integer getEid() {
+        return eid;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setEid(Integer eid) {
+        this.eid = eid;
     }
 
-    public String getEmail() {
-        return email;
+    public String geteName() {
+        return eName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Integer getSex() {
-        return sex;
-    }
-
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public void seteName(String eName) {
+        this.eName = eName;
     }
 
     public Integer getStatus() {
@@ -104,13 +76,5 @@ public class SysUser extends BaseEntity<Long> {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
     }
 }

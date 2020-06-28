@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Update;
 public interface UserDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into sys_user(username, password, nickname, headImgUrl, phone, telephone, email, birthday, sex, status, createTime, updateTime) values(#{username}, #{password}, #{nickname}, #{headImgUrl}, #{phone}, #{telephone}, #{email}, #{birthday}, #{sex}, #{status}, now(), now())")
+    @Insert("insert into sys_user(username, password, name, phone, eid, eName, status, createTime, updateTime) values(#{username}, #{password}, #{name}, #{phone}, #{eid}, #{eName}, #{status}, now(), now())")
     int save(SysUser user);
 
     @Select("select * from sys_user t where t.id = #{id}")

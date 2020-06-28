@@ -76,20 +76,20 @@ public class UserController {
      *
      * @param headImgUrl
      */
-    @PutMapping(params = "headImgUrl")
-    @ResponseBody
-    public CommonResult updateHeadImgUrl(String headImgUrl) {
-        SysUser user = UserUtil.getLoginUser();
-        UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
-        userDTO.setHeadImgUrl(headImgUrl);
-
-        SysUser u = userService.updateUser(userDTO);
-        if (u == null) {
-            return CommonResult.failed();
-        }
-        return CommonResult.success(null);
-    }
+//    @PutMapping(params = "headImgUrl")
+//    @ResponseBody
+//    public CommonResult updateHeadImgUrl(String headImgUrl) {
+//        SysUser user = UserUtil.getLoginUser();
+//        UserDTO userDTO = new UserDTO();
+//        BeanUtils.copyProperties(user, userDTO);
+//        userDTO.setHeadImgUrl(headImgUrl);
+//
+//        SysUser u = userService.updateUser(userDTO);
+//        if (u == null) {
+//            return CommonResult.failed();
+//        }
+//        return CommonResult.success(null);
+//    }
 
     /**
      * 修改密码

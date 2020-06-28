@@ -16,8 +16,8 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    用户名：<input id="username" type="text" class="form-control" placeholder="用户名">
-                                    昵称：<input id="nickname" type="text" class="form-control" placeholder="昵称">
+                                    账户：<input id="username" type="text" class="form-control" placeholder="账户">
+                                    姓名：<input id="name" type="text" class="form-control" placeholder="姓名">
                                     状态：<select class="form-control input-sm" id="status"> </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="sys:user:query">
                                         <i class="layui-icon">&#xe615;</i>搜索
@@ -41,10 +41,10 @@
                 <table id="dt-table" class="table table-striped table-bordered table-hover" style="width:100%">
                     <thead>
                     <tr>
-                        <th>用户名</th>
-                        <th>昵称</th>
+                        <th>账户</th>
+                        <th>姓名</th>
                         <th>手机号</th>
-                        <th>邮箱</th>
+                        <th>企业</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
@@ -86,7 +86,7 @@
                     "type": "get",
                     "data": function (d) {
                         d.username = $('#username').val();
-                        d.nickname = $('#nickname').val();
+                        d.name = $('#name').val();
                         d.status = $('#status').val();
                     },
                     "error": function (xhr, textStatus, errorThrown) {
@@ -112,9 +112,9 @@
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
                     {"data": "username", "defaultContent": ""},
-                    {"data": "nickname", "defaultContent": ""},
+                    {"data": "name", "defaultContent": ""},
                     {"data": "phone", "defaultContent": ""},
-                    {"data": "email", "defaultContent": ""},
+                    {"data": "eName", "defaultContent": ""},
                     {
                         "data": "status",
                         "defaultContent": "",
