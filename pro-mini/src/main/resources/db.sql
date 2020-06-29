@@ -1,5 +1,5 @@
 /*
- Date: 27/06/2020 22:19:44
+ Date: 29/06/2020 21:04:14
 */
 
 SET NAMES utf8mb4;
@@ -19,7 +19,7 @@ CREATE TABLE `sys_permission`  (
   `permission` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `sort` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -46,6 +46,13 @@ INSERT INTO `sys_permission` VALUES (44, 0, '企业管理', 'fa-codepen', 'pages
 INSERT INTO `sys_permission` VALUES (45, 44, '查询', '', '', 2, 'enterprise:query', 100);
 INSERT INTO `sys_permission` VALUES (46, 44, '新增', '', '', 2, 'enterprise:add', 100);
 INSERT INTO `sys_permission` VALUES (47, 44, '删除', '', '', 2, 'enterprise:del', 100);
+INSERT INTO `sys_permission` VALUES (48, 0, '混凝土类型', 'fa-flask', '', 1, '', 9);
+INSERT INTO `sys_permission` VALUES (49, 48, '添加剂', '', 'pages/concretetype/concretetypeList.html?type=additive', 1, '', 1);
+INSERT INTO `sys_permission` VALUES (50, 48, '混凝土型号', '', 'pages/concretetype/concretetypeList.html?type=type', 1, '', 2);
+INSERT INTO `sys_permission` VALUES (51, 48, '抗渗等级', '', 'pages/concretetype/concretetypeList.html?type=level', 1, '', 3);
+INSERT INTO `sys_permission` VALUES (52, 48, '查询', '', '', 2, 'concreteType:query', 100);
+INSERT INTO `sys_permission` VALUES (53, 48, '新增', '', '', 2, 'concreteType:add', 100);
+INSERT INTO `sys_permission` VALUES (54, 48, '删除', '', '', 2, 'concreteType:del', 100);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -64,7 +71,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, 'ADMIN', '超级管理员', '2020-05-17 23:20:29', '2020-05-18 22:13:07');
+INSERT INTO `sys_role` VALUES (1, 'ADMIN', '超级管理员', '2020-05-17 23:20:29', '2020-06-29 16:02:14');
 INSERT INTO `sys_role` VALUES (2, 'USER', '', '2017-08-01 21:47:31', '2020-05-17 23:25:09');
 
 -- ----------------------------
@@ -102,6 +109,13 @@ INSERT INTO `sys_role_permission` VALUES (1, 44);
 INSERT INTO `sys_role_permission` VALUES (1, 45);
 INSERT INTO `sys_role_permission` VALUES (1, 46);
 INSERT INTO `sys_role_permission` VALUES (1, 47);
+INSERT INTO `sys_role_permission` VALUES (1, 48);
+INSERT INTO `sys_role_permission` VALUES (1, 49);
+INSERT INTO `sys_role_permission` VALUES (1, 50);
+INSERT INTO `sys_role_permission` VALUES (1, 51);
+INSERT INTO `sys_role_permission` VALUES (1, 52);
+INSERT INTO `sys_role_permission` VALUES (1, 53);
+INSERT INTO `sys_role_permission` VALUES (1, 54);
 INSERT INTO `sys_role_permission` VALUES (2, 1);
 INSERT INTO `sys_role_permission` VALUES (2, 2);
 INSERT INTO `sys_role_permission` VALUES (2, 3);
@@ -147,6 +161,59 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 'admin', '$2a$10$iYM/H7TrSaLs7XyIWQdGwe1xf4cdmt3nwMja6RT0wxG5YY1RjN0EK', '管理员', '', NULL, NULL, 1, '2017-04-10 15:21:38', '2020-05-17 23:21:29');
 INSERT INTO `sys_user` VALUES (2, 'user', '$2a$10$ooGb4wjT7Hg3zgU2RhZp6eVu3jvG29i/U4L6VRwiZZ4.DZ0OOEAHu', '用户', '', NULL, NULL, 1, '2017-08-01 21:47:18', '2017-08-01 21:47:18');
+
+-- ----------------------------
+-- Table structure for t_concrete_type
+-- ----------------------------
+DROP TABLE IF EXISTS `t_concrete_type`;
+CREATE TABLE `t_concrete_type`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `k` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `val` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `money` decimal(10, 3) NULL DEFAULT 0.000,
+  `sort` int(11) NOT NULL,
+  `createTime` datetime(0) NOT NULL,
+  `updateTime` datetime(0) NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of t_concrete_type
+-- ----------------------------
+INSERT INTO `t_concrete_type` VALUES (1, 'additive', '1', '减水剂', 0.000, 1, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (2, 'additive', '2', '引气剂', 0.600, 2, '2020-06-29 09:58:24', '2020-06-29 20:55:41');
+INSERT INTO `t_concrete_type` VALUES (3, 'additive', '3', '泵送剂', 0.000, 3, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (4, 'additive', '4', '缓凝剂', 0.000, 4, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (5, 'additive', '5', '早强剂', 0.000, 5, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (6, 'additive', '6', '速凝剂', 0.000, 6, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (7, 'additive', '7', '防水剂', 0.000, 7, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (8, 'additive', '8', '阻锈剂', 0.000, 8, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (9, 'additive', '9', '加气剂', 0.000, 9, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (10, 'additive', '10', '膨胀剂', 0.000, 10, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (11, 'additive', '11', '防冻剂', 0.000, 11, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (12, 'additive', '12', '着色剂', 0.000, 12, '2020-06-29 09:58:24', '2020-06-29 09:58:24');
+INSERT INTO `t_concrete_type` VALUES (16, 'level', '1', 'P6', 0.000, 1, '2020-06-29 17:03:24', '2020-06-29 17:03:24');
+INSERT INTO `t_concrete_type` VALUES (17, 'level', '2', 'P8', 0.000, 2, '2020-06-29 17:03:38', '2020-06-29 17:03:38');
+INSERT INTO `t_concrete_type` VALUES (19, 'type', '1', 'C10', 0.000, 1, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (20, 'type', '2', 'C15', 0.000, 2, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (21, 'type', '3', 'C20', 0.000, 3, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (22, 'type', '4', 'C25', 0.000, 4, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (23, 'type', '5', 'C30', 0.000, 5, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (24, 'type', '6', 'C35', 0.000, 6, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (25, 'type', '7', 'C40', 0.000, 7, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (26, 'type', '8', 'C45', 0.000, 8, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (27, 'type', '9', 'C50', 0.000, 9, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (28, 'type', '10', 'C55', 0.000, 10, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (29, 'type', '11', 'C60', 0.000, 11, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (30, 'type', '12', 'C65', 0.000, 12, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (31, 'type', '13', 'C70', 0.000, 13, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (32, 'type', '14', 'C75', 0.000, 14, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (33, 'type', '15', 'C80', 0.000, 15, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (34, 'type', '16', 'C85', 0.000, 16, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (35, 'type', '17', 'C90', 0.000, 17, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (36, 'type', '18', 'C95', 0.000, 18, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
+INSERT INTO `t_concrete_type` VALUES (37, 'type', '19', 'C100', 0.000, 19, '2020-06-29 16:58:28', '2020-06-29 16:58:28');
 
 -- ----------------------------
 -- Table structure for t_dict
