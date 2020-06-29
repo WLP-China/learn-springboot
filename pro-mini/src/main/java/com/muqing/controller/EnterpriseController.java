@@ -49,12 +49,24 @@ public class EnterpriseController {
         enterpriseService.delete(id);
     }
 
+    /**
+     * 根据id获取
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('enterprise:query')")
     public Enterprise get(@PathVariable Long id) {
         return enterpriseDao.getById(id);
     }
 
+    /**
+     * 列表 for datatables
+     *
+     * @param request
+     * @return
+     */
     @GetMapping()
     @PreAuthorize("hasAuthority('enterprise:query')")
     public PageTableResponse list(PageTableRequest request) {
@@ -73,5 +85,11 @@ public class EnterpriseController {
                     }
                 }
         ).handle(request);
+    }
+
+    @GetMapping("/valid")
+    @PreAuthorize("hasAuthority('enterprise:query')")
+    public List<Enterprise> list() {
+        return enterpriseDao.listByStatus(Enterprise.Status.VALID);
     }
 }

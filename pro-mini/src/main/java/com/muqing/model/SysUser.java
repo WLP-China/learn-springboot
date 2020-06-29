@@ -12,7 +12,7 @@ public class SysUser extends BaseEntity<Long> {
     private String phone;
 //    @JsonFormat(pattern = "yyyy-MM-dd")
 //    private Date birthday;
-    private Integer eid;
+    private Long eid;
     private String eName;
     private Integer status;
 
@@ -54,11 +54,11 @@ public class SysUser extends BaseEntity<Long> {
         this.phone = phone;
     }
 
-    public Integer getEid() {
+    public Long getEid() {
         return eid;
     }
 
-    public void setEid(Integer eid) {
+    public void setEid(Long eid) {
         this.eid = eid;
     }
 

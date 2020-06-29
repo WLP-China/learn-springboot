@@ -29,4 +29,7 @@ public interface EnterpriseDao {
     List<Enterprise> list(@Param("params") Map<String, Object> params,
                           @Param("offset") Integer offset,
                           @Param("limit") Integer limit);
+
+    @Select("select * from t_enterprise t where status = #{status}")
+    List<Enterprise> listByStatus(int status);
 }

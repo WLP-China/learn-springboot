@@ -7,9 +7,11 @@ import com.muqing.common.page.table.PageTableHandler.ListHandler;
 import com.muqing.common.page.table.PageTableRequest;
 import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.common.utils.UserUtil;
+import com.muqing.dao.EnterpriseDao;
 import com.muqing.dao.UserDao;
 import com.muqing.dto.LoginUserDTO;
 import com.muqing.dto.UserDTO;
+import com.muqing.model.Enterprise;
 import com.muqing.model.SysUser;
 import com.muqing.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +32,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private EnterpriseDao enterpriseDao;
 
     /**
      * 添加用户
@@ -46,6 +50,8 @@ public class UserController {
 //            throw new IllegalArgumentException(userDTO.getUsername() + "已存在");
             return CommonResult.failed("用户名[" + userDTO.getUsername() + "]已存在");
         }
+        Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
+        userDTO.seteName(enterprise.geteName());
 
         SysUser user = userService.saveUser(userDTO);
         if (user == null) {
@@ -64,6 +70,9 @@ public class UserController {
     @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:add')")
     public CommonResult<SysUser> updateUser(@RequestBody UserDTO userDTO) {
+        Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
+        userDTO.seteName(enterprise.geteName());
+
         SysUser user = userService.updateUser(userDTO);
         if (user == null) {
             return CommonResult.failed();
