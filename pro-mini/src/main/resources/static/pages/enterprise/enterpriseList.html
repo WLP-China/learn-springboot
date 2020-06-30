@@ -20,14 +20,13 @@
                                     企业名称：<input id="eName" type="text" class="form-control" placeholder="企业名称">
                                     状态：<select class="form-control input-sm" id="status"> </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="enterprise:query">
-                                        <i
-                                                class="layui-icon">&#xe615;</i>搜索
+                                        <i class="layui-icon">&#xe615;</i>搜索
                                     </button>
                                 </div>
                             </form>
                         </td>
                         <td align="right">
-                            <button class="layui-btn layui-btn-sm" onclick="location.href='addEnterprise.html'"
+                            <button class="layui-btn layui-btn-sm" onclick="location.href='addEnterprise.html?type='+getUrlParam('type')"
                                     permission="enterprise:add">
                                 <i class="layui-icon">&#xe608;</i> 添加
                             </button>
@@ -55,11 +54,12 @@
     </div>
 </div>
 <script type="text/javascript" src="/js/libs/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="/js/jq.js"></script>
 <script type="text/javascript" src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
 <script type="text/javascript" src="/js/my/permission.js"></script>
+<script type="text/javascript" src="/js/jq.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/dict.js"></script>
 
 <script type="text/javascript">
@@ -71,8 +71,9 @@
 
     var pers = checkPermission();
 
-    var example;
+    var etype = getUrlParam("type");
 
+    var example;
     function init() {
         example =
             $('#dt-table').DataTable({
@@ -86,6 +87,7 @@
                     "url": "/enterprises",
                     "type": "get",
                     "data": function (d) {
+                        d.type = etype;
                         d.eName = $('#eName').val();
                         d.status = $('#status').val();
                     },
@@ -127,7 +129,7 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "addEnterprise.html?id=" + id;
+                            var href = "addEnterprise.html?type="+ etype +"&id=" + id;
                             var edit = buttonEdit(href, "enterprise:add", pers);
                             var del = buttonDel(id, "enterprise:del", pers);
                             return edit + del;

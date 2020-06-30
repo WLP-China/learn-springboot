@@ -12,6 +12,7 @@ public class Enterprise extends BaseEntity<Long> {
     private String creditCode;//统一社会信用代码/税号
     private String addr;//单位地址
     private String telephone;//电话号码
+    private Integer type;//类型（0：贸易公司，1：需方，2：供方）
     private Integer status;//状态
 
     public interface Status {
@@ -58,6 +59,14 @@ public class Enterprise extends BaseEntity<Long> {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Integer getStatus() {

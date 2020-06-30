@@ -8,6 +8,9 @@
             <if test="params.eName != null and params.eName != ''">
                 and t.eName like concat('%', #{params.eName}, '%')
             </if>
+            <if test="params.type != null and params.type != ''">
+                and t.type = #{params.type}
+            </if>
             <if test="params.status != null and params.status != ''">
                 and t.status = #{params.status}
             </if>
@@ -31,6 +34,9 @@
             </if>
             <if test="telephone != null">
                 telephone = #{telephone},
+            </if>
+            <if test="type != null">
+                type = #{type},
             </if>
             <if test="status != null">
                 status = #{status},

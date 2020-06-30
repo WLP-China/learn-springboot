@@ -50,8 +50,12 @@ public class UserController {
 //            throw new IllegalArgumentException(userDTO.getUsername() + "已存在");
             return CommonResult.failed("用户名[" + userDTO.getUsername() + "]已存在");
         }
-        Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
-        userDTO.seteName(enterprise.geteName());
+        if (userDTO.getEid() != null) {
+            Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
+            userDTO.seteName(enterprise.geteName());
+        } else {
+            userDTO.seteName(null);
+        }
 
         SysUser user = userService.saveUser(userDTO);
         if (user == null) {
@@ -70,8 +74,12 @@ public class UserController {
     @ResponseBody
     @PreAuthorize("hasAuthority('sys:user:add')")
     public CommonResult<SysUser> updateUser(@RequestBody UserDTO userDTO) {
-        Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
-        userDTO.seteName(enterprise.geteName());
+        if (userDTO.getEid() != null) {
+            Enterprise enterprise = enterpriseDao.getById(userDTO.getEid());
+            userDTO.seteName(enterprise.geteName());
+        } else {
+            userDTO.seteName(null);
+        }
 
         SysUser user = userService.updateUser(userDTO);
         if (user == null) {

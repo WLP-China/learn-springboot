@@ -51,12 +51,15 @@
             <if test="phone != null">
                 phone = #{phone},
             </if>
+<!--
             <if test="eid != null">
                 eid = #{eid},
             </if>
             <if test="eName != null">
                 eName = #{eName},
-            </if>
+            </if>-->
+            eid = #{eid},
+            eName = #{eName},
             <if test="status != null">
                 status = #{status},
             </if>

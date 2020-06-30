@@ -13,7 +13,7 @@ import java.util.Map;
 public interface EnterpriseDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into t_enterprise(eName, eInfo, creditCode, addr, telephone, status, createTime, updateTime) values (#{eName}, #{eInfo},#{creditCode},#{addr},#{telephone},#{status},now(), now())")
+    @Insert("insert into t_enterprise(eName, eInfo, creditCode, addr, telephone, type, status, createTime, updateTime) values (#{eName}, #{eInfo}, #{creditCode}, #{addr}, #{telephone}, #{type}, #{status}, now(), now())")
     int save(Enterprise enterprise);
 
     @Select("select * from t_enterprise t where t.id = #{id}")
