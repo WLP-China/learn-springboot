@@ -230,20 +230,19 @@
             }),
             success: function (response) {
                 if (response.code == 200) {
+                    // $("#comment_section").hide();
                     window.location.reload();
                 } else {
-                    alert(response.message);
-                    /*
                     if (response.code == 501) {
                         var isAccepted = confirm(response.message);
                         if (isAccepted) {
-
-                            // window.open("https://github.com/login/oauth/authorize?client_id=2859958f9f059979ed3a&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
-                            // window.localStorage.setItem("closable", true);
+                            // window.open("https://github.com/login/oauth/authorize?client_id=d652f5db17b798fc512f&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
+                            window.open("https://gitee.com/oauth/authorize?client_id=12ae6cd285a5695182048a47a0187e084dba672a01cd73e9aadbec7f573927b3&redirect_uri=" + document.location.origin + "/callback/gitee&response_type=code")
+                            window.localStorage.setItem("closable", true);
                         }
                     } else {
                         alert(response.message);
-                    }*/
+                    }
                 }
             }
         });

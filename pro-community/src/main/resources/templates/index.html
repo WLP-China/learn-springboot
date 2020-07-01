@@ -19,6 +19,16 @@
             color: #999;
         }
     </style>
+    <script type="application/javascript">
+        //不刷新页面登陆
+        window.onload = function () {
+            var closable = window.localStorage.getItem("closable");
+            if (closable == "true") {
+                window.close();
+                window.localStorage.removeItem("closable");
+            }
+        }
+    </script>
 </head>
 <body>
 
