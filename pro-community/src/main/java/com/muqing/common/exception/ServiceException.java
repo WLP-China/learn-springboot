@@ -31,6 +31,4 @@ public class ServiceException extends RuntimeException {
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-
-
 }

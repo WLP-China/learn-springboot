@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan({"com.ifun.mbg.mapper","com.ifun.dao"})
+@MapperScan({"com.muqing.mbg.mapper","com.muqing.dao"})
 public class MainApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
