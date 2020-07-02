@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muqing.dao.OrderDao">
+
+    <sql id="where">
+        <where>
+<!--            <if test="params.eName != null and params.eName != ''">
+                and t.eName like concat('%', #{params.eName}, '%')
+            </if>
+            <if test="params.type != null and params.type != ''">
+                and t.type = #{params.type}
+            </if>
+            <if test="params.status != null and params.status != ''">
+                and t.status = #{params.status}
+            </if>-->
+        </where>
+    </sql>
+
+    <update id="update">
+        update t_order t
+        <set>
+<!--            <if test="buyer_enterprise != null">-->
+<!--                buyer_enterprise = #{buyer_enterprise},-->
+<!--            </if>-->
+<!--            <if test="buyer_enterprise_id != null">-->
+<!--                buyer_enterprise_id = #{buyer_enterprise_id},-->
+<!--            </if>-->
+            <if test="proname != null">
+                proname = #{proname},
+            </if>
+            <if test="position != null">
+                position = #{position},
+            </if>
+            <if test="nun_order != null">
+                nun_order = #{nun_order},
+            </if>
+            <if test="concrete_additive != null">
+                concrete_additive = #{concrete_additive},
+            </if>
+            <if test="concrete_type != null">
+                concrete_type = #{concrete_type},
+            </if>
+            <if test="concrete_level != null">
+                concrete_level = #{concrete_level},
+            </if>
+            <if test="pumpingType != null">
+                pumpingType = #{pumpingType},
+            </if>
+            <if test="sendTime != null">
+                sendTime = #{sendTime},
+            </if>
+            <if test="is_finance != null">
+                is_finance = #{is_finance},
+            </if>
+            <if test="pay_type != null">
+                pay_type = #{pay_type},
+            </if>
+            <if test="seller_enterprise != null">
+                seller_enterprise = #{seller_enterprise},
+            </if>
+            <if test="seller_enterprise_id != null">
+                seller_enterprise_id = #{seller_enterprise_id},
+            </if>
+            <if test="num_cend != null">
+                num_cend = #{num_cend},
+            </if>
+            <if test="p_jianzhan != null">
+                p_jianzhan = #{p_jianzhan},
+            </if>
+            <if test="p_dirver != null">
+                p_dirver = #{p_dirver},
+            </if>
+            <if test="num_receive != null">
+                num_receive = #{num_receive},
+            </if>
+            <if test="p_receive != null">
+                p_receive = #{p_receive},
+            </if>
+            <if test="p_pangzhan_A != null">
+                p_pangzhan_A = #{p_pangzhan_A},
+            </if>
+            <if test="p_pangzhan_B != null">
+                p_pangzhan_B = #{p_pangzhan_B},
+            </if>
+            <if test="status != null">/
+                status = #{status},
+            </if>
+            updateTime = #{updateTime}
+        </set>
+        where t.id = #{id}
+    </update>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1) from t_order t
+        <include refid="where"/>
+    </select>
+<!--
+
+-->
+    <select id="list" resultType="com.muqing.model.Order">
+        select id, buyer_enterprise, buyer_enterprise_id, proname, position, nun_order, concrete_additive, concrete_type, concrete_level, pumping_type, sendTime, is_finance, pay_type from t_order t
+        <include refid="where"/>
+        ${params.orderBy}
+        limit #{offset}, #{limit}
+    </select>
+</mapper>
