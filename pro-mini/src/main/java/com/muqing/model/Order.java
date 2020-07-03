@@ -83,7 +83,7 @@ public class Order extends BaseEntity<Long> {
     /**
      * 是否财政项目
      */
-    private Boolean isFinance;
+    private Integer isFinance;
 
     /**
      * 结算方式
@@ -94,7 +94,7 @@ public class Order extends BaseEntity<Long> {
      * 单位名称-供方
      */
     private String sellerEnterprise;
-    private String sellerEnterpriseId;
+    private Long sellerEnterpriseId;
 
     /**
      * 发货量
@@ -221,11 +221,11 @@ public class Order extends BaseEntity<Long> {
         this.sendTime = sendTime;
     }
 
-    public Boolean getFinance() {
+    public Integer getFinance() {
         return isFinance;
     }
 
-    public void setFinance(Boolean finance) {
+    public void setFinance(Integer finance) {
         isFinance = finance;
     }
 
@@ -245,11 +245,11 @@ public class Order extends BaseEntity<Long> {
         this.sellerEnterprise = sellerEnterprise;
     }
 
-    public String getSellerEnterpriseId() {
+    public Long getSellerEnterpriseId() {
         return sellerEnterpriseId;
     }
 
-    public void setSellerEnterpriseId(String sellerEnterpriseId) {
+    public void setSellerEnterpriseId(Long sellerEnterpriseId) {
         this.sellerEnterpriseId = sellerEnterpriseId;
     }
 

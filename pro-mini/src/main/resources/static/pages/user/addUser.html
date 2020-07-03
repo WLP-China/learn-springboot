@@ -75,29 +75,19 @@
     //初始化 角色checkbox
     initRoles();
     //初始化 企业select
-    var select = $("#eid");
     $.ajax({
         type: 'get',
         url: '/enterprises/valid',
         async: false,
         success: function (data) {
-            v = {};
-            $.each(data, function (i, d) {
-                v[d.id] = d.eName;
-            });
+            var select = $("#eid");
             select.empty();
             select.append("<option value=''>请选择</option>");
-            $.each(v, function (k, v) {
-                select.append("<option value ='" + k + "'>" + v + "</option>");
+            $.each(data, function (i, d) {
+                select.append("<option value ='" + d.id + "'>" + d.eName + "</option>");
             });
         }
     });
-    // select.change(function () {
-    //     var options = $("#eName option:selected");
-    //     console.log(options.val())
-    //     console.log(options.text())
-    // });
-
 
     $('#form').bootstrapValidator();
 
@@ -121,7 +111,7 @@
                     layer.msg("添加成功", {shift: -1, time: 1000}, function () {
                         location.href = "userList.html";
                     });
-                }else{
+                } else {
                     layer.msg(data.message);
                 }
             }

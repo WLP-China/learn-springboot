@@ -17,8 +17,8 @@
                         <td>
                             <form class="form-inline" onsubmit="return false">
                                 <div class="form-group">
-                                    企业名称：<input id="eName" type="text" class="form-control" placeholder="企业名称">
-                                    状态：<select class="form-control input-sm" id="status"> </select>
+                                    工程名称：<input id="proname" type="text" class="form-control" placeholder="工程名称">
+                                    状态：<select class="form-control" id="status"> </select>
                                     <button id="searchBt" class="layui-btn layui-btn-sm" permission="order:query">
                                         <i class="layui-icon">&#xe615;</i>搜索
                                     </button>
@@ -41,10 +41,11 @@
                     <thead>
                     <tr>
                         <th>需方</th>
-                        <th style="width: 20%">工程名称</th>
-                        <th style="width: 20%">预计用量</th>
-                        <th style="width: 20%">状态</th>
-                        <th style="width: 10%">操作</th>
+                        <th style>工程名称</th>
+                        <th style>预计用量</th>
+                        <th style>创建时间</th>
+                        <th style>状态</th>
+                        <th style="width: 15%">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,7 +69,7 @@
         var layer = layui.layer;
     });
 
-    var eStatus = showDictSelect("status", "userStatus", true);
+    var oStatus = showDictSelect("status", "orderStatus", true);
 
     var pers = checkPermission();
 
@@ -86,8 +87,8 @@
                     "url": "/order",
                     "type": "get",
                     "data": function (d) {
-                        // d.eName = $('#eName').val();
-                        // d.status = $('#status').val();
+                        d.proname = $('#proname').val();
+                        d.status = $('#status').val();
                     },
                     "error": function (xhr, textStatus, errorThrown) {
                         var msg = xhr.responseText;
@@ -111,14 +112,15 @@
                 },
                 "dom": "<'dt-toolbar'r>t<'dt-toolbar-footer'<'col-sm-10 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-10' p v>>",
                 "columns": [
-                    {"data": "id", "defaultContent": ""},
+                    {"data": "buyerEnterprise", "defaultContent": ""},
                     {"data": "proname", "defaultContent": ""},
                     {"data": "nunOrder", "defaultContent": ""},
+                    {"data": "createTime", "defaultContent": ""},
                     {
                         "data": "status",
                         "defaultContent": "",
                         "render": function (data, type, row) {
-                            return eStatus[data];
+                            return oStatus[data];
                         }
                     },
                     {
@@ -134,7 +136,7 @@
                         }
                     },
                 ],
-                "order": [[1, "desc"]]
+                "order": [[4, "desc"]]
             });
     }
 

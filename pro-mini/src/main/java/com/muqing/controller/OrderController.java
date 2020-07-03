@@ -7,6 +7,7 @@ import com.muqing.common.page.table.PageTableRequest;
 import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.dao.OrderDao;
 import com.muqing.dto.OrderDTO;
+import com.muqing.dto.OrderVO;
 import com.muqing.model.Order;
 import com.muqing.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,14 +60,13 @@ public class OrderController {
                 new CountHandler() {
                     @Override
                     public int count(PageTableRequest request) {
-                        int i= orderDao.count(request.getParams());
-                        return i;
+                        return orderDao.count(request.getParams());
                     }
                 },
                 new ListHandler() {
                     @Override
-                    public List<Order> list(PageTableRequest request) {
-                        List<Order> list = orderDao.list(request.getParams(), request.getOffset(), request.getLimit());
+                    public List<OrderVO> list(PageTableRequest request) {
+                        List<OrderVO> list = orderDao.list(request.getParams(), request.getOffset(), request.getLimit());
                         return list;
                     }
                 }

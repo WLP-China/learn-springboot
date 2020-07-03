@@ -1,5 +1,6 @@
 package com.muqing.dao;
 
+import com.muqing.dto.OrderVO;
 import com.muqing.model.Order;
 import org.apache.ibatis.annotations.*;
 
@@ -14,7 +15,7 @@ public interface OrderDao {
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("insert into t_order(buyer_enterprise, buyer_enterprise_id,  proname, position, nun_order, concrete_additive, concrete_type, concrete_level, pumping_type, sendTime, is_finance, pay_type, status, createTime, updateTime) " +
-            "values (#{buyer_enterprise}, #{buyer_enterprise_id},  #{proname}, #{position}, #{nun_order}, #{concrete_additive}, #{concrete_type}, #{concrete_level}, #{pumping_type}, #{sendTime}, #{is_finance}, #{pay_type}, #{status}, now(), now())")
+            "values (#{buyerEnterprise}, #{buyerEnterpriseId},  #{proname}, #{position}, #{nunOrder}, #{concreteAdditive}, #{concreteType}, #{concreteLevel}, #{pumpingType}, #{sendTime}, #{isFinance}, #{payType}, #{status}, now(), now())")
     int save(Order order);
 
     @Select("select * from t_order t where t.id = #{id}")
@@ -27,7 +28,7 @@ public interface OrderDao {
 
     Integer count(@Param("params") Map<String, Object> params);
 
-    List<Order> list(@Param("params") Map<String, Object> params,
-                     @Param("offset") Integer offset,
-                     @Param("limit") Integer limit);
+    List<OrderVO> list(@Param("params") Map<String, Object> params,
+                       @Param("offset") Integer offset,
+                       @Param("limit") Integer limit);
 }

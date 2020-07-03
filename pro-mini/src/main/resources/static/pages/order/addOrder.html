@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-9" style="padding: 20px 10px;">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>单位名称</label>
+                <div class='col-md-10'>
+                    <input type="hidden" id="buyerEnterpriseId" name="buyerEnterpriseId">
+                    <input class='form-control' placeholder='单位名称' type='text' name='buyerEnterprise'
+                           id='buyerEnterprise'
+                           data-bv-notempty='true' data-bv-notempty-message='单位名称 不能为空'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>工程名称</label>
+                <div class='col-md-10'>
+                    <input class='form-control' placeholder='工程名称' type='text' name='proname' id='proname'
+                           data-bv-notempty='true' data-bv-notempty-message='工程名称 不能为空'>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>施工部位</label>
+                <div class='col-md-10'>
+                    <input class='form-control' placeholder='施工部位' type='text' name='position' id='position'
+                           data-bv-notempty='true' data-bv-notempty-message='施工部位 不能为空'>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">订单量(单位KG)</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="订单量/预计用量" name="nunOrder" id="nunOrder" type="number"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="订单量 不能为空">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">添加剂</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="concreteAdditive" id="concreteAdditive"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">混凝土型号</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="concreteType" id="concreteType"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">抗渗压等级</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="concreteLevel" id="concreteLevel"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">泵送方式</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="pumpingtype" id="pumpingtype"></select>
+                </div>
+            </div>
+            <div class='form-group'>
+                <label class='col-md-2 control-label'>发货时间</label>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" placeholder="发货时间" id="sendTime" name='sendTime'>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">是否财政项目</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="isFinance" id="isFinance">
+                        <option value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">结算方式</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="payType" id="payType"></select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="location.href='orderList.html'">返回</button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3"></div>
+
+<script type="text/javascript" src="/js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/jq.js"></script>
+<script type="text/javascript" src="/js/dict.js"></script>
+
+<script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#sendTime'
+        });
+    });
+
+    function showConcreteType(id, type) {
+        $.ajax({
+            type: 'get',
+            url: '/concretetype?type=' + type,
+            async: false,
+            success: function (data) {
+                let select = $("#" + id);
+                select.empty();
+                select.append("<option value=''>请选择</option>");
+                $.each(data, function (i, d) {
+                    console.log(d);
+                    select.append("<option value ='" + d.val + "'>" + d.val + "（￥：" + d.money + " 元/KG）" + "</option>");
+                });
+                // $.each(v, function (k, v) {
+                // });
+            }
+        });
+    }
+
+    //添加剂
+    showConcreteType("concreteAdditive", "additive");
+    //混凝土型号
+    showConcreteType("concreteType", "type");
+    //抗渗压等级
+    showConcreteType("concreteLevel", "level");
+    //泵送方式
+    showDictSelect("pumpingtype", "pumpingType", false);
+    //是否财政项目
+    // showDictSelect("isFinance", "boolean", false);
+    //账期
+    showDictSelect("payType", "isNotFinance", false);
+    $("#isFinance").change(function () {
+        if ($('#isFinance').val() == 1) {
+            showDictSelect("payType", "isFinance", false);
+        } else {
+            showDictSelect("payType", "isNotFinance", false);
+        }
+    });
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var formdata = $("#form").serializeObject();
+
+        $.ajax({
+            type: 'post',
+            url: '/order',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata),
+            success: function (data) {
+                layer.msg("添加成功", {shift: -1, time: 1000}, function () {
+                    location.href = "orderList.html";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

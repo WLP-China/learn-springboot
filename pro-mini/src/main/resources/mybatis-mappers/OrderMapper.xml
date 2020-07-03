@@ -10,10 +10,10 @@
             </if>
             <if test="params.type != null and params.type != ''">
                 and t.type = #{params.type}
-            </if>
+            </if>-->
             <if test="params.status != null and params.status != ''">
                 and t.status = #{params.status}
-            </if>-->
+            </if>
         </where>
     </sql>
 
@@ -98,8 +98,8 @@
 <!--
 
 -->
-    <select id="list" resultType="com.muqing.model.Order">
-        select id, buyer_enterprise, buyer_enterprise_id, proname, position, nun_order, concrete_additive, concrete_type, concrete_level, pumping_type, sendTime, is_finance, pay_type from t_order t
+    <select id="list" resultType="com.muqing.dto.OrderVO">
+        select id, buyer_enterprise_id, buyer_enterprise, seller_enterprise, seller_enterprise_id, proname, nun_order, concrete_additive, concrete_type, concrete_level, pumping_type, sendTime, is_finance, pay_type, status, createTime, updateTime from t_order t
         <include refid="where"/>
         ${params.orderBy}
         limit #{offset}, #{limit}

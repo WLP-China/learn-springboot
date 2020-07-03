@@ -21,10 +21,9 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public int save(OrderDTO orderDTO) {
         Order order = new Order();
-
-        BeanUtils.copyProperties(order, orderDTO);
-
-        return 0;
+        BeanUtils.copyProperties(orderDTO, order);
+        order.setStatus(Order.Status.DAISHENHE);
+        return orderDao.save(order);
     }
 
     @Override
