@@ -18,7 +18,7 @@ public class OrderDTO {
     private String concreteAdditive; //添加剂
     private String concreteType; //混凝土型号
     private String concreteLevel; //抗渗压等级
-    private String pumpingtype; //泵送方式
+    private String pumpingType; //泵送方式
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date sendTime; //发货时间
     private Integer isFinance; //是否财政项目
@@ -88,12 +88,12 @@ public class OrderDTO {
         this.concreteLevel = concreteLevel;
     }
 
-    public String getPumpingtype() {
-        return pumpingtype;
+    public String getPumpingType() {
+        return pumpingType;
     }
 
-    public void setPumpingtype(String pumpingtype) {
-        this.pumpingtype = pumpingtype;
+    public void setPumpingType(String pumpingType) {
+        this.pumpingType = pumpingType;
     }
 
     public Date getSendTime() {

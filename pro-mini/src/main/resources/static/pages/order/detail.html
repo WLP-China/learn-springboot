@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>卡片面板</legend>
+</fieldset>
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">订单信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col>
+                            </colgroup>
+                            <!--                            <thead>-->
+                            <!--                            <tr>-->
+                            <!--                                <th>人物</th>-->
+                            <!--                                <th>格言</th>-->
+                            <!--                            </tr>-->
+                            <!--                            </thead>-->
+                            <tbody>
+                            <tr>
+                                <td>需方单位</td>
+                                <td id="buyerEnterprise"></td>
+                            </tr>
+                            <tr>
+                                <td>工程名称</td>
+                                <td id="proname"></td>
+                            </tr>
+                            <tr>
+                                <td>施工部位</td>
+                                <td id="position"></td>
+                            </tr>
+                            <tr>
+                                <td>订单量(预计用量)</td>
+                                <td id="nunOrder"></td>
+                            </tr>
+                            <tr>
+                                <td>添加剂</td>
+                                <td id="concreteAdditive"></td>
+                            </tr>
+                            <tr>
+                                <td>混凝土型号</td>
+                                <td id="concreteType"></td>
+                            </tr>
+                            <tr>
+                                <td>抗渗压等级</td>
+                                <td id="concreteLevel"></td>
+                            </tr>
+                            <tr>
+                                <td>泵送方式</td>
+                                <td id="pumpingType"></td>
+                            </tr>
+                            <tr>
+                                <td>是否财政项目</td>
+                                <td id="isFinance"></td>
+                            </tr>
+                            <tr>
+                                <td>结算方式</td>
+                                <td id="payType"></td>
+                            </tr>
+                            <tr>
+                                <td>要求发货时间</td>
+                                <td id="sendTime"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">卡片面板</div>
+                <div class="layui-card-body">
+                    结合 layui 的栅格系统<br>
+                    轻松实现响应式布局
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">标题</div>
+                <div class="layui-card-body">
+                    内容
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+
+
+<script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
+
+    initData();
+
+    function initData() {
+        var id = getUrlParam("id");
+
+        if (isNotEmpty(id)) {
+            $.ajax({
+                type: 'get',
+                url: '/order/' + id,
+                async: false,
+                success: function (data) {
+                    console.log(data)
+                    // $("#id").val(data.id);
+                    $("#buyerEnterprise").text(data.buyerEnterprise);
+                    $("#proname").text(data.proname);
+                    $("#position").text(data.position);
+                    $("#nunOrder").text(data.nunOrder + "KG");
+                    $("#concreteAdditive").text(data.concreteAdditive);
+                    $("#concreteType").text(data.concreteType);
+                    $("#concreteLevel").text(data.concreteLevel);
+                    $("#pumpingType").text(data.pumpingType);
+                    $("#sendTime").text(data.sendTime);
+                    $("#isFinance").text(data.isFinance);
+                    $("#payType").text(data.payType);
+                    // $("#11").text(data.11);
+                    // $("#11").text(data.11);
+                }
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -126,7 +126,6 @@
                 select.empty();
                 select.append("<option value=''>请选择</option>");
                 $.each(data, function (i, d) {
-                    console.log(d);
                     select.append("<option value ='" + d.val + "'>" + d.val + "（￥：" + d.money + " 元/KG）" + "</option>");
                 });
                 // $.each(v, function (k, v) {

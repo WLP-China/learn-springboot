@@ -221,12 +221,12 @@ public class Order extends BaseEntity<Long> {
         this.sendTime = sendTime;
     }
 
-    public Integer getFinance() {
+    public Integer getIsFinance() {
         return isFinance;
     }
 
-    public void setFinance(Integer finance) {
-        isFinance = finance;
+    public void setIsFinance(Integer isFinance) {
+        this.isFinance = isFinance;
     }
 
     public String getPayType() {

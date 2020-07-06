@@ -129,10 +129,12 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "addOrder.html?";
-                            var edit = buttonEdit(href, "order:add", pers);
+                            var href_update = "addOrder.html?&id=" + id;
+                            var href_detail = "detail.html?&id=" + id;
+                            var edit = buttonEdit(href_update, "order:add", pers);
                             var del = buttonDel(id, "order:del", pers);
-                            return edit + del;
+                            var detail = buttonDetail(href_detail, "order:query", pers);
+                            return edit + del + detail;
                         }
                     },
                 ],
