@@ -1,11 +1,14 @@
 package com.muqing.controller;
 
+import com.muqing.common.api.CommonResult;
 import com.muqing.common.page.table.PageTableHandler;
 import com.muqing.common.page.table.PageTableHandler.CountHandler;
 import com.muqing.common.page.table.PageTableHandler.ListHandler;
 import com.muqing.common.page.table.PageTableRequest;
 import com.muqing.common.page.table.PageTableResponse;
+import com.muqing.common.utils.UserUtil;
 import com.muqing.dao.OrderDao;
+import com.muqing.dto.LoginUserDTO;
 import com.muqing.dto.OrderDTO;
 import com.muqing.dto.OrderVO;
 import com.muqing.model.Order;
@@ -29,10 +32,26 @@ public class OrderController {
     @Autowired
     private OrderDao orderDao;
 
+    /**
+     * 新增订单
+     *
+     * @param orderDTO
+     */
     @PostMapping
     @PreAuthorize("hasAuthority('order:add')")
     public void save(@RequestBody OrderDTO orderDTO) {
         orderService.save(orderDTO);
+    }
+
+    @PostMapping("/addSeller")
+    @PreAuthorize("hasAuthority('order:add')")
+    public CommonResult addSeller(@RequestParam(name = "id") Long id,
+                                  @RequestParam(name = "eid") Long eid) {
+        int i = orderService.addSeller(id, eid);
+        if (i != 0) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
     }
 
     /**
@@ -72,5 +91,4 @@ public class OrderController {
                 }
         ).handle(request);
     }
-
 }

@@ -32,17 +32,17 @@
             <if test="position != null">
                 position = #{position},
             </if>
-            <if test="nun_order != null">
-                nun_order = #{nun_order},
+            <if test="nunOrder != null">
+                nun_order = #{nunOrder},
             </if>
-            <if test="concrete_additive != null">
-                concrete_additive = #{concrete_additive},
+            <if test="concreteAdditive != null">
+                concrete_additive = #{concreteAdditive},
             </if>
-            <if test="concrete_type != null">
-                concrete_type = #{concrete_type},
+            <if test="concreteType != null">
+                concrete_type = #{concreteType},
             </if>
-            <if test="concrete_level != null">
-                concrete_level = #{concrete_level},
+            <if test="concreteLevel != null">
+                concrete_level = #{concreteLevel},
             </if>
             <if test="pumpingType != null">
                 pumpingType = #{pumpingType},
@@ -50,40 +50,40 @@
             <if test="sendTime != null">
                 sendTime = #{sendTime},
             </if>
-            <if test="is_finance != null">
-                is_finance = #{is_finance},
+            <if test="isFinance != null">
+                is_finance = #{isFinance},
             </if>
-            <if test="pay_type != null">
-                pay_type = #{pay_type},
+            <if test="payType != null">
+                pay_type = #{payType},
             </if>
-            <if test="seller_enterprise != null">
-                seller_enterprise = #{seller_enterprise},
+            <if test="sellerEnterprise != null">
+                seller_enterprise = #{sellerEnterprise},
             </if>
-            <if test="seller_enterprise_id != null">
-                seller_enterprise_id = #{seller_enterprise_id},
+            <if test="sellerEnterpriseId != null">
+                seller_enterprise_id = #{sellerEnterpriseId},
             </if>
-            <if test="num_cend != null">
-                num_cend = #{num_cend},
+            <if test="numCend != null">
+                num_cend = #{numCend},
             </if>
-            <if test="p_jianzhan != null">
-                p_jianzhan = #{p_jianzhan},
+            <if test="pJianzhan != null">
+                p_jianzhan = #{pJianzhan},
             </if>
-            <if test="p_dirver != null">
-                p_dirver = #{p_dirver},
+            <if test="pDirver != null">
+                p_dirver = #{pDirver},
             </if>
-            <if test="num_receive != null">
-                num_receive = #{num_receive},
+            <if test="numReceive != null">
+                num_receive = #{numReceive},
             </if>
-            <if test="p_receive != null">
-                p_receive = #{p_receive},
+            <if test="pReceive != null">
+                p_receive = #{pReceive},
             </if>
-            <if test="p_pangzhan_A != null">
-                p_pangzhan_A = #{p_pangzhan_A},
+            <if test="pPangzhanA != null">
+                p_pangzhan_A = #{pPangzhanA},
             </if>
-            <if test="p_pangzhan_B != null">
-                p_pangzhan_B = #{p_pangzhan_B},
+            <if test="pPangzhanB != null">
+                p_pangzhan_B = #{pPangzhanB},
             </if>
-            <if test="status != null">/
+            <if test="status != null">
                 status = #{status},
             </if>
             updateTime = #{updateTime}

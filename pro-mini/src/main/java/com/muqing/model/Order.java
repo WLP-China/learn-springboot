@@ -34,102 +34,29 @@ status
 public class Order extends BaseEntity<Long> {
     private static final long serialVersionUID = 8000583932282918364L;
 
-    /**
-     * 单位名称-需方
-     */
-    private String buyerEnterprise;
+    private String buyerEnterprise;//单位名称-需方
     private Long buyerEnterpriseId;
+    private String proname;//工程名称
+    private String position;//施工部位
+    private String nunOrder;//订单量(预计用量)
+    private String concreteAdditive;//添加剂
+    private String concreteType;//混凝土型号
+    private String concreteLevel;//抗渗压等级
+    private String pumpingType;//泵送方式
+    private Date sendTime;//发货时间
+    private Integer isFinance;//是否财政项目
+    private String payType;//结算方式
 
-    /**
-     * 工程名称
-     */
-    private String proname;
-
-    /**
-     * 施工部位
-     */
-    private String position;
-
-    /**
-     * 订单量(预计用量)
-     */
-    private String nunOrder;
-
-    /**
-     * 添加剂
-     */
-    private String concreteAdditive;
-
-    /**
-     * 混凝土型号
-     */
-    private String concreteType;
-
-    /**
-     * 抗渗压等级
-     */
-    private String concreteLevel;
-
-    /**
-     * 泵送方式
-     */
-    private String pumpingType;
-
-    /**
-     * 发货时间
-     */
-    private Date sendTime;
-
-    /**
-     * 是否财政项目
-     */
-    private Integer isFinance;
-
-    /**
-     * 结算方式
-     */
-    private String payType;
-
-    /**
-     * 单位名称-供方
-     */
-    private String sellerEnterprise;
+    private String sellerEnterprise;//单位名称-供方
     private Long sellerEnterpriseId;
+    private String numCend;//发货量
+    private String pJianzhan;//监站人员
+    private String pDirver;//司机
 
-    /**
-     * 发货量
-     */
-    private String numCend;
-
-    /**
-     * 监站人员
-     */
-    private String pJianzhan;
-
-    /**
-     * 司机
-     */
-    private String pDirver;
-
-    /**
-     * 接收量
-     */
-    private String numReceive;
-
-    /**
-     * 接收人
-     */
-    private String pReceive;
-
-    /**
-     * 旁站人A-需方人员
-     */
-    private String pPangzhanA;
-
-    /**
-     * 旁站人B-供方人员
-     */
-    private String pPangzhanB;
+    private String numReceive;//接收量
+    private String pReceive;//接收人
+    private String pPangzhanA;//旁站人A-需方人员
+    private String pPangzhanB;//旁站人B-供方人员
 
     private Integer status;
 

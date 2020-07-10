@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/layui/css/layui.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-9" style="padding: 20px 10px;">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label">供货方企业</label>
+                <div class="col-md-10">
+                    <select class="form-control input-sm" name="eid" id="eid"></select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="location.href='detail.html?id=' + getUrlParam('orderId')">返回
+                        </button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3"></div>
+
+<script type="text/javascript" src="/js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/jq.js"></script>
+<script type="text/javascript" src="/js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+    });
+
+    //初始化 企业select
+    $.ajax({
+        type: 'get',
+        url: '/enterprises/valid',
+        async: false,
+        success: function (data) {
+            var select = $("#eid");
+            select.empty();
+            select.append("<option value=''>请选择</option>");
+            $.each(data, function (i, d) {
+                select.append("<option value ='" + d.id + "'>" + d.eName + "</option>");
+            });
+        }
+    });
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+
+        var orderId = getUrlParam("orderId");
+        $.ajax({
+            type: 'post',
+            url: '/order/addSeller/',
+            data: {
+                "id": orderId,
+                "eid": $("#eid").val()
+            },
+            success: function (data) {
+                let msg = "操作成功";
+                if (data.code != 200) {
+                    msg = "操作失败，请稍后重试";
+                }
+                layer.msg(msg, {shift: -1, time: 1000}, function () {
+                    location.href = "detail.html?id=" + orderId;
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -7,8 +7,18 @@
 <body>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>卡片面板</legend>
+    <legend>订单详情</legend>
 </fieldset>
+<blockquote class="layui-elem-quote">
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href='addSeller.html?&orderId='+getUrlParam('id')" permission="order:add">审核</button>
+    <button type="button" class="layui-btn layui-btn-sm">默认按钮</button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal">百搭按钮</button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-warm">暖色按钮</button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-danger">警告按钮</button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-disabled">禁用按钮</button>
+
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="float: right" onclick="location.href='orderList.html'">返回</button>
+</blockquote>
 <div style="padding: 20px; background-color: #F2F2F2;">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md6">
@@ -21,12 +31,6 @@
                                 <col width="150">
                                 <col>
                             </colgroup>
-                            <!--                            <thead>-->
-                            <!--                            <tr>-->
-                            <!--                                <th>人物</th>-->
-                            <!--                                <th>格言</th>-->
-                            <!--                            </tr>-->
-                            <!--                            </thead>-->
                             <tbody>
                             <tr>
                                 <td>需方单位</td>
@@ -110,14 +114,13 @@
     });
 
     initData();
-
     function initData() {
-        var id = getUrlParam("id");
+        var orderId = getUrlParam("id");
 
-        if (isNotEmpty(id)) {
+        if (isNotEmpty(orderId)) {
             $.ajax({
                 type: 'get',
-                url: '/order/' + id,
+                url: '/order/' + orderId,
                 async: false,
                 success: function (data) {
                     console.log(data)
