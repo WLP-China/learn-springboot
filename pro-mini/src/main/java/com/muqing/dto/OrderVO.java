@@ -15,7 +15,7 @@ public class OrderVO {
     private String sellerEnterpriseId; //单位ID-供方
 
     private String proname; //工程名称
-//    private String position; //施工部位
+    private String position; //施工部位
     private String nunOrder; //订单量(预计用量)
     private String concreteAdditive; //添加剂
     private String concreteType; //混凝土型号
@@ -76,6 +76,14 @@ public class OrderVO {
 
     public void setProname(String proname) {
         this.proname = proname;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getNunOrder() {
