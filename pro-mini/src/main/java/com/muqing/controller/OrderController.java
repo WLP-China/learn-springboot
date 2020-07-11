@@ -9,10 +9,7 @@ import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.common.utils.UserUtil;
 import com.muqing.dao.EnterpriseDao;
 import com.muqing.dao.OrderDao;
-import com.muqing.dto.LoginUserDTO;
-import com.muqing.dto.OrderDTO;
-import com.muqing.dto.OrderVO;
-import com.muqing.dto.PaginationDTO;
+import com.muqing.dto.*;
 import com.muqing.model.Enterprise;
 import com.muqing.model.Order;
 import com.muqing.service.OrderService;
@@ -62,6 +59,22 @@ public class OrderController {
     public CommonResult addSeller(@RequestParam(name = "id") Long id,
                                   @RequestParam(name = "eid") Long eid) {
         int i = orderService.addSeller(id, eid);
+        if (i != 0) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
+    }
+
+    /**
+     * 确认发货
+     *
+     * @param orderSellerDTO
+     * @return
+     */
+    @PostMapping("/addSent")
+    @PreAuthorize("hasAuthority('order:add')")
+    public CommonResult addSentInfo(@RequestBody OrderSellerDTO orderSellerDTO) {
+        int i = orderService.addSentInfo(orderSellerDTO);
         if (i != 0) {
             return CommonResult.success(null);
         }

@@ -18,9 +18,17 @@ public interface OrderService {
     /**
      * 添加卖方
      *
-     * @param id 订单ID
+     * @param id  订单ID
      * @param eid 卖方ID
      * @return
      */
     int addSeller(Long id, Long eid);
+
+    /**
+     * 添加发货信息
+     *
+     * @param orderSellerDTO
+     * @return
+     */
+    int addSentInfo(OrderSellerDTO orderSellerDTO);
 }

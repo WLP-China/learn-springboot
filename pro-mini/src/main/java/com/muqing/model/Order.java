@@ -51,7 +51,7 @@ public class Order extends BaseEntity<Long> {
     private Long sellerEnterpriseId;
     private String numCend;//发货量
     private String pJianzhan;//监站人员
-    private String pDirver;//司机
+    private String pDriver;//司机
 
     private String numReceive;//接收量
     private String pReceive;//接收人
@@ -196,12 +196,12 @@ public class Order extends BaseEntity<Long> {
         this.pJianzhan = pJianzhan;
     }
 
-    public String getpDirver() {
-        return pDirver;
+    public String getpDriver() {
+        return pDriver;
     }
 
-    public void setpDirver(String pDirver) {
-        this.pDirver = pDirver;
+    public void setpDriver(String pDriver) {
+        this.pDriver = pDriver;
     }
 
     public String getNumReceive() {

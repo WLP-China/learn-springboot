@@ -1,5 +1,6 @@
 package com.muqing.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.muqing.dao.EnterpriseDao;
 import com.muqing.dao.OrderDao;
 import com.muqing.dto.OrderDTO;
@@ -49,12 +50,28 @@ public class OrderServiceImpl implements OrderService {
             Enterprise e = enterpriseDao.getById(eid);
             if (e != null) {
                 Order order = new Order();
-                order.setId(e.getId());
+                order.setId(orderById.getId());
                 order.setSellerEnterpriseId(e.getId());
                 order.setSellerEnterprise(e.geteName());
                 order.setStatus(Order.Status.DAIFAHUO);
                 return orderDao.update(order);
             }
+        }
+        return 0;
+    }
+
+    @Override
+    public int addSentInfo(OrderSellerDTO orderSellerDTO) {
+        Order orderById = orderDao.getById(Long.valueOf(orderSellerDTO.getOrderId()));
+        Integer orderStatus = orderById.getStatus();
+        if (orderStatus == 2) {
+            Order order = new Order();
+            order.setId(orderById.getId());
+            order.setNumCend(orderSellerDTO.getNumCend());
+            order.setpJianzhan(JSON.toJSONString(orderSellerDTO.getpJianzhan()));
+            order.setpDriver(JSON.toJSONString(orderSellerDTO.getpDriver()));
+            order.setStatus(Order.Status.YIFAHUO);
+            return orderDao.update(order);
         }
         return 0;
     }

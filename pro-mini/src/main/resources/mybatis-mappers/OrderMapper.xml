@@ -71,8 +71,8 @@
             <if test="pJianzhan != null">
                 p_jianzhan = #{pJianzhan},
             </if>
-            <if test="pDirver != null">
-                p_dirver = #{pDirver},
+            <if test="pDriver != null">
+                p_driver = #{pDriver},
             </if>
             <if test="numReceive != null">
                 num_receive = #{numReceive},

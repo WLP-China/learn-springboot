@@ -6,17 +6,17 @@ package com.muqing.dto;
  */
 public class OrderSellerDTO {
 
-    private String sellerEnterpriseId; //单位ID-供方
+    private String orderId; //订单ID
     private String numCend; //发货量
-    private String pJianzhan; //监站人员
-    private String pDirver; //司机
+    private Contact pJianzhan; //监站人员
+    private Contact pDriver; //司机
 
-    public String getSellerEnterpriseId() {
-        return sellerEnterpriseId;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setSellerEnterpriseId(String sellerEnterpriseId) {
-        this.sellerEnterpriseId = sellerEnterpriseId;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public String getNumCend() {
@@ -27,19 +27,19 @@ public class OrderSellerDTO {
         this.numCend = numCend;
     }
 
-    public String getpJianzhan() {
+    public Contact getpJianzhan() {
         return pJianzhan;
     }
 
-    public void setpJianzhan(String pJianzhan) {
+    public void setpJianzhan(Contact pJianzhan) {
         this.pJianzhan = pJianzhan;
     }
 
-    public String getpDirver() {
-        return pDirver;
+    public Contact getpDriver() {
+        return pDriver;
     }
 
-    public void setpDirver(String pDirver) {
-        this.pDirver = pDirver;
+    public void setpDriver(Contact pDriver) {
+        this.pDriver = pDriver;
     }
 }
