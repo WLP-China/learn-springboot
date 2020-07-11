@@ -107,4 +107,13 @@ public class OrderServiceImpl implements OrderService {
         }
         return 0;
     }
+
+    @Override
+    public int delete(Long id) {
+        Order orderById = orderDao.getById(id);
+        if (orderById.getStatus() == 1) {
+            return orderDao.delete(id);
+        }
+        return 0;
+    }
 }

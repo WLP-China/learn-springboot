@@ -10,14 +10,21 @@
     <legend>订单详情</legend>
 </fieldset>
 <blockquote class="layui-elem-quote">
-    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" onclick="location.href='addSeller.html?&orderId='+getUrlParam('id')" permission="order:add">审核</button>
+    <!--
     <button type="button" class="layui-btn layui-btn-sm">默认按钮</button>
     <button type="button" class="layui-btn layui-btn-sm layui-btn-normal">百搭按钮</button>
     <button type="button" class="layui-btn layui-btn-sm layui-btn-warm">暖色按钮</button>
     <button type="button" class="layui-btn layui-btn-sm layui-btn-danger">警告按钮</button>
     <button type="button" class="layui-btn layui-btn-sm layui-btn-disabled">禁用按钮</button>
+-->
+    <span>订单状态：</span><span id="status" style="color: orangered"></span>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="float: right"
+            onclick="location.href='orderList.html'">返回
+    </button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" style="float: right;margin-right: 10px"
+            onclick="location.href='addSeller.html?&orderId='+getUrlParam('id')" permission="order:addseller">审核
+    </button>
 
-    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="float: right" onclick="location.href='orderList.html'">返回</button>
 </blockquote>
 <div style="padding: 20px; background-color: #F2F2F2;">
     <div class="layui-row layui-col-space15">
@@ -72,9 +79,75 @@
                                 <td>结算方式</td>
                                 <td id="payType"></td>
                             </tr>
+                            <!--
                             <tr>
                                 <td>要求发货时间</td>
                                 <td id="sendTime"></td>
+                            </tr>-->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">发货信息</div>
+                <div class="layui-card-body">
+                    <!--                    结合 layui 的栅格系统<br>-->
+                    <!--                    轻松实现响应式布局-->
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>供方单位</td>
+                                <td id="sellerEnterprise"></td>
+                            </tr>
+                            <tr>
+                                <td>发货量</td>
+                                <td id="numCend"></td>
+                            </tr>
+                            <tr>
+                                <td>监站人员</td>
+                                <td id="pJianzhan"></td>
+                            </tr>
+                            <tr>
+                                <td>司机</td>
+                                <td id="pDriver"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12"></div>
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">需方确认信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>接收量</td>
+                                <td id="numReceive"></td>
+                            </tr>
+                            <tr>
+                                <td>接收人</td>
+                                <td id="pReceive"></td>
+                            </tr>
+                            <tr>
+                                <td>旁站人</td>
+                                <td id="pPangzhanA"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -84,13 +157,26 @@
         </div>
         <div class="layui-col-md6">
             <div class="layui-card">
-                <div class="layui-card-header">卡片面板</div>
+                <div class="layui-card-header">供方确认信息</div>
                 <div class="layui-card-body">
-                    结合 layui 的栅格系统<br>
-                    轻松实现响应式布局
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>旁站人</td>
+                                <td id="pPangzhanB"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
+        <!--
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-header">标题</div>
@@ -98,7 +184,7 @@
                     内容
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 
@@ -114,6 +200,7 @@
     });
 
     initData();
+
     function initData() {
         var orderId = getUrlParam("id");
 
@@ -128,7 +215,7 @@
                     $("#buyerEnterprise").text(data.buyerEnterprise);
                     $("#proname").text(data.proname);
                     $("#position").text(data.position);
-                    $("#nunOrder").text(data.nunOrder + "KG");
+                    $("#nunOrder").text(data.nunOrder + "Kg");
                     $("#concreteAdditive").text(data.concreteAdditive);
                     $("#concreteType").text(data.concreteType);
                     $("#concreteLevel").text(data.concreteLevel);
@@ -136,8 +223,32 @@
                     $("#sendTime").text(data.sendTime);
                     $("#isFinance").text(data.isFinance);
                     $("#payType").text(data.payType);
-                    // $("#11").text(data.11);
-                    // $("#11").text(data.11);
+
+                    let status = data.status;
+                    let status_arr = ["未知状态", "待审核", "待发货", "已发货", "已签收", "已完成"];
+                    $("#status").text(status_arr[status]);
+
+                    if (status != 1) {
+                        $("#sellerEnterprise").text(data.sellerEnterprise);
+                    }
+                    if (status != 1 && status != 2) {
+                        let p_jz = JSON.parse(data.pJianzhan);
+                        let p_driver = JSON.parse(data.pDriver);
+                        $("#numCend").text(data.numCend + "Kg");
+                        $("#pJianzhan").text(p_jz.name + "(" + p_jz.phone + ")");
+                        $("#pDriver").text(p_driver.name + "(" + p_driver.phone + ")");
+                    }
+                    if (status == 4 || status == 5) {
+                        let p_receive = JSON.parse(data.pReceive);
+                        let p_pz_A = JSON.parse(data.pPangzhanA);
+                        $("#numReceive").text(data.numReceive + "Kg");
+                        $("#pReceive").text(p_receive.name + "(" + p_receive.phone + ")");
+                        $("#pPangzhanA").text(p_pz_A.name + "(" + p_pz_A.phone + ")");
+                    }
+                    if (status == 5) {
+                        let p_pa_B = JSON.parse(data.pPangzhanB);
+                        $("#pPangzhanB").text(p_pa_B.name + "(" + p_pa_B.phone + ")");
+                    }
                 }
             });
         }

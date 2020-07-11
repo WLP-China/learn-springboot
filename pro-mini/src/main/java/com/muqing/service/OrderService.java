@@ -49,4 +49,6 @@ public interface OrderService {
      * @return
      */
     int sellerConfirm(OrderConfirmSellerDTO confirmSellerDTO);
+
+    int delete(Long id);
 }

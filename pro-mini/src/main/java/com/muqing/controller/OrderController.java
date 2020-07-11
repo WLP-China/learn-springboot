@@ -55,14 +55,14 @@ public class OrderController {
      * @return
      */
     @PostMapping("/addSeller")
-    @PreAuthorize("hasAuthority('order:add')")
+    @PreAuthorize("hasAuthority('order:addseller')")
     public CommonResult addSeller(@RequestParam(name = "id") Long id,
                                   @RequestParam(name = "eid") Long eid) {
         int i = orderService.addSeller(id, eid);
         if (i != 0) {
             return CommonResult.success(null);
         }
-        return CommonResult.failed();
+        return CommonResult.failed("非法操作：订单当前状态不允许审核");
     }
 
     /**
@@ -72,7 +72,7 @@ public class OrderController {
      * @return
      */
     @PostMapping("/addSent")
-    @PreAuthorize("hasAuthority('order:add')")
+    @PreAuthorize("hasAuthority('order:addsent')")
     public CommonResult addSentInfo(@RequestBody OrderSellerDTO orderSellerDTO) {
         int i = orderService.addSentInfo(orderSellerDTO);
         if (i != 0) {
@@ -88,7 +88,7 @@ public class OrderController {
      * @return
      */
     @PostMapping("/confirm/buyer")
-    @PreAuthorize("hasAuthority('order:add')")
+    @PreAuthorize("hasAuthority('order:confirm:buyer')")
     public CommonResult buyerConfirm(@RequestBody OrderConfirmBuyerDTO confirmBuyerDTO) {
         int i = orderService.buyerConfirm(confirmBuyerDTO);
         if (i != 0) {
@@ -104,7 +104,7 @@ public class OrderController {
      * @return
      */
     @PostMapping("/confirm/seller")
-    @PreAuthorize("hasAuthority('order:add')")
+    @PreAuthorize("hasAuthority('order:confirm:seller')")
     public CommonResult sellerConfirm(@RequestBody OrderConfirmSellerDTO confirmSellerDTO) {
         int i = orderService.sellerConfirm(confirmSellerDTO);
         if (i != 0) {
@@ -120,7 +120,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('order:query')")
+    @PreAuthorize("hasAnyAuthority('order:query:all','order:query:owns')")
     public Order get(@PathVariable Long id) {
         return orderDao.getById(id);
     }
@@ -132,7 +132,7 @@ public class OrderController {
      * @return
      */
     @GetMapping()
-    @PreAuthorize("hasAuthority('order:query')")
+    @PreAuthorize("hasAuthority('order:query:all')")
     public PageTableResponse list(PageTableRequest request) {
         return new PageTableHandler(
                 new CountHandler() {
@@ -160,7 +160,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/owns")
-//    @PreAuthorize("hasAuthority('order:query')")
+    @PreAuthorize("hasAuthority('order:query:owns')")
     public CommonResult<PaginationDTO<OrderVO>> list(@RequestParam(name = "pagenum") Integer pagenum,
                                                      @RequestParam(name = "pagesize") Integer pagesize) {
         Map<String, Object> params = new HashMap<>();
@@ -195,5 +195,15 @@ public class OrderController {
         paginationDTO.setCurrentPage(pagenum);
 
         return CommonResult.success(paginationDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('order:del')")
+    public CommonResult delete(@PathVariable Long id) {
+        int i = orderService.delete(id);
+        if (i != 0) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed("非法操作：订单已审核，不可删除");
     }
 }
