@@ -82,6 +82,38 @@ public class OrderController {
     }
 
     /**
+     * 买确认
+     *
+     * @param confirmBuyerDTO
+     * @return
+     */
+    @PostMapping("/confirm/buyer")
+    @PreAuthorize("hasAuthority('order:add')")
+    public CommonResult buyerConfirm(@RequestBody OrderConfirmBuyerDTO confirmBuyerDTO) {
+        int i = orderService.buyerConfirm(confirmBuyerDTO);
+        if (i != 0) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
+    }
+
+    /**
+     * 卖方确认
+     *
+     * @param confirmSellerDTO
+     * @return
+     */
+    @PostMapping("/confirm/seller")
+    @PreAuthorize("hasAuthority('order:add')")
+    public CommonResult sellerConfirm(@RequestBody OrderConfirmSellerDTO confirmSellerDTO) {
+        int i = orderService.sellerConfirm(confirmSellerDTO);
+        if (i != 0) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
+    }
+
+    /**
      * 根据id获取
      *
      * @param id

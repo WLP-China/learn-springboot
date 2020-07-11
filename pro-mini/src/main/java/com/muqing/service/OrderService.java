@@ -1,5 +1,7 @@
 package com.muqing.service;
 
+import com.muqing.dto.OrderConfirmBuyerDTO;
+import com.muqing.dto.OrderConfirmSellerDTO;
 import com.muqing.dto.OrderDTO;
 import com.muqing.dto.OrderSellerDTO;
 import com.muqing.model.Order;
@@ -31,4 +33,20 @@ public interface OrderService {
      * @return
      */
     int addSentInfo(OrderSellerDTO orderSellerDTO);
+
+    /**
+     * 买方确认
+     *
+     * @param confirmBuyerDTO
+     * @return
+     */
+    int buyerConfirm(OrderConfirmBuyerDTO confirmBuyerDTO);
+
+    /**
+     * 卖方确认
+     *
+     * @param confirmSellerDTO
+     * @return
+     */
+    int sellerConfirm(OrderConfirmSellerDTO confirmSellerDTO);
 }

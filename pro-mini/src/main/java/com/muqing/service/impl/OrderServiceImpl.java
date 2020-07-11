@@ -3,6 +3,8 @@ package com.muqing.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.muqing.dao.EnterpriseDao;
 import com.muqing.dao.OrderDao;
+import com.muqing.dto.OrderConfirmBuyerDTO;
+import com.muqing.dto.OrderConfirmSellerDTO;
 import com.muqing.dto.OrderDTO;
 import com.muqing.dto.OrderSellerDTO;
 import com.muqing.model.Enterprise;
@@ -71,6 +73,36 @@ public class OrderServiceImpl implements OrderService {
             order.setpJianzhan(JSON.toJSONString(orderSellerDTO.getpJianzhan()));
             order.setpDriver(JSON.toJSONString(orderSellerDTO.getpDriver()));
             order.setStatus(Order.Status.YIFAHUO);
+            return orderDao.update(order);
+        }
+        return 0;
+    }
+
+    @Override
+    public int buyerConfirm(OrderConfirmBuyerDTO confirmBuyerDTO) {
+        Order orderById = orderDao.getById(Long.valueOf(confirmBuyerDTO.getOrderId()));
+        Integer orderStatus = orderById.getStatus();
+        if (orderStatus == 3) {
+            Order order = new Order();
+            order.setId(orderById.getId());
+            order.setNumReceive(confirmBuyerDTO.getNumReceive());
+            order.setpReceive(JSON.toJSONString(confirmBuyerDTO.getpReceive()));
+            order.setpPangzhanA(JSON.toJSONString(confirmBuyerDTO.getpPangzhanA()));
+            order.setStatus(Order.Status.YIQIANSHOU);
+            return orderDao.update(order);
+        }
+        return 0;
+    }
+
+    @Override
+    public int sellerConfirm(OrderConfirmSellerDTO confirmSellerDTO) {
+        Order orderById = orderDao.getById(Long.valueOf(confirmSellerDTO.getOrderId()));
+        Integer orderStatus = orderById.getStatus();
+        if (orderStatus == 4) {
+            Order order = new Order();
+            order.setId(orderById.getId());
+            order.setpPangzhanB(JSON.toJSONString(confirmSellerDTO.getpPangzhanB()));
+            order.setStatus(Order.Status.YIWANCHENG);
             return orderDao.update(order);
         }
         return 0;
