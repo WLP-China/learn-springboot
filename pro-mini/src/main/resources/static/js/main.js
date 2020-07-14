@@ -79,27 +79,28 @@ function showLoginInfo() {
         async: false,
         success: function (result) {
             data = result.data;
-            $(".admin-header-user span").text(data.nickname);
 
-            var pro = window.location.protocol;
-            var host = window.location.host;
-            var domain = pro + "//" + host;
+            $(".admin-header-user span").text(data.name);
 
-            var sex = data.sex;
-            var url = data.headImgUrl;
-            if (url == null || url == "") {
-                if (sex == 1) {
-                    url = "/img/avatars/man.png";
-                } else {
-                    url = "/img/avatars/woman.png";
-                }
-
-                url = domain + url;
-            } else {
-                url = domain + "/statics" + url;
-            }
-            var img = $(".admin-header-user img");
-            img.attr("src", url);
+            // var pro = window.location.protocol;
+            // var host = window.location.host;
+            // var domain = pro + "//" + host;
+            //
+            // var sex = data.sex;
+            // var url = data.headImgUrl;
+            // if (url == null || url == "") {
+            //     if (sex == 1) {
+            //         url = "/img/avatars/man.png";
+            //     } else {
+            //         url = "/img/avatars/woman.png";
+            //     }
+            //
+            //     url = domain + url;
+            // } else {
+            //     url = domain + "/statics" + url;
+            // }
+            // var img = $(".admin-header-user img");
+            // img.attr("src", url);
         }
     });
 }

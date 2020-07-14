@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="col-xs-12 col-sm-12 col-md-1 col-lg-9" style="padding: 20px 10px;">
+    <form class="form-horizontal" onsubmit="return false" id="form">
+        <fieldset>
+            <input type="hidden" id="id1" name="id1">
+            <div class="form-group">
+                <label class="col-md-2 control-label">不含税价格</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="价格" name="money1" id="money1" type="number" min="0.0"
+                           step="0.1" value="0.0"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="价格 不能为空">
+                </div>
+            </div>
+            <input type="hidden" id="id2" name="id2">
+            <div class="form-group">
+                <label class="col-md-2 control-label">含税价格</label>
+                <div class="col-md-10">
+                    <input class="form-control" placeholder="价格" name="money2" id="money2" type="number" min="0.0"
+                           step="0.1" value="0.0"
+                           data-bv-notempty="true"
+                           data-bv-notempty-message="价格 不能为空">
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" align="center">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary"
+                                onclick="location.href='../dashboard.html'">返回
+                        </button>
+                        <button class="btn btn-primary" type="submit" onclick="add()">
+                            <i class="fa fa-save"></i> 保存
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-3"></div>
+
+<script type="text/javascript" src="/js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="/js/jq.js"></script>
+<script type="text/javascript" src="/js/plugin/bootstrapvalidator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+
+<script type="text/javascript">
+    layui.use(['layer', 'laydate'], function () {
+        var layer = layui.layer;
+    });
+
+
+    initData();
+
+    function initData() {
+        $.ajax({
+            type: 'get',
+            url: '/concretetype?type=price',
+            async: false,
+            success: function (data) {
+                console.log(data)
+                for (let key in data) {
+                    if (data[key].k == 1) {
+                        $("#id1").val(data[key].id);
+                        $("#money1").val(data[key].money);
+                    }
+                    if (data[key].k == 2) {
+                        $("#id2").val(data[key].id2);
+                        $("#money2").val(data[key].money);
+                    }
+                }
+            }
+        });
+    }
+
+    function add() {
+        $('#form').bootstrapValidator();
+        var bootstrapValidator = $("#form").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (!bootstrapValidator.isValid()) {
+            return;
+        }
+        var formdata1 = {
+            "id": $("#id1").val(),
+            "money": $("#money1").val()
+        };
+        var formdata2 = {
+            "id": $("#id2").val(),
+            "money": $("#money2").val()
+        };
+        $.ajax({
+            type: 'put',
+            url: '/concretetype',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata1),
+            success: function (data) {
+            }
+        });
+        $.ajax({
+            type: 'put',
+            url: '/concretetype',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(formdata2),
+            success: function (data) {
+                layer.msg("操作成功", {shift: -1, time: 1000}, function () {
+                    location.href = "../dashboard.html";
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

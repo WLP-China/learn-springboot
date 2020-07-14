@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     name: dev
-    url: jdbc:mysql://172.16.3.100:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: mysql123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,5 +27,5 @@ mybatis:
 
 #token配置
 token:
-  expiration: 7200 #token过期限秒数(60*60*24)
+  expiration: 72000 #token过期限秒数(60*60*24)
   jwtSecret: mySecret:) #私钥

@@ -62,9 +62,7 @@ function buttonDetail(href, permission, pers) {
     return btn.prop("outerHTML");
 }
 
-/*
 function deleteCurrentTab() {
     var lay_id = $(parent.document).find("ul.layui-tab-title").children("li.layui-this").attr("lay-id");
     parent.active.tabDelete(lay_id);
 }
-*/
