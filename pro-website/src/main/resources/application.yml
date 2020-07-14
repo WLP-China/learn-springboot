@@ -1,0 +1,24 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    name: dev
+    url: jdbc:mysql://127.0.0.1:3306/pro_website?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: mysql123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  type-aliases-package: com.muqing.model
+  mapper-locations: classpath:/mybatis-mappers/* # MyBatis的mapper.xml的路径配置
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+#token配置
+token:
+  expiration: 72000 #token过期限秒数(60*60*24)
+  jwtSecret: mySecret:) #私钥

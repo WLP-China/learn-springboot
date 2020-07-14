@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../layui/css/layui.css">
+</head>
+<body>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>今日价格</legend>
+</fieldset>
+<!--
+<blockquote class="layui-elem-quote">
+    <span>订单状态：</span><span id="status" style="color: orangered"></span>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-primary" style="float: right"
+            onclick="location.href='orderList.html'">返回
+    </button>
+    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" style="float: right;margin-right: 10px"
+            onclick="location.href='addSeller.html?&orderId='+getUrlParam('id')" permission="order:addseller">审核
+    </button>
+</blockquote>-->
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">今日价格
+                    <button type="button" class="layui-btn layui-btn-sm layui-btn-normal"
+                            style="float: right;margin-top: 10px"
+                            onclick="location.href='concretetype/editPrice.html'"
+                            permission="order:addseller">修改
+                    </button>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-form">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="150">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                            <tr>
+                                <td>不含税</td>
+                                <td id="bhs"></td>
+                            </tr>
+                            <tr>
+                                <td>含税</td>
+                                <td id="hs"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">标题</div>
+                <div class="layui-card-body">
+                    内容
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+<script type="text/javascript" src="../../js/libs/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="../../layui/layui.js"></script>
+<script type="text/javascript" src="../../js/jq.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+
+
+<script type="text/javascript">
+    layui.use('layer', function () {
+        var layer = layui.layer;
+    });
+
+    initData();
+
+    function initData() {
+        $.ajax({
+            type: 'get',
+            url: '/concretetype?type=price',
+            async: false,
+            success: function (data) {
+                console.log(data)
+                for (let key in data) {
+                    if (data[key].k == 1) {
+                        $("#bhs").text(data[key].money);
+                    }
+                    if (data[key].k == 2) {
+                        $("#hs").text(data[key].money);
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
