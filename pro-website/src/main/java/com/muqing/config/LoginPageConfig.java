@@ -7,13 +7,14 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class LoginPageConfig {
 
-    @RequestMapping("/platform")
+//    @RequestMapping("/platform")
+    @RequestMapping("/")
     public RedirectView platformPage() {
         return new RedirectView("/login.html");
     }
 
-    @RequestMapping("/")
-    public RedirectView websiteIndexPage() {
-        return new RedirectView("/website/login.html");
-    }
+//    @RequestMapping("/")
+//    public RedirectView websiteIndexPage() {
+//        return new RedirectView("/website/index.html");
+//    }
 }
