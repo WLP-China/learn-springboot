@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class PaginationDTO<T> {
     private List<T> data;
+    private Integer totalCount;//总条数
     private Integer totalPage;//总页数
     private Integer currentPage;//当前页
 
@@ -17,6 +18,14 @@ public class PaginationDTO<T> {
 
     public void setData(List<T> data) {
         this.data = data;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
     public Integer getTotalPage() {

@@ -22,10 +22,10 @@ public class WebSiteController {
     private ArticleDao articleDao;
 
     @GetMapping("/article")
-    public CommonResult<PaginationDTO<Article>> list(@RequestParam(name = "type") String type,
-                                                     @RequestParam(name = "title") String title,
-                                                     @RequestParam(name = "pagenum") Integer pagenum,
-                                                     @RequestParam(name = "pagesize") Integer pagesize) {
+    public CommonResult<PaginationDTO<Article>> list(@RequestParam(name = "type",required = false) String type,
+                                                     @RequestParam(name = "title", required = false) String title,
+                                                     @RequestParam(name = "pagenum", defaultValue = "1") Integer pagenum,
+                                                     @RequestParam(name = "pagesize", defaultValue = "5") Integer pagesize) {
         //SELECT .. FROM `t_article` WHERE status=1 ORDER BY isTop DESC,publishTime DESC,createTime DESC
         Map<String, Object> params = new HashMap<>();
         params.put("type", type);
@@ -47,6 +47,7 @@ public class WebSiteController {
 
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setData(list);
+        paginationDTO.setTotalCount(totalCount);
         paginationDTO.setTotalPage(totalPage);
         paginationDTO.setCurrentPage(pagenum);
         return CommonResult.success(paginationDTO);
