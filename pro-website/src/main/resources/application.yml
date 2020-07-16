@@ -11,6 +11,12 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  servlet:
+    multipart:
+      enabled: true # 开启 multipart 上传功能
+      file-size-threshold: 2KB # 文件写入磁盘的阈值
+      max-file-size: 5MB # 最大文件大小
+      max-request-size: 100MB # 最大请求大小
 
 mybatis:
   type-aliases-package: com.muqing.model
@@ -18,6 +24,10 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
 
+## 自定义配置
+#上传文件保存路径
+files:
+  path: ${file-path:d:/files}
 #token配置
 token:
   expiration: 72000 #token过期限秒数(60*60*24)

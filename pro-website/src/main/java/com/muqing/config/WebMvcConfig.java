@@ -3,14 +3,18 @@ package com.muqing.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.muqing.common.page.table.PageTableArgumentResolver;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -49,7 +53,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 定义时间格式转换器.用于返回json数据时候日期格式化
-     *
+     * <p>
      * 改为配置文件文件方式：application.yml
      * spring:jackson:date-format: yyyy-MM-dd HH:mm:ss
      *
@@ -70,4 +74,18 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        //将自定义的时间格式转换器添加到转换器列表中,jackson格式化时遇到Date类型就会转换成所定义的格式
 //        converters.add(jackson2HttpMessageConverter());
 //    }
+
+    //上传文件根路径
+    @Value("${files.path}")
+    private String filesPath;
+
+    /**
+     * 外部文件访问
+     * （映射静态资源目录）
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/statics/**")
+                .addResourceLocations(ResourceUtils.FILE_URL_PREFIX + filesPath + File.separator);
+    }
 }

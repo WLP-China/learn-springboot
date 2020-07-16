@@ -70,7 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/js/**",   // /**/*.js
                         "/fonts/**",
                         "/img/**",
-                        "/statics/**",
+                        "/statics/**",//外部文件访问
                         "/layui/**",
                         "/web/**"
                 ).permitAll()

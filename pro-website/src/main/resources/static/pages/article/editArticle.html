@@ -99,6 +99,54 @@
     ];
     // 关闭粘贴样式的过滤
     editor.customConfig.pasteFilterStyle = false;
+
+    var pro = window.location.protocol;
+    var host = window.location.host;
+    var domain = pro + "//" + host;
+
+    editor.customConfig.uploadImgServer = '/files/wangEditor'// 配置服务器端地址
+    editor.customConfig.uploadFileName = 'file' //自定义fileName
+    editor.customConfig.uploadImgParams = {//自定义上传参数
+        token: localStorage.getItem("token"),
+        domain: domain
+    }
+    // editor.customConfig.uploadImgHeaders = {//自定义 header
+    //     'Content-Type': 'multipart/form-data'
+    // }
+    editor.customConfig.uploadImgMaxLength = 5; //限制一次最多能传几张图片,默认为 10000 张（即不限制）
+    //editor.customConfig.uploadImgMaxSize =5 * 1024 * 1024; //限制图片大小 默认5M
+    //editor.customConfig.uploadImgParamsWithUrl = true//是否需要将参数拼接到 url 中
+    //editor.customConfig.withCredentials = true//（跨域传递 cookie）跨域上传中如果需要传递 cookie 需设置 withCredentials
+    //editor.customConfig.uploadImgTimeout = 3000 //自定义 timeout 时间，默认10秒钟
+    //监听函数
+    editor.customConfig.uploadImgHooks = {
+        before: function (xhr, editor, files) {
+            // 图片上传之前触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
+            // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
+            // return {
+            //     prevent: true,
+            //     msg: '放弃上传'
+            // }
+        },
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+            console.log("success");
+            console.log(result);
+        },
+        fail: function (xhr, editor, result) {
+            // 图片上传并返回结果，但图片插入错误时触发
+            console.log("fail");
+            console.log(result);
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+        },
+        timeout: function (xhr, editor) {
+            // 图片上传超时时触发
+        },
+    }
     editor.create();
 
     layui.use(['layer', 'form', 'laydate'], function () {
