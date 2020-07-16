@@ -8,6 +8,9 @@
             <if test="params.type != null and params.type != ''">
                 and type = #{params.type}
             </if>
+            <if test="params.status != null and params.status != ''">
+                and status = #{params.status}
+            </if>
             <if test="params.title != null and params.title != ''">
                 and t.title like concat('%', #{params.title}, '%')
             </if>

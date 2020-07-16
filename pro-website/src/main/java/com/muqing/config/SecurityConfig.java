@@ -71,11 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/fonts/**",
                         "/img/**",
                         "/statics/**",
-                        "/layui/**"
-//                        "/v2/api-docs/**",
-//                        "/swagger-resources/**",
-//                        "/webjars/**",
-//                        "/druid/**",
+                        "/layui/**",
+                        "/web/**"
                 ).permitAll()
                 /*
                  * Filter拦截请求两次的问题

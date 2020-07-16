@@ -17,8 +17,8 @@
                             <td width="80%">
                                 <form class="form-inline" onsubmit="return false">
                                     <div class="form-group">
-                                        type：
-                                        <input id="title" type="text" class="form-control" placeholder="type">
+                                        标题：
+                                        <input id="title" type="text" class="form-control" placeholder="标题">
                                         <button id="searchBt" class="layui-btn layui-btn-sm" permission="article:query">
                                             <i class="layui-icon">&#xe615;</i>搜索
                                         </button>
@@ -26,7 +26,7 @@
                                 </form>
                             </td>
                             <td align="right" width="20%">
-                                <button class="layui-btn layui-btn-sm" onclick="location.href='addArticle.html'"
+                                <button class="layui-btn layui-btn-sm" onclick="location.href='editArticle.html?type='+atype"
                                         permission="article:add">
                                     <i class="layui-icon">&#xe608;</i> 添加
                                 </button>
@@ -58,6 +58,7 @@
 <script type="text/javascript" src="/js/plugin/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="/js/plugin/datatables/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/jq.js"></script>
 <script type="text/javascript" src="/js/my/permission.js"></script>
 
@@ -67,6 +68,7 @@
     });
 
     var pers = checkPermission();
+    var atype = getUrlParam("type");
 
     var example;
     function init() {
@@ -82,7 +84,7 @@
                     "url": "/article",
                     "type": "get",
                     "data": function (d) {
-                        // d.type = $("#type").val();
+                        d.type = atype;
                         d.title = $("#title").val();
                     },
                     "error": function (xhr, textStatus, errorThrown) {
@@ -117,14 +119,14 @@
                         "orderable": false,
                         "render": function (data, type, row) {
                             var id = row['id'];
-                            var href = "updateArticle.html?id=" + id;
+                            var href = "editArticle.html?id=" + id+"&type="+atype;
                             var edit = buttonEdit(href, "article:add", pers);
                             var del = buttonDel(id, "article:del", pers);
                             return edit + del;
                         }
                     },
                 ],
-                "order": [[0, "asc"]]
+                "order": [[3, "desc"]]
             });
     }
 

@@ -31,6 +31,12 @@ public class ArticleController {
     @ResponseBody
     @PreAuthorize("hasAuthority('article:add')")
     public CommonResult saveOrUpdate(@RequestBody Article article) {
+        if (article.getIsTop() == null) {
+            article.setIsTop(0);
+        }
+        if (article.getStatus() == null) {
+            article.setStatus(0);
+        }
         int resule = articleService.saveOrUpdate(article);
         if (resule == 1) {
             return CommonResult.success(null);
