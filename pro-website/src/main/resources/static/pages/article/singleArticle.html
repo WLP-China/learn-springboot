@@ -17,7 +17,12 @@
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
         <div class="layui-card">
-            <div class="layui-card-header">新增文章</div>
+            <div class="layui-card-header">文章详情
+                <button id="editBtn" type="button" class="layui-btn layui-btn-sm" style="float: right; margin-top: 5px;"
+                        onclick='editBtn()'>编辑</button>
+                <button id="returnBtn" type="button" class="layui-btn layui-btn-sm layui-btn-normal" style="float: right; margin-top: 5px; display:none"
+                        onclick="location.href='singleArticle.html?id='+getUrlParam('id')+'&type='+getUrlParam('type')">取消编辑</button>
+            </div>
             <div class="layui-card-body">
                 <form class="layui-form layui-form-pane" lay-filter="form-filter">
                     <input type="hidden" id="id" name="id">
@@ -25,26 +30,26 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-block">
-                            <input type="text" id="title" name="title" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                            <input type="text" id="title" name="title" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input layui-disabled" disabled>
                         </div>
                     </div>
                     <div class="layui-row layui-col-space30 layui-form-item">
                         <div class="layui-col-lg4">
                             <label class="layui-form-label">发布时间</label>
                             <div class="layui-input-block">
-                                <input type="text" id="publishTime" name="publishTime" lay-verify="required" lay-verify="required" placeholder="" autocomplete="off" class="layui-input">
+                                <input type="text" id="publishTime" name="publishTime" lay-verify="required" lay-verify="required" placeholder="" autocomplete="off" class="layui-input" disabled>
                             </div>
                         </div>
                         <div class="layui-col-lg4">
                             <label class="layui-form-label">是否置顶</label>
                             <div class="layui-input-block">
-                                <input type="checkbox" id="isTop" name="isTop" value="1" lay-skin="switch" lay-text="是|否">
+                                <input type="checkbox" id="isTop" name="isTop" value="1" lay-skin="switch" lay-text="是|否" disabled>
                             </div>
                         </div>
                         <div class="layui-col-lg4">
                             <label class="layui-form-label">是否发布</label>
                             <div class="layui-input-block">
-                                <input type="checkbox" id="status" name="status" value="1" lay-skin="switch" lay-text="是|否" checked>
+                                <input type="checkbox" id="status" name="status" value="1" lay-skin="switch" lay-text="是|否" disabled>
                             </div>
                         </div>
                     </div>
@@ -55,8 +60,8 @@
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block" align="center">
-                            <button class="layui-btn" lay-submit lay-filter="submit-form">立即提交</button>
-                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            <button id="submit" class="layui-btn" lay-submit lay-filter="submit-form" style="display:none;">立即提交</button>
+<!--                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
                         </div>
                     </div>
                 </form>
@@ -149,6 +154,23 @@
     }
     editor.create();
 
+    editor.$textElem.attr('contenteditable', false)
+    function editBtn() {
+        $("#title").attr("disabled", false);
+        $("#title").removeClass("layui-disabled");
+        $("#publishTime").attr("disabled", false);
+        $("#publishTime").removeClass("layui-disabled");
+        $("#isTop").attr("disabled", false);
+        $("#isTop").removeClass("layui-disabled");
+        $("#status").attr("disabled", false);
+        $("#status").removeClass("layui-disabled");
+        editor.$textElem.attr('contenteditable', true)
+
+        $("#returnBtn").show();
+        $("#submit").show();
+        $("#editBtn").hide();
+    }
+
     layui.use(['layer', 'form', 'laydate'], function () {
         var layer = layui.layer;
         var laydate = layui.laydate;
@@ -196,7 +218,7 @@
                 success: function (data) {
                     if (data.code == 200) {
                         layer.msg("操作成功", {shift: -1, time: 1000}, function () {
-                            location.href = "singleArticle.html?id=" + id;
+                            location.href = "singleArticle.html?id=" + id + "type=" + atype;
                         });
                     }else {
                         layer.msg(data.message, {shift: -1, time: 1000}, function () {
