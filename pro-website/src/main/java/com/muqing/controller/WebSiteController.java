@@ -44,7 +44,7 @@ public class WebSiteController {
         } else {
             totalPage = totalCount / pagesize + 1;
         }
-
+      
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setData(list);
         paginationDTO.setTotalCount(totalCount);
