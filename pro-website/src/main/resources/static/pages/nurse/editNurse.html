@@ -27,13 +27,6 @@
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">科室</label>
-                                <div class="layui-input-block">
-                                    <select id="deparimentId" name="deparimentId" lay-verify="required">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="layui-form-item">
                                 <label class="layui-form-label">排序</label>
                                 <div class="layui-input-block">
                                     <input type="number" id="sort" name="sort" value="100" lay-verify="required" autocomplete="off" class="layui-input">
@@ -45,8 +38,8 @@
 <!--                                <label class="layui-form-label">照片</label>-->
                                 <div class="layui-input-block layui-upload">
                                     <input type="hidden" id="photo" name="photo">
-                                    <div class="layui-upload-list">
-                                        <img class="layui-upload-img" id="img-view" name="img-view" style="height: 150px;">
+                                    <div class="layui-upload-list" style="margin-top: 0">
+                                        <img class="layui-upload-img" id="img-view" name="img-view" style="height: 120px;">
                                         <p id="retry-upload"></p>
                                     </div>
                                     <button type="button" class="layui-btn" id="upload-img">上传照片</button>
@@ -58,12 +51,6 @@
                         <label class="layui-form-label">简介</label>
                         <div class="layui-input-block">
                             <textarea id="info" name="info" lay-verify="required" placeholder="请输入" class="layui-textarea" style="height: 260px;"></textarea>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">专业特长</label>
-                        <div class="layui-input-block">
-                            <textarea id="major" name="major" lay-verify="required" placeholder="请输入" class="layui-textarea" style="height: 260px;"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -88,21 +75,6 @@
     var pro = window.location.protocol;
     var host = window.location.host;
     var domain = pro + "//" + host;
-
-    //初始化 科室select
-    $.ajax({
-        type: 'get',
-        url: '/departments/list',
-        async: false,
-        success: function (data) {
-            var select = $("#deparimentId");
-            select.empty();
-            select.append("<option value=''>请选择</option>");
-            $.each(data, function (i, d) {
-                select.append("<option value ='" + d.id + "'>" + d.name + "</option>");
-            });
-        }
-    });
 
     layui.use(['layer', 'form', 'upload'], function () {
         var layer = layui.layer;
@@ -139,17 +111,15 @@
             if (isNotEmpty(id)) {
                 $.ajax({
                     type: 'get',
-                    url: '/doctors/' + id,
+                    url: '/nurses/' + id,
                     async: false,
                     success: function (data) {
                         form.val('form-filter', {
                             "id": data.id,
                             "name": data.name,
                             "professionalTitle": data.professionalTitle,
-                            "deparimentId": data.deparimentId,
                             "sort": data.sort,
                             "info": data.info,
-                            "major": data.major,
                         });
                         $("#photo").val(data.photo)
                         $("#img-view").attr("src", data.photo)
@@ -161,13 +131,13 @@
         form.on('submit(submit-form)', function (data) {
             $.ajax({
                 type: 'post',
-                url: '/doctors',
+                url: '/nurses',
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(data.field),
                 success: function (data) {
                     if (data.code == 200) {
                         layer.msg("添加成功", {shift: -1, time: 1000}, function () {
-                            location.href = "doctorList.html";
+                            location.href = "nurseList.html";
                         });
                     }else {
                         layer.msg(data.message, {shift: -1, time: 1000}, function () {
