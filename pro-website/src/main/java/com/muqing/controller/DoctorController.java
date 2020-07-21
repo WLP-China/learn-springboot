@@ -7,7 +7,9 @@ import com.muqing.common.page.table.PageTableHandler.ListHandler;
 import com.muqing.common.page.table.PageTableRequest;
 import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.dao.DepartmentDao;
+import com.muqing.dao.DoctorDao;
 import com.muqing.model.Department;
+import com.muqing.model.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +17,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 科室
+ * 专家医生
  */
 @RestController
-@RequestMapping("/departments")
-public class DepartmentController {
+@RequestMapping("/doctors")
+public class DoctorController {
 
+    @Autowired
+    private DoctorDao doctorDao;
     @Autowired
     private DepartmentDao departmentDao;
 
     /**
      * 添加/修改
      *
-     * @param department
+     * @param doctor
      * @return
      */
-    @PreAuthorize("hasAuthority('department:add')")
+    @PreAuthorize("hasAuthority('doctor:add')")
     @PostMapping
-    public CommonResult save(@RequestBody Department department) {
-        if (department.getIsTop() == null) {
-            department.setIsTop("0");
+    public CommonResult save(@RequestBody Doctor doctor) {
+        Department department = departmentDao.getById(doctor.getDeparimentId());
+        if (department == null) {
+            return CommonResult.failed("未选择科室");
         }
+        doctor.setDepartmentName(department.getName());
 
         int resule = 0;
-        if (department.getId() != null) {
-            resule = departmentDao.update(department);
+        if (doctor.getId() != null) {
+            resule = doctorDao.update(doctor);
         } else {
-            resule = departmentDao.save(department);
+            resule = doctorDao.save(doctor);
         }
 
         if (resule == 1) {
@@ -56,10 +62,10 @@ public class DepartmentController {
      *
      * @param id
      */
-    @PreAuthorize("hasAuthority('department:del')")
+    @PreAuthorize("hasAuthority('doctor:del')")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        departmentDao.delete(id);
+        doctorDao.delete(id);
     }
 
     /**
@@ -69,8 +75,8 @@ public class DepartmentController {
      * @return
      */
     @GetMapping("/{id}")
-    public Department get(@PathVariable Long id) {
-        return departmentDao.getById(id);
+    public Doctor get(@PathVariable Long id) {
+        return doctorDao.getById(id);
     }
 
     /**
@@ -79,27 +85,19 @@ public class DepartmentController {
      * @param request
      * @return
      */
-    @PreAuthorize("hasAuthority('department:query')")
+    @PreAuthorize("hasAuthority('doctor:query')")
     @GetMapping(params = {"start", "length"})
     public PageTableResponse list(PageTableRequest request) {
         return new PageTableHandler(new CountHandler() {
-
             @Override
             public int count(PageTableRequest request) {
-                return departmentDao.count(request.getParams());
+                return doctorDao.count(request.getParams());
             }
         }, new ListHandler() {
-
             @Override
-            public List<Department> list(PageTableRequest request) {
-                return departmentDao.list(request.getParams(), request.getOffset(), request.getLimit());
+            public List<Doctor> list(PageTableRequest request) {
+                return doctorDao.list(request.getParams(), request.getOffset(), request.getLimit());
             }
         }).handle(request);
-    }
-
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('department:query')")
-    public List<Department> list() {
-        return departmentDao.listAll();
     }
 }

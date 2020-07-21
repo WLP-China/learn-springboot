@@ -28,4 +28,6 @@ public interface DepartmentDao {
 
     List<Department> list(@Param("params") Map<String, Object> params, @Param("offset") Integer offset,
                     @Param("limit") Integer limit);
+
+    List<Department> listAll();
 }
