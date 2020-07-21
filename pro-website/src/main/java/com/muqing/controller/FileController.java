@@ -3,6 +3,11 @@ package com.muqing.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.muqing.common.page.table.PageTableHandler;
+import com.muqing.common.page.table.PageTableHandler.CountHandler;
+import com.muqing.common.page.table.PageTableHandler.ListHandler;
+import com.muqing.common.page.table.PageTableRequest;
+import com.muqing.common.page.table.PageTableResponse;
 import com.muqing.dao.FileInfoDao;
 import com.muqing.dto.WangEditorFile;
 import com.muqing.model.FileInfo;
@@ -51,21 +56,21 @@ public class FileController {
         return editorFile;
     }
 
-//    @GetMapping
-//    @PreAuthorize("hasAuthority('sys:file:query')")
-//    public PageTableResponse listFiles(PageTableRequest request) {
-//        return new PageTableHandler(new CountHandler() {
-//            @Override
-//            public int count(PageTableRequest request) {
-//                return fileInfoDao.count(request.getParams());
-//            }
-//        }, new ListHandler() {
-//            @Override
-//            public List<FileInfo> list(PageTableRequest request) {
-//                List<FileInfo> list = fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
-//                return list;
-//            }
-//        }).handle(request);
-//    }
+    @GetMapping
+    @PreAuthorize("hasAuthority('sys:file:query')")
+    public PageTableResponse listFiles(PageTableRequest request) {
+        return new PageTableHandler(new CountHandler() {
+            @Override
+            public int count(PageTableRequest request) {
+                return fileInfoDao.count(request.getParams());
+            }
+        }, new ListHandler() {
+            @Override
+            public List<FileInfo> list(PageTableRequest request) {
+                List<FileInfo> list = fileInfoDao.list(request.getParams(), request.getOffset(), request.getLimit());
+                return list;
+            }
+        }).handle(request);
+    }
 
 }

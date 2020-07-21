@@ -20,8 +20,8 @@
 <!--        <module>demo-thymeleaf</module>-->
 <!--        <module>demo-security</module>-->
 
-        <module>pro-community</module>
-        <module>pro-mini</module>
+<!--        <module>pro-community</module>-->
+<!--        <module>pro-mini</module>-->
         <module>pro-website</module>
     </modules>
 
