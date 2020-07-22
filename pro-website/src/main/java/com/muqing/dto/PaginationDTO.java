@@ -3,7 +3,7 @@ package com.muqing.dto;
 import java.util.List;
 
 /**
- * 简单分页对象 （for微信小程序使用）
+ * 简单分页对象
  * Create by iFun on 2020/07/10
  */
 public class PaginationDTO<T> {

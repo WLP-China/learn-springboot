@@ -10,7 +10,7 @@ public class Doctor extends BaseEntity<Long> {
     private String name;// 姓名
     private String photo;// 照片
     private String professionalTitle;// 职称
-    private Long deparimentId;// 科室
+    private Long departmentId;// 科室
     private String departmentName;
     private String major;// 专业特长
     private String info;// 简介
@@ -40,12 +40,12 @@ public class Doctor extends BaseEntity<Long> {
         this.professionalTitle = professionalTitle;
     }
 
-    public Long getDeparimentId() {
-        return deparimentId;
+    public Long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDeparimentId(Long deparimentId) {
-        this.deparimentId = deparimentId;
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartmentName() {
