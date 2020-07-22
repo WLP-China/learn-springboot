@@ -37,7 +37,7 @@ public class DoctorController {
     @PreAuthorize("hasAuthority('doctor:add')")
     @PostMapping
     public CommonResult save(@RequestBody Doctor doctor) {
-        Department department = departmentDao.getById(doctor.getDeparimentId());
+        Department department = departmentDao.getById(doctor.getDepartmentId());
         if (department == null) {
             return CommonResult.failed("未选择科室");
         }
