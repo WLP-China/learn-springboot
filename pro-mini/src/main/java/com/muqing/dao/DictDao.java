@@ -29,6 +29,6 @@ public interface DictDao {
     @Select("select * from t_dict t where t.type = #{type} and k = #{k}")
     Dict getByTypeAndK(@Param("type") String type, @Param("k") String k);
 
-    @Select("select * from t_dict t where t.type = #{type}")
+    @Select("select * from t_dict t where t.type = #{type} order by id asc")
     List<Dict> listByType(String type);
 }

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">订单量(单位KG)</label>
+                <label class="col-md-2 control-label">订单量(单位 m³)</label>
                 <div class="col-md-10">
                     <input class="form-control" placeholder="订单量/预计用量" name="nunOrder" id="nunOrder" type="number"
                            data-bv-notempty="true"
@@ -126,7 +126,7 @@
                 select.empty();
                 select.append("<option value=''>请选择</option>");
                 $.each(data, function (i, d) {
-                    select.append("<option value ='" + d.val + "'>" + d.val + "（￥：" + d.money + " 元/KG）" + "</option>");
+                    select.append("<option value ='" + d.val + "'>" + d.val + "（￥：" + d.money + " 元/m³）" + "</option>");
                 });
                 // $.each(v, function (k, v) {
                 // });

@@ -215,7 +215,7 @@
                     $("#buyerEnterprise").text(data.buyerEnterprise);
                     $("#proname").text(data.proname);
                     $("#position").text(data.position);
-                    $("#nunOrder").text(data.nunOrder + "Kg");
+                    $("#nunOrder").text(data.nunOrder + " m³");
                     $("#concreteAdditive").text(data.concreteAdditive);
                     $("#concreteType").text(data.concreteType);
                     $("#concreteLevel").text(data.concreteLevel);
@@ -234,14 +234,14 @@
                     if (status != 1 && status != 2) {
                         let p_jz = JSON.parse(data.pJianzhan);
                         let p_driver = JSON.parse(data.pDriver);
-                        $("#numCend").text(data.numCend + "Kg");
+                        $("#numCend").text(data.numCend + " m³");
                         $("#pJianzhan").text(p_jz.name + "(" + p_jz.phone + ")");
                         $("#pDriver").text(p_driver.name + "(" + p_driver.phone + ")");
                     }
                     if (status == 4 || status == 5) {
                         let p_receive = JSON.parse(data.pReceive);
                         let p_pz_A = JSON.parse(data.pPangzhanA);
-                        $("#numReceive").text(data.numReceive + "Kg");
+                        $("#numReceive").text(data.numReceive + " m³");
                         $("#pReceive").text(p_receive.name + "(" + p_receive.phone + ")");
                         $("#pPangzhanA").text(p_pz_A.name + "(" + p_pz_A.phone + ")");
                     }
