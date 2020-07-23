@@ -3,16 +3,21 @@ package com.muqing.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.muqing.dao.EnterpriseDao;
 import com.muqing.dao.OrderDao;
+import com.muqing.dao.OrderSellerDao;
 import com.muqing.dto.OrderConfirmBuyerDTO;
 import com.muqing.dto.OrderConfirmSellerDTO;
 import com.muqing.dto.OrderDTO;
 import com.muqing.dto.OrderSellerDTO;
 import com.muqing.model.Enterprise;
 import com.muqing.model.Order;
+import com.muqing.model.OrderSeller;
 import com.muqing.service.OrderService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Create by iFun on 2020/07/01
@@ -22,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private OrderSellerDao orderSellerDao;
 
     @Autowired
     private EnterpriseDao enterpriseDao;
@@ -63,17 +70,26 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public int addSentInfo(OrderSellerDTO orderSellerDTO) {
         Order orderById = orderDao.getById(Long.valueOf(orderSellerDTO.getOrderId()));
         Integer orderStatus = orderById.getStatus();
-        if (orderStatus == 2) {
-            Order order = new Order();
-            order.setId(orderById.getId());
-            order.setNumCend(orderSellerDTO.getNumCend());
-            order.setpJianzhan(JSON.toJSONString(orderSellerDTO.getpJianzhan()));
-            order.setpDriver(JSON.toJSONString(orderSellerDTO.getpDriver()));
-            order.setStatus(Order.Status.YIFAHUO);
-            return orderDao.update(order);
+        if (orderStatus == 2 || orderStatus == 3) {
+            if (orderStatus == 2) {
+                Order order = new Order();
+                order.setId(orderById.getId());
+                order.setStatus(Order.Status.YIFAHUO);
+                orderDao.update(order);
+            }
+
+            Integer countByOrderId = orderSellerDao.countByOrderId(orderById.getId());
+            OrderSeller orderSeller = new OrderSeller();
+            orderSeller.setOrderId(orderById.getId());
+            orderSeller.setNo(countByOrderId + 1);
+            orderSeller.setNumSend(orderSellerDTO.getNumSend());
+            orderSeller.setpJianzhan(JSON.toJSONString(orderSellerDTO.getpJianzhan()));
+//            orderSeller.setpDriver(JSON.toJSONString(orderSellerDTO.getpDriver()));
+            return orderSellerDao.save(orderSeller);
         }
         return 0;
     }
@@ -106,6 +122,21 @@ public class OrderServiceImpl implements OrderService {
             return orderDao.update(order);
         }
         return 0;
+    }
+
+    @Override
+    public Order getById(Long id) {
+        Order order = orderDao.getById(id);
+        List<OrderSeller> orderSellerList = orderSellerDao.listByOrderId(id);
+        if (orderSellerList != null) {
+            Double totle = Double.valueOf(0);
+            for (OrderSeller orderSeller : orderSellerList) {
+                totle += orderSeller.getNumSend();
+            }
+            order.setOrderSellerList(orderSellerList);
+            order.setTotleSend(totle);
+        }
+        return order;
     }
 
     @Override

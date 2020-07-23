@@ -19,8 +19,8 @@ public class OrderDTO {
     private String concreteType; //混凝土型号
     private String concreteLevel; //抗渗压等级
     private String pumpingType; //泵送方式
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date sendTime; //发货时间
+    @JsonFormat(pattern = "yyyy/MM/dd")
+    private Date sendTime; //发货时间、浇筑时间
     private Integer isFinance; //是否财政项目
     private String payType; //结算方式
 

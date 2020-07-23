@@ -1,36 +1,8 @@
 package com.muqing.model;
 
 import java.util.Date;
-/*
-//id
-buyer_enterprise
-buyer_enterprise_id
-proname
-position
-nun_order
-concrete_additive
-concrete_type
-concrete_level
-pumping_type
-sendTime
-is_finance
-pay_type
+import java.util.List;
 
-seller_enterprise
-seller_enterprise_id
-num_cend
-p_jianzhan
-p_dirver
-
-num_receive
-p_receive
-p_pangzhan_A
-p_pangzhan_B
-status
-
-//createTime
-//updateTime
-*/
 public class Order extends BaseEntity<Long> {
     private static final long serialVersionUID = 8000583932282918364L;
 
@@ -43,15 +15,17 @@ public class Order extends BaseEntity<Long> {
     private String concreteType;//混凝土型号
     private String concreteLevel;//抗渗压等级
     private String pumpingType;//泵送方式
-    private Date sendTime;//发货时间
+    private Date sendTime;//发货时间、浇筑时间
     private Integer isFinance;//是否财政项目
     private String payType;//结算方式
 
     private String sellerEnterprise;//单位名称-供方
     private Long sellerEnterpriseId;
-    private String numCend;//发货量
-    private String pJianzhan;//监站人员
-    private String pDriver;//司机
+//    private String numSend;//发货量
+//    private String pJianzhan;//监站人员
+//    private String pDriver;//司机
+    private List<OrderSeller> orderSellerList;
+    private Double totleSend;//总发货量
 
     private String numReceive;//接收量
     private String pReceive;//接收人
@@ -61,11 +35,11 @@ public class Order extends BaseEntity<Long> {
     private Integer status;
 
     public interface Status {
-        int DAISHENHE = 1;
-        int DAIFAHUO = 2;
-        int YIFAHUO = 3;
-        int YIQIANSHOU = 4;
-        int YIWANCHENG = 5;
+        int DAISHENHE = 1; //待审核
+        int DAIFAHUO = 2; //代发货
+        int YIFAHUO = 3; //已发货
+        int YIQIANSHOU = 4; //已签收
+        int YIWANCHENG = 5; //已完成
     }
 
     public String getBuyerEnterprise() {
@@ -180,28 +154,20 @@ public class Order extends BaseEntity<Long> {
         this.sellerEnterpriseId = sellerEnterpriseId;
     }
 
-    public String getNumCend() {
-        return numCend;
+    public List<OrderSeller> getOrderSellerList() {
+        return orderSellerList;
     }
 
-    public void setNumCend(String numCend) {
-        this.numCend = numCend;
+    public void setOrderSellerList(List<OrderSeller> orderSellerList) {
+        this.orderSellerList = orderSellerList;
     }
 
-    public String getpJianzhan() {
-        return pJianzhan;
+    public Double getTotleSend() {
+        return totleSend;
     }
 
-    public void setpJianzhan(String pJianzhan) {
-        this.pJianzhan = pJianzhan;
-    }
-
-    public String getpDriver() {
-        return pDriver;
-    }
-
-    public void setpDriver(String pDriver) {
-        this.pDriver = pDriver;
+    public void setTotleSend(Double totleSend) {
+        this.totleSend = totleSend;
     }
 
     public String getNumReceive() {

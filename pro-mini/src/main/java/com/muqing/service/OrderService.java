@@ -50,5 +50,7 @@ public interface OrderService {
      */
     int sellerConfirm(OrderConfirmSellerDTO confirmSellerDTO);
 
+    Order getById(Long id);
+
     int delete(Long id);
 }

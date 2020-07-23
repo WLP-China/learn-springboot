@@ -79,11 +79,10 @@
                                 <td>结算方式</td>
                                 <td id="payType"></td>
                             </tr>
-                            <!--
                             <tr>
-                                <td>要求发货时间</td>
+                                <td>浇筑时间</td>
                                 <td id="sendTime"></td>
-                            </tr>-->
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -96,7 +95,8 @@
                 <div class="layui-card-body">
                     <!--                    结合 layui 的栅格系统<br>-->
                     <!--                    轻松实现响应式布局-->
-                    <div class="layui-form">
+                    <div class="layui-form" id="order_sellers">
+                        <!--
                         <table class="layui-table">
                             <colgroup>
                                 <col width="150">
@@ -120,7 +120,7 @@
                                 <td id="pDriver"></td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table>-->
                     </div>
                 </div>
             </div>
@@ -155,6 +155,7 @@
                 </div>
             </div>
         </div>
+        <!--
         <div class="layui-col-md6">
             <div class="layui-card">
                 <div class="layui-card-header">供方确认信息</div>
@@ -176,6 +177,7 @@
                 </div>
             </div>
         </div>
+        -->
         <!--
         <div class="layui-col-md12">
             <div class="layui-card">
@@ -229,14 +231,24 @@
                     $("#status").text(status_arr[status]);
 
                     if (status != 1) {
-                        $("#sellerEnterprise").text(data.sellerEnterprise);
+                        let str = '<table class="layui-table"><colgroup><col width="150"><col></colgroup><tbody><tr><td>供方单位</td><td>'+data.sellerEnterprise+'</td></tr></tbody></table>'
+                        $("#order_sellers").html(str);
                     }
                     if (status != 1 && status != 2) {
-                        let p_jz = JSON.parse(data.pJianzhan);
-                        let p_driver = JSON.parse(data.pDriver);
-                        $("#numCend").text(data.numCend + " m³");
-                        $("#pJianzhan").text(p_jz.name + "(" + p_jz.phone + ")");
-                        $("#pDriver").text(p_driver.name + "(" + p_driver.phone + ")");
+                        let str = '<table class="layui-table"><colgroup><col width="150"><col></colgroup><tbody><tr><td>供方单位</td><td>'+data.sellerEnterprise+'</td></tr></tbody></table>'
+
+                        var orderSellerList = data.orderSellerList;
+                        $.each(orderSellerList,function(index,value){
+                            let p_jz = JSON.parse(value.pJianzhan);
+                            str = str + '<table class="layui-table"><colgroup><col width="150"><col></colgroup><tbody><tr><td>订单号</td><td>'+value.no+'</td></tr><tr><td>发货量</td><td>'+value.numCend+' m³</td></tr><tr><td>监站人员</td><td>'+p_jz.name+'('+p_jz.phone+')</td></tr><tr><td>发货时间</td><td>'+value.createTime+'</td></tr></tbody></table>';
+                        });
+
+                        $("#order_sellers").html(str);
+
+                        // let p_driver = JSON.parse(data.pDriver);
+                        // $("#numCend").text(data.numCend + " m³");
+                        // $("#pJianzhan").text(p_jz.name + "(" + p_jz.phone + ")");
+                        // $("#pDriver").text(p_driver.name + "(" + p_driver.phone + ")");
                     }
                     if (status == 4 || status == 5) {
                         let p_receive = JSON.parse(data.pReceive);
@@ -245,10 +257,10 @@
                         $("#pReceive").text(p_receive.name + "(" + p_receive.phone + ")");
                         $("#pPangzhanA").text(p_pz_A.name + "(" + p_pz_A.phone + ")");
                     }
-                    if (status == 5) {
-                        let p_pa_B = JSON.parse(data.pPangzhanB);
-                        $("#pPangzhanB").text(p_pa_B.name + "(" + p_pa_B.phone + ")");
-                    }
+                    // if (status == 5) {
+                    //     let p_pa_B = JSON.parse(data.pPangzhanB);
+                    //     $("#pPangzhanB").text(p_pa_B.name + "(" + p_pa_B.phone + ")");
+                    // }
                 }
             });
         }

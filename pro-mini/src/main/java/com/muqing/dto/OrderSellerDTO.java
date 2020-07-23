@@ -7,7 +7,7 @@ package com.muqing.dto;
 public class OrderSellerDTO {
 
     private String orderId; //订单ID
-    private String numCend; //发货量
+    private Double numSend; //发货量
     private Contact pJianzhan; //监站人员
     private Contact pDriver; //司机
 
@@ -19,12 +19,12 @@ public class OrderSellerDTO {
         this.orderId = orderId;
     }
 
-    public String getNumCend() {
-        return numCend;
+    public Double getNumSend() {
+        return numSend;
     }
 
-    public void setNumCend(String numCend) {
-        this.numCend = numCend;
+    public void setNumSend(Double numSend) {
+        this.numSend = numSend;
     }
 
     public Contact getpJianzhan() {

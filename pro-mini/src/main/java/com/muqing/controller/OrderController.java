@@ -122,7 +122,7 @@ public class OrderController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('order:query:all','order:query:owns')")
     public Order get(@PathVariable Long id) {
-        return orderDao.getById(id);
+        return orderService.getById(id);
     }
 
     /**

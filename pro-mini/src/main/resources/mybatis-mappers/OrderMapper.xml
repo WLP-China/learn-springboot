@@ -65,15 +65,6 @@
             <if test="sellerEnterpriseId != null">
                 seller_enterprise_id = #{sellerEnterpriseId},
             </if>
-            <if test="numCend != null">
-                num_cend = #{numCend},
-            </if>
-            <if test="pJianzhan != null">
-                p_jianzhan = #{pJianzhan},
-            </if>
-            <if test="pDriver != null">
-                p_driver = #{pDriver},
-            </if>
             <if test="numReceive != null">
                 num_receive = #{numReceive},
             </if>
