@@ -35,8 +35,8 @@
             <if test="professionalTitle != null">
                 professionalTitle = #{professionalTitle},
             </if>
-            <if test="deparimentId != null">
-                deparimentId = #{deparimentId},
+            <if test="departmentId != null">
+                departmentId = #{departmentId},
             </if>
             <if test="departmentName != null">
                 departmentName = #{departmentName},

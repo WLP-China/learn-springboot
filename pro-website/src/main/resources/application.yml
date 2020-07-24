@@ -4,10 +4,13 @@ server:
 spring:
   datasource:
     name: dev
-    url: jdbc:mysql://127.0.0.1:3306/pro_website?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://39.104.13.121:3306/hospwebsite?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+#    url: jdbc:mysql://127.0.0.1:3306/pro_website?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: mysql123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: zhdj123456789
+#    password: mysql123456
+    driver-class-name: com.mysql.jdbc.Driver #mysql < 8.0
+#    driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -27,7 +30,8 @@ mybatis:
 ## 自定义配置
 #上传文件保存路径
 files:
-  path: ${file-path:d:/files}
+  path: ${file-path:/usr/local/webapp/files}
+#  path: ${file-path:d:/files}
 #token配置
 token:
   expiration: 72000 #token过期限秒数(60*60*24)

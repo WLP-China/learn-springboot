@@ -33,7 +33,7 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">科室</label>
                                 <div class="layui-input-block">
-                                    <select id="deparimentId" name="deparimentId" lay-verify="required">
+                                    <select id="departmentId" name="departmentId" lay-verify="required">
                                     </select>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
         url: '/departments/list',
         async: false,
         success: function (data) {
-            var select = $("#deparimentId");
+            var select = $("#departmentId");
             select.empty();
             select.append("<option value=''>请选择</option>");
             $.each(data, function (i, d) {
@@ -150,7 +150,7 @@
                             "id": data.id,
                             "name": data.name,
                             "professionalTitle": data.professionalTitle,
-                            "deparimentId": data.deparimentId,
+                            "departmentId": data.departmentId,
                             "sort": data.sort,
                             "info": data.info,
                             "major": data.major,
