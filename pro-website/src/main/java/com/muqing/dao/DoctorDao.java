@@ -21,7 +21,7 @@ public interface DoctorDao {
     int update(Doctor doctor);
 
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("insert into t_doctor(name, photo, professionalTitle, departmentId, departmentName, major, info,sort, createTime, updateTime) values(#{name},#{photo},#{professionalTitle},#{deparimentId},#{departmentName},#{major},#{info},#{sort}, now(), now())")
+    @Insert("insert into t_doctor(name, photo, professionalTitle, departmentId, departmentName, major, info,sort, createTime, updateTime) values(#{name},#{photo},#{professionalTitle},#{departmentId},#{departmentName},#{major},#{info},#{sort}, now(), now())")
     int save(Doctor doctor);
 
     int count(@Param("params") Map<String, Object> params);
