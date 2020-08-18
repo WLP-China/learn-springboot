@@ -1,10 +1,12 @@
 server:
-  port: 3406
+  port: 7070
+#  servlet:
+#    context-path: /miniapp
 
 spring:
   datasource:
     name: dev
-    url: jdbc:mysql://127.0.0.1:3306/pro_website?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: mysql123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -26,13 +28,6 @@ log: # 自定义日志相关配置
     my: debug
   file: d:/files/logs
   maxsize: 30MB
-
-# 自定义jwt key
-#jwt:
-#  tokenHeader: Authorization #JWT存储的请求头
-#  secret: mySecret #JWT加解密使用的密钥
-#  expiration: 604800 #JWT的超期限时间(60*60*24)
-#  tokenHead: Bearer  #JWT负载中拿到开头
 
 #token配置
 token:

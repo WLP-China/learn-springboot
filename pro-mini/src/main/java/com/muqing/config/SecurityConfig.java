@@ -72,6 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/img/**",
                         "/layui/**"
                 ).permitAll()
+                //测试时全部运行访问
+//                .antMatchers("/**").permitAll()
                 /*
                  * Filter拦截请求两次的问题
                  * 跨域请求会先进行一次options请求。跨域的post的请求会验证两次，get不会。
@@ -81,8 +83,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
-                //测试时全部运行访问
-                //.antMatchers("/**").permitAll();
 
         httpSecurity
                 .formLogin()//允许表单登录

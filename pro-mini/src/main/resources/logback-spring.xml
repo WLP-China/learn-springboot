@@ -31,7 +31,7 @@
             <fileNamePattern>${logFile}.%d{yyyy-MM-dd}.%i</fileNamePattern>
             <maxFileSize>${maxFileSize}</maxFileSize>
             <!--日志文件保留天数-->
-            <MMaxHistory>30</MMaxHistory>
+<!--            <MMaxHistory>30</MMaxHistory>-->
         </rollingPolicy>
         <!--
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
