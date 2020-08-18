@@ -1,0 +1,35 @@
+server:
+  port: 8080
+#  servlet:
+#    context-path: /miniapp
+
+spring:
+  datasource:
+    name: dev
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: mysql123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  type-aliases-package: com.muqing.model
+  mapper-locations: classpath:/mybatis-mappers/* # MyBatis的mapper.xml的路径配置
+  configuration:
+    mapUnderscoreToCamelCase: true
+
+logging:
+  config: classpath:logback-spring.xml
+log: # 自定义日志相关配置
+  level:
+    root: info
+    my: debug
+  file: d:/files/logs
+  maxsize: 30MB
+
+#token配置
+token:
+  expiration: 72000 #token过期限秒数(60*60*24)
+  jwtSecret: mySecret:) #私钥
