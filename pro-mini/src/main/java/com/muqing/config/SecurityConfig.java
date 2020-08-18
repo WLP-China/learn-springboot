@@ -4,6 +4,7 @@ import com.muqing.filter.TokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -75,11 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //测试时全部运行访问
 //                .antMatchers("/**").permitAll()
                 /*
-                 * Filter拦截请求两次的问题
-                 * 跨域请求会先进行一次options请求。跨域的post的请求会验证两次，get不会。
-                 * 网上的解释是，post请求第一次是预检请求，Request Method： OPTIONS。
+                 * 不拦截options请求
+                 *
+                 * 复杂请求、跨域请求，在发送真实请求前都会先发送OPTIONS请求(Request Method： OPTIONS 预检请求)，浏览器根据OPTIONS请求返回的结果来决定是否继续发送真实的请求进行跨域资源访问。
                  * */
-                //.antMatchers(HttpMethod.OPTIONS).permitAll()//不拦截options请求
+                .antMatchers(HttpMethod.OPTIONS).permitAll()
 
                 // 除上面外的所有请求全部需要鉴权认证
                 .anyRequest().authenticated();
