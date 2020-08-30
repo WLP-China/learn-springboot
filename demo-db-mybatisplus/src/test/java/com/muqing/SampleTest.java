@@ -24,4 +24,25 @@ public class SampleTest {
         users.forEach(System.out::println);
     }
 
+    @Test
+    public void testInsert(){
+        User user = new User();
+        user.setName("张三");
+        user.setAge(18);
+        user.setEmail("123456@qq.com");
+
+        int i = userMapper.insert(user);//会主动生成id
+        System.out.println(i);
+        System.out.println(user);//id会自动回填
+    }
+
+    @Test
+    public void testUpdate(){
+        User user = new User();
+        user.setId(6L);
+        user.setAge(20);
+        int i = userMapper.updateById(user);//动态sql
+        System.out.println(i);
+    }
+
 }
