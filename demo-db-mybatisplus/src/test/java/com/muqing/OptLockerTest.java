@@ -62,6 +62,8 @@ public class OptLockerTest {
         userUpdate.setAge(19);
         userUpdate.setVersion(0);
         Assert.assertEquals("Should update failed due to incorrect version(actually 1, but 0 passed in)", 0, userMapper.updateById(userUpdate));
+
+        //自旋锁来多次尝试提交
     }
 
     @Test
