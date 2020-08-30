@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -18,14 +20,14 @@ public class SampleTest {
     private UserMapper userMapper;
 
     @Test
-    public void contextLoads(){
+    public void contextLoads() {
         List<User> users = userMapper.selectList(null);
 
         users.forEach(System.out::println);
     }
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         User user = new User();
         user.setName("张三");
         user.setAge(18);
@@ -37,7 +39,7 @@ public class SampleTest {
     }
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         User user = new User();
         user.setId(6L);
         user.setAge(20);
@@ -45,4 +47,43 @@ public class SampleTest {
         System.out.println(i);
     }
 
+    //===== ===== ===== select ===== ===== =====
+    @Test
+    public void testSelectById() {
+        User user = userMapper.selectById(1L);
+        System.out.println(user);
+    }
+
+    @Test
+    public void testSelectByBatchId() {
+        List<User> users = userMapper.selectBatchIds(Arrays.asList(1, 2, 3));
+        users.forEach(System.out::println);
+    }
+
+    @Test
+    public void testSelectByBatchIds() {
+        HashMap<String, Object> map = new HashMap<>();
+        // 自定义要查询
+        map.put("name", "张三");
+        List<User> users = userMapper.selectByMap(map);
+        users.forEach(System.out::println);
+    }
+
+    //===== ===== ===== 删除 ===== ===== =====
+    @Test
+    public void testDeleteById() {
+        userMapper.deleteById(1L);
+    }
+
+    @Test
+    public void testDeleteBatchId() {
+        userMapper.deleteBatchIds(Arrays.asList(1L, 2L, 3L));
+    }
+
+    @Test
+    public void testDeleteMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "张三");
+        userMapper.deleteByMap(map);
+    }
 }

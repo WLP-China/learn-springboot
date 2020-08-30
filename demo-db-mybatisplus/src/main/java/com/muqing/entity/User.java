@@ -20,6 +20,8 @@ public class User {
     private String name;
     private Integer age;
     private String email;
+    @TableLogic //逻辑删除
+    private Integer deleted;
     @Version
     private Integer version;
     @TableField(value = "credit_time", fill = FieldFill.INSERT)
