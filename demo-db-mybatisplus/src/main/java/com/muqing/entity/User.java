@@ -1,9 +1,6 @@
 package com.muqing.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +20,8 @@ public class User {
     private String name;
     private Integer age;
     private String email;
+    @Version
+    private Integer version;
     @TableField(value = "credit_time", fill = FieldFill.INSERT)
     private LocalDateTime createTime;
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)

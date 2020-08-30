@@ -28,3 +28,12 @@ useSSL=false 是否使用安全链接
     UUID //uuid（3.3.0废弃）
     
 `雪花算法`: snowflake是Twitter开源的分布式ID生成算法，结果是一个long型的ID。其核心思想是：使用41bit作为毫秒数，10bit作为机器的ID（5个bit是数据中心，5个bit的机器ID），12bit作为毫秒内的流水号（意味着每个节点在每毫秒可以产生 4096 个 ID），最后还有一个符号位，永远是0。可以保证几乎全球唯一！    
+
+##乐观锁
+意图：当要更新一条记录的时候，希望这条记录没有被别人更新
+
+乐观锁实现方式：
+    取出记录时，获取当前version
+    更新时，带上这个version
+    执行更新时， set version = newVersion where version = oldVersion
+    如果version不对，就更新失败
